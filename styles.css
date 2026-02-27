@@ -297,6 +297,12 @@ strong {
     color: var(--clr-text-main);
 }
 
+.alert-red {
+    background-color: #ffebee;
+    border-color: #c62828;
+    color: #b71c1c;
+}
+
 .alert-icon {
     font-size: 1.2rem;
 }
