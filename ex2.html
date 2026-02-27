@@ -74,26 +74,32 @@
                             <h3 class="method-title">1️⃣ Build the Model</h3>
                             <div class="code-block dark-mode" style="margin-top: 1rem;">
                                 <p style="margin-bottom: 0.5rem; color: #D4D4D4;">You need: A <span
-                                        class="param">Discount Rate variable</span> (ex: cell B1), an <span
+                                        class="param">Discount Rate variable</span> , an <span
                                         class="excel-func">NPV Formula</span> referencing that rate, and your <span
                                         class="param">Cash Flows</span>.</p>
-                                <div class="code-comment">// Test: Change the rate manually; if the NPV changes, your
-                                    model is ready.</div>
                             </div>
                         </div>
 
                         <!-- Step 2 -->
                         <div class="method-column mt-4">
-                            <h3 class="method-title">2️⃣ Setup the Data Table (The 'Output' Layout)</h3>
+                            <h3 class="method-title">2️⃣ Setup the Data Table (Output Structure)</h3>
                             <div class="code-block dark-mode" style="margin-top: 1rem;">
-                                <p style="color: #D4D4D4;">Create a column of test discount rates: <span
-                                        class="param">0%, 3%, 6%, 9%, 12%, 15%...</span></p>
-                                <div class="code-comment mt-4">// CRUCIAL: In the cell exactly above the empty results
-                                    (top-right of your list), enter = and click on your NPV result cell. This is the NPV
-                                    Reference.</div>
-                                <code
-                                    style="display: block; margin-top: 0.5rem;">=<span class="param">NPV_Result_Cell</span></code>
-                            </div>
+        
+                                <p style="color: #D4D4D4;">
+                                    Create a <span class="param">Data Table</span> with two columns:
+                                </p>
+                                <p style="color: #D4D4D4; margin-top: 0.5rem;">
+                                    • First column → <span class="param">Test discount rates</span> (0%, 3%, 6%, 9%, 12%, 15%, ...)
+                                </p>
+                                <p style="color: #D4D4D4;">
+                                 • Second column → <span class="param">NPV results</span> (1st case = NPV reference and the rest will be automatically generated)
+                                </p>
+                                <div class="code-comment mt-4">
+                                CRUCIAL: In the cell directly above the second column (top-right of the table),
+                                enter "=" and click on your NPV result cell. This creates the NPV reference.
+                                </div>
+
+                             </div>
                         </div>
 
                         <!-- Step 3 -->
