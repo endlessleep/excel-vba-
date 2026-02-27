@@ -42,40 +42,41 @@
 
                 <!-- NPV SECTION -->
                 <section class="content-card">
-                    <h2 class="section-title">1. Net Present Value (NPV)</h2>
+    <h2 class="section-title">1. Net Present Value (NPV)</h2>
 
-                    <div class="methods-grid">
-                        <div class="method-column">
-                            <h3 class="method-title">Method 1 &ndash; direct npv formula</h3>
-                            <div class="code-block dark-mode">
-                                <code><span class="excel-func">=NPV</span>(<span class="param">discount_rate</span>; <span class="param">range_of_CF</span>)</code>
-                                <div class="code-comment"> (CF starting at t=1)</div>
-                            </div>
-                        </div>
+    <div class="methods-grid">
+        <div class="method-column">
+            <h3 class="method-title">Method 1 – direct npv formula</h3>
+            <div class="code-block dark-mode">
+                <div class="code-comment">// If cash flows start at t = 1 :</div>
+                <code><span class="excel-func">=NPV</span>(<span class="param">rate</span>; <span class="param">range</span>)</code>
+                
+                <div class="code-comment" style="margin-top: 10px;">// If cash flow at t = 0 :</div>
+                <code>= initial_CF + <span class="excel-func">NPV</span>(<span class="param">rate</span>; <span class="param">range</span>)</code>
+            </div>
+        </div>
 
-                        <div class="method-column">
-                            <h3 class="method-title">Method 2 &ndash; manual method</h3>
-                            <div class="code-block dark-mode">
-                                <code>Initial_CF + <span class="excel-func">NPV</span>(<span class="param">rate</span>; <span class="param">range</span>)</code>
-                                <div class="code-comment"> (CF starting at t=0) </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="method-column">
+            <h3 class="method-title">Method 2 – manual method (Discounted CF)</h3>
+            <div class="code-block dark-mode">
+                <div class="code-comment">// Step 1: Discount each cash flow</div>
+                <code>= CF / (1+rate)^period</code>
+                
+                <div class="code-comment" style="margin-top: 10px;">// Step 2: Sum them up (t=0 vs t=1)</div>
+                <code><span class="excel-func">=SUM</span>(<span class="param">discounted_range</span>)</code>
+            </div>
+        </div>
+    </div>
 
-                    <button class="btn-note" onclick="toggleNote('note-npv')">
-                        <span class="note-icon">📝</span> NOTE
-                    </button>
+    <button class="btn-note" onclick="toggleNote('note-npv')">
+        <span class="note-icon">📝</span> NOTE
+    </button>
 
-                    <div id="note-npv" class="post-it-note">
-                        <p>The <span class="fluo">Net Present Value (NPV)</span> strictly measures the absolute <span
-                                class="fluo">value created</span> by taking on an investment.</p>
-                        <p class="mt-2"><strong>Golden Rule:</strong> Always <span class="fluo accept">Accept if NPV >
-                                0</span> and <span class="fluo err">Reject if NPV < 0</span>. It is the most reliable
-                                    metric in corporate finance because it assumes reinvestment at the cost of capital.
-                        </p>
-                    </div>
-                </section>
-
+    <div id="note-npv" class="post-it-note">
+        <p>The <span class="fluo">Net Present Value (NPV)</span> strictly measures the absolute <span class="fluo">value created</span>.</p>
+        <p class="mt-2"><strong>Rule:</strong> In Method 2, you manually calculate the present value of <strong>each</strong> period before summing them up. Method 1 is just the Excel shortcut.</p>
+    </div>
+</section>
                 <!-- IRR SECTION -->
                 <section class="content-card">
                     <h2 class="section-title">2. Internal Rate of Return (IRR)</h2>
