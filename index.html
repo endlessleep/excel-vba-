@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,13 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="app-wrapper">
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-header">
-                <h2>Fiches de Cours</h2>
+                <h2>Revision Sheets</h2>
             </div>
             <nav class="sidebar-nav">
                 <a href="#" class="nav-item active">Lecture 1: NPV & IRR</a>
@@ -26,33 +28,36 @@
         <main class="main-content">
             <header class="page-header">
                 <h1>Lecture 1: <strong>NPV</strong> & <strong>IRR</strong></h1>
-                <p class="subtitle">Fondamentaux de l'évaluation financière</p>
+                <p class="subtitle">Fundamentals of Financial Valuation</p>
             </header>
 
             <div class="content-sections">
                 <!-- Section 1: NPV -->
                 <section class="concept-card">
                     <h2 class="card-title">1. Net Present Value (<strong>NPV</strong>)</h2>
-                    
+
                     <div class="excel-box">
                         <div class="box-label">EXCEL CODE</div>
                         <div class="code-content">
                             <code>=NPV(<span class="param">discount_rate</span>; <span class="param">range_of_CF</span>)</code>
-                            <span class="comment">// (si t=1)</span><br>
+                            <span class="comment">// (if t=1)</span><br>
                             <code>Initial_CF + NPV(<span class="param">rate</span>; <span class="param">range</span>)</code>
-                            <span class="comment">// (si t=0)</span>
+                            <span class="comment">// (if t=0)</span>
                         </div>
                     </div>
 
-                    <button class="btn-theory" onclick="toggleTheory('theory-npv', this)">POINT COURS <span class="chevron">↓</span></button>
-                    
+                    <button class="btn-theory" onclick="toggleTheory('theory-npv', this)">THEORY <span
+                            class="chevron">↓</span></button>
+
                     <div id="theory-npv" class="theory-content">
                         <ul>
-                            <li>Le <strong>NPV</strong> mesure la <strong>valeur créée</strong> par un investissement.</li>
-                            <li><strong>Règle de décision :</strong>
+                            <li><strong>NPV</strong> measures the <strong>value created</strong> by an investment.</li>
+                            <li><strong>Decision Rule:</strong>
                                 <ul>
-                                    <li>Si <strong>NPV > 0</strong> &rarr; <span class="highlight accept">Accept</span></li>
-                                    <li>Si <strong>NPV < 0</strong> &rarr; <span class="highlight reject">Reject</span></li>
+                                    <li>If <strong>NPV > 0</strong> &rarr; <span class="highlight accept">Accept</span>
+                                    </li>
+                                    <li>If <strong>NPV < 0</strong> &rarr; <span class="highlight reject">Reject</span>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -62,23 +67,25 @@
                 <!-- Section 2: IRR -->
                 <section class="concept-card">
                     <h2 class="card-title">2. Internal Rate of Return (<strong>IRR</strong>)</h2>
-                    
+
                     <div class="excel-box">
                         <div class="box-label">EXCEL CODE</div>
                         <div class="code-content">
                             <code>=IRR(<span class="param">range_including_t0</span>)</code><br>
                             <div class="verification">
-                                <span class="comment">Vérification :</span> <code>NPV(IRR, range) = 0</code>
+                                <span class="comment">Check:</span> <code>NPV(IRR, range) = 0</code>
                             </div>
                         </div>
                     </div>
 
-                    <button class="btn-theory" onclick="toggleTheory('theory-irr', this)">POINT COURS <span class="chevron">↓</span></button>
-                    
+                    <button class="btn-theory" onclick="toggleTheory('theory-irr', this)">THEORY <span
+                            class="chevron">↓</span></button>
+
                     <div id="theory-irr" class="theory-content">
                         <ul>
-                            <li>L'<strong>IRR</strong> est le taux d'actualisation qui rend la <strong>NPV égale à zéro</strong>.</li>
-                            <li>C'est le <strong>rendement annuel en pourcentage</strong> attendu de l'investissement.</li>
+                            <li><strong>IRR</strong> is the discount rate that makes <strong>NPV equal to zero</strong>.
+                            </li>
+                            <li>It is the <strong>expected annual percentage yield</strong> of the investment.</li>
                         </ul>
                     </div>
                 </section>
@@ -86,7 +93,7 @@
                 <!-- Section 3: Loan Table -->
                 <section class="concept-card">
                     <h2 class="card-title">3. Loan Table (Amortization)</h2>
-                    
+
                     <div class="excel-box">
                         <div class="box-label">EXCEL CODE / CALCULS</div>
                         <div class="code-content calculations">
@@ -100,12 +107,15 @@
                         </div>
                     </div>
 
-                    <button class="btn-theory" onclick="toggleTheory('theory-loan', this)">POINT COURS <span class="chevron">↓</span></button>
-                    
+                    <button class="btn-theory" onclick="toggleTheory('theory-loan', this)">THEORY <span
+                            class="chevron">↓</span></button>
+
                     <div id="theory-loan" class="theory-content">
                         <ul>
-                            <li>Le tableau montre comment chaque paiement (<strong>Cash Flow</strong>) est divisé entre les <strong>intérêts</strong> et le <strong>remboursement du capital</strong>.</li>
-                            <li>Utiliser l'<strong>IRR</strong> garantit que le prêt est remboursé à 100% à la fin : <strong>Ending Principal = 0</strong>.</li>
+                            <li>The table shows how each payment (<strong>Cash Flow</strong>) is split between
+                                <strong>interest</strong> and <strong>principal repayment</strong>.</li>
+                            <li>Using the <strong>IRR</strong> ensures the loan is 100% repaid at the end:
+                                <strong>Ending Principal = 0</strong>.</li>
                         </ul>
                     </div>
                 </section>
@@ -115,4 +125,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
