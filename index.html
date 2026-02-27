@@ -154,7 +154,7 @@
                             <thead>
                                 <tr>
                                     <th>Year</th>
-                                    <th>Principal (Beg)</th>
+                                    <th>Beginning Principal </th>
                                     <th>Payment (CF)</th>
                                     <th>Interest</th>
                                     <th>Principal Repaid</th>
@@ -163,20 +163,12 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="year-col">0</td>
-                                    <td>-</td>
-                                    <td class="formula-cell"><code>-Initial Investment [absolute value]</code></td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
                                     <td class="year-col">t=1</td>
-                                    <td class="formula-cell"><code>=Ending Principal (t-1) = initial investment</code></td>
-                                    <td class="formula-cell"><code>=CF(t=1)</code></td>
-                                    <td class="formula-cell"><code>=Beginning Principal * IRR</code></td>
-                                    <td class="formula-cell"><code>=CF(t=1) - Interest</code></td>
-                                    <td class="formula-cell"><code>=Beginning Principal - Principal Repaid</code></td>
+                                    <td class="formula-cell"><code> Initial investment = Ending Principal (t-1) </code></td>
+                                    <td class="formula-cell"><code>CF(t=1)</code></td>
+                                    <td class="formula-cell"><code>Beginning Principal * IRR</code></td>
+                                    <td class="formula-cell"><code>CF(t=1) - Interest</code></td>
+                                    <td class="formula-cell"><code>Beginning Principal - Principal Repaid</code></td>
                                 </tr>
                                 <tr class="total-row">
                                     <td class="year-col">t=T</td>
@@ -196,9 +188,8 @@
                     </button>
 
                     <div id="note-loan" class="post-it-note">
-                        <p>This table deconstructs how a <span class="fluo">Cash Flow</span> is split into <span
-                                class="fluo">Interest</span> and <span class="fluo">Principal Repayment</span> over
-                            time.</p>
+                        <p>how a <span class="fluo">Cash Flow</span> is split into <span
+                                class="fluo">Interest</span> and <span class="fluo">Principal Repayment</span> over time.</p>
                         <p class="mt-2">If you discount the cash flows at the IRR, the ending principal exactly hits
                             <strong>0</strong> at year <em>t = T</em>, proving that the IRR fully covers the return of and
                             return on the invested capital.</p>
