@@ -14,7 +14,7 @@
     --clr-param: #9CDCFE;
 
     /* Post-it */
-    --clr-postit-bg: #e8f5e9;
+    --clr-postit-bg: #B2D3C2;
     --clr-postit-border: #217346;
     --clr-postit-text: #000000;
 }
@@ -196,6 +196,11 @@ strong {
     padding: 4rem 5rem;
     width: calc(100% - 280px);
     max-width: 1100px;
+    display: block !important;
+}
+
+.cards-container {
+    display: block !important;
 }
 
 .page-header {

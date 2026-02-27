@@ -11,28 +11,49 @@
 
 <body>
     <div class="app-wrapper">
-        <!-- Persistent Sidebar -->
+
+        <!-- ================= SIDEBAR ================= -->
         <aside class="sidebar">
             <div class="sidebar-brand">
-                <div class="brand-icon">F</div>
-                <span>COMPUTER SCIENCE </span>
+                <span>FINANCE CORE</span>
             </div>
 
             <nav class="sidebar-nav">
                 <!-- Accordion Menu -->
                 <div class="accordion-item active">
                     <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="folder-icon">📂</span> LECTURE 1: EXCEL
+                        <span class="folder-icon">📂</span> LECTURE 1: Capital Budgeting
                         <span class="chevron">▼</span>
                     </button>
                     <div class="accordion-content show">
                         <a href="#" class="nav-link active">Ex 1: NPV & IRR</a>
-                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: à suivre </a>
-                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 3: à suivre</a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: Payback Period</a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 3: Profitability Index</a>
                     </div>
                 </div>
 
-        <!-- Main Content Area -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 2: Fixed Income
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 1: Bond Pricing</a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: Yield to Maturity</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header disabled">
+                        <span class="folder-icon">📁</span> LECTURE 3: Risk & Return
+                        <span class="chevron">▼</span>
+                    </button>
+                </div>
+            </nav>
+        </aside>
+        <!-- ================= END SIDEBAR ================= -->
+
+        <!-- ================= MAIN CONTENT ================= -->
         <main class="main-content">
             <header class="page-header">
                 <h1>EXERCISE 1: NPV & IRR</h1>
@@ -45,21 +66,34 @@
                     <h2 class="section-title">1. Net Present Value (NPV)</h2>
 
                     <div class="methods-grid">
+
+                        <!-- METHOD 1 -->
                         <div class="method-column">
-                            <h3 class="method-title">Method 1 &ndash; direct npv formula</h3>
+                            <h3 class="method-title">Method 1 &ndash; Excel Shortcut</h3>
                             <div class="code-block dark-mode">
+                                <div class="code-comment">// Case t=1</div>
                                 <code><span class="excel-func">=NPV</span>(<span class="param">discount_rate</span>; <span class="param">range_of_CF</span>)</code>
-                                <div class="code-comment"> (CF starting at t=1)</div>
+
+                                <div class="code-comment mt-4">// Case t=0</div>
+                                <code>initial_CF + <span class="excel-func">NPV</span>(<span class="param">discount_rate</span>; <span class="param">range_of_CF</span>)</code>
                             </div>
                         </div>
 
+                        <!-- METHOD 2 -->
                         <div class="method-column">
-                            <h3 class="method-title">Method 2 &ndash; manual method</h3>
+                            <h3 class="method-title">Method 2 &ndash; Manual Method</h3>
                             <div class="code-block dark-mode">
-                                <code>Initial_CF + <span class="excel-func">NPV</span>(<span class="param">rate</span>; <span class="param">range</span>)</code>
-                                <div class="code-comment"> (CF starting at t=0) </div>
+                                <div class="code-comment">// Step 1 (Discounting)</div>
+                                <code>=CF / (1+<span class="param">rate</span>)^<span class="param">period</span></code>
+
+                                <div class="code-comment mt-4">// Step 2 (Summing t=1)</div>
+                                <code><span class="excel-func">=SUM</span>(<span class="param">range_of_DISCOUNTED_CFs</span>)</code>
+
+                                <div class="code-comment mt-4">// Step 2 (Summing t=0)</div>
+                                <code>initial_CF + <span class="excel-func">SUM</span>(<span class="param">range_of_DISCOUNTED_CFs</span>)</code>
                             </div>
                         </div>
+
                     </div>
 
                     <button class="btn-note" onclick="toggleNote('note-npv')">
@@ -177,6 +211,8 @@
 
             </div>
         </main>
+        <!-- ================= END MAIN CONTENT ================= -->
+
     </div>
 
     <!-- Overlay Note System -->
