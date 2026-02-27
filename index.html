@@ -15,42 +15,22 @@
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <div class="brand-icon">F</div>
-                <span>FINANCE CORE</span>
+                <span>COMPUTER SCIENCE </span>
             </div>
 
             <nav class="sidebar-nav">
                 <!-- Accordion Menu -->
                 <div class="accordion-item active">
                     <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="folder-icon">📂</span> LECTURE 1: Capital Budgeting
+                        <span class="folder-icon">📂</span> LECTURE 1: EXCEL
                         <span class="chevron">▼</span>
                     </button>
                     <div class="accordion-content show">
                         <a href="#" class="nav-link active">Ex 1: NPV & IRR</a>
-                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: Payback Period</a>
-                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 3: Profitability Index</a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: à suivre </a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 3: à suivre</a>
                     </div>
                 </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="folder-icon">📁</span> LECTURE 2: Fixed Income
-                        <span class="chevron">▼</span>
-                    </button>
-                    <div class="accordion-content">
-                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 1: Bond Pricing</a>
-                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: Yield to Maturity</a>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header disabled">
-                        <span class="folder-icon">📁</span> LECTURE 3: Risk & Return
-                        <span class="chevron">▼</span>
-                    </button>
-                </div>
-            </nav>
-        </aside>
 
         <!-- Main Content Area -->
         <main class="main-content">
@@ -69,7 +49,7 @@
                             <h3 class="method-title">Method 1 &ndash; direct npv formula</h3>
                             <div class="code-block dark-mode">
                                 <code><span class="excel-func">=NPV</span>(<span class="param">discount_rate</span>; <span class="param">range_of_CF</span>)</code>
-                                <div class="code-comment">// Evaluates CF starting at t=1</div>
+                                <div class="code-comment"> (CF starting at t=1)</div>
                             </div>
                         </div>
 
@@ -77,7 +57,7 @@
                             <h3 class="method-title">Method 2 &ndash; manual method</h3>
                             <div class="code-block dark-mode">
                                 <code>Initial_CF + <span class="excel-func">NPV</span>(<span class="param">rate</span>; <span class="param">range</span>)</code>
-                                <div class="code-comment">// When initial CF is at t=0</div>
+                                <div class="code-comment"> (CF starting at t=0) </div>
                             </div>
                         </div>
                     </div>
