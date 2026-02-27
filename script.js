@@ -1,31 +1,51 @@
-function toggleFolder(btn) {
-    const folder = btn.parentElement;
+// Accordion Sidebar Logic
+function toggleAccordion(btn) {
+    if (btn.classList.contains('disabled')) return;
 
-    if (folder.classList.contains('active')) {
-        folder.classList.remove('active');
-        folder.querySelector('.folder-content').classList.remove('show');
+    const item = btn.parentElement;
+    const content = item.querySelector('.accordion-content');
+
+    // Toggle active state
+    if (item.classList.contains('active')) {
+        item.classList.remove('active');
+        content.classList.remove('show');
     } else {
-        folder.classList.add('active');
-        folder.querySelector('.folder-content').classList.add('show');
+        // Optional: Close other open accordions if strictly 1 open at a time is wanted
+        // document.querySelectorAll('.accordion-item.active').forEach(openItem => {
+        //     openItem.classList.remove('active');
+        //     openItem.querySelector('.accordion-content').classList.remove('show');
+        // });
+
+        item.classList.add('active');
+        content.classList.add('show');
     }
 }
 
-function switchTab(btn, sectionId, tabType) {
-    // 1. Get the container for this section
-    const sectionContainer = btn.closest('.concept-card');
+// Post-it Note Logic
+let currentOpenNote = null;
 
-    // 2. Remove 'active' class from all buttons in this section
-    const buttons = sectionContainer.querySelectorAll('.segment-btn');
-    buttons.forEach(b => b.classList.remove('active'));
+function toggleNote(noteId) {
+    const noteElement = document.getElementById(noteId);
 
-    // 3. Add 'active' class to the clicked button
-    btn.classList.add('active');
+    // If clicking the same note that's open, just close it
+    if (currentOpenNote === noteElement) {
+        closeNote();
+        return;
+    }
 
-    // 4. Hide all tab panes in this section
-    const panes = sectionContainer.querySelectorAll('.tab-pane');
-    panes.forEach(p => p.classList.remove('active'));
+    // Close previously open note if any
+    if (currentOpenNote) {
+        currentOpenNote.classList.remove('open');
+    }
 
-    // 5. Show the targeted tab pane based on the sectionId and tabType
-    const targetPane = document.getElementById(`${sectionId}-${tabType}`);
-    targetPane.classList.add('active');
+    // Open new note
+    noteElement.classList.add('open');
+    currentOpenNote = noteElement;
+}
+
+function closeNote() {
+    if (currentOpenNote) {
+        currentOpenNote.classList.remove('open');
+        currentOpenNote = null;
+    }
 }

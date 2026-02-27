@@ -1,124 +1,206 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Modelling Using MS Excel and VBA</title>
+    <title>Finance Revision - Premium</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="app-wrapper">
-        <!-- Sidebar -->
+        <!-- Persistent Sidebar -->
         <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2>Revision Sheets</h2>
+            <div class="sidebar-brand">
+                <div class="brand-icon">F</div>
+                <span>FINANCE CORE</span>
             </div>
+
             <nav class="sidebar-nav">
-                <a href="#" class="nav-item active">Lecture 1: NPV & IRR</a>
+                <!-- Accordion Menu -->
+                <div class="accordion-item active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 1: Capital Budgeting
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content show">
+                        <a href="#" class="nav-link active">Ex 1: NPV & IRR</a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: Payback Period</a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 3: Profitability Index</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 2: Fixed Income
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 1: Bond Pricing</a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: Yield to Maturity</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header disabled">
+                        <span class="folder-icon">📁</span> LECTURE 3: Risk & Return
+                        <span class="chevron">▼</span>
+                    </button>
+                </div>
             </nav>
         </aside>
 
-        <!-- Main Content -->
+        <!-- Main Content Area -->
         <main class="main-content">
             <header class="page-header">
-                <h1>Lecture 1: <strong>NPV</strong> & <strong>IRR</strong></h1>
-                <p class="subtitle">Fundamentals of Financial Valuation</p>
+                <h1>EXERCISE 1: NPV & IRR</h1>
             </header>
 
-            <div class="content-sections">
-                <!-- Section 1: NPV -->
-                <section class="concept-card">
-                    <h2 class="card-title">1. Net Present Value (<strong>NPV</strong>)</h2>
+            <div class="cards-container">
 
-                    <div class="excel-box">
-                        <div class="box-label">EXCEL CODE</div>
-                        <div class="code-content">
-                            <code>=NPV(<span class="param">discount_rate</span>; <span class="param">range_of_CF</span>)</code>
-                            <span class="comment"> (if t=1)</span><br>
-                            <code>= Initial_CF + NPV(<span class="param">rate</span>; <span class="param">range</span>)</code>
-                            <span class="comment"> (if t=0)</span>
+                <!-- NPV SECTION -->
+                <section class="content-card">
+                    <h2 class="section-title">1. Net Present Value (NPV)</h2>
+
+                    <div class="methods-grid">
+                        <div class="method-column">
+                            <h3 class="method-title">Method 1 &ndash; direct npv formula</h3>
+                            <div class="code-block dark-mode">
+                                <code><span class="excel-func">=NPV</span>(<span class="param">discount_rate</span>; <span class="param">range_of_CF</span>)</code>
+                                <div class="code-comment">// Evaluates CF starting at t=1</div>
+                            </div>
                         </div>
-                    </div>
 
-                    <button class="btn-theory" onclick="toggleTheory('theory-npv', this)">THEORY <span
-                            class="chevron">↓</span></button>
-
-                    <div id="theory-npv" class="theory-content">
-                        <ul>
-                            <li><strong>NPV</strong> measures the <strong>value created</strong> by an investment.</li>
-                            <li><strong>Decision Rule:</strong>
-                                <ul>
-                                    <li>If <strong>NPV > 0</strong> &rarr; <span class="highlight accept">Accept</span>
-                                    </li>
-                                    <li>If <strong>NPV < 0</strong> &rarr; <span class="highlight reject">Reject</span>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-
-                <!-- Section 2: IRR -->
-                <section class="concept-card">
-                    <h2 class="card-title">2. Internal Rate of Return (<strong>IRR</strong>)</h2>
-
-                    <div class="excel-box">
-                        <div class="box-label">EXCEL CODE</div>
-                        <div class="code-content">
-                            <code>=IRR(<span class="param">range_including_t0</span>)</code><br>
-                            <div class="verification">
-                                <span class="comment">Check:</span> <code>NPV(IRR, range) = 0</code>
+                        <div class="method-column">
+                            <h3 class="method-title">Method 2 &ndash; manual method</h3>
+                            <div class="code-block dark-mode">
+                                <code>Initial_CF + <span class="excel-func">NPV</span>(<span class="param">rate</span>; <span class="param">range</span>)</code>
+                                <div class="code-comment">// When initial CF is at t=0</div>
                             </div>
                         </div>
                     </div>
 
-                    <button class="btn-theory" onclick="toggleTheory('theory-irr', this)">THEORY <span
-                            class="chevron">↓</span></button>
+                    <button class="btn-note" onclick="toggleNote('note-npv')">
+                        <span class="note-icon">📝</span> NOTE
+                    </button>
 
-                    <div id="theory-irr" class="theory-content">
-                        <ul>
-                            <li><strong>IRR</strong> is the discount rate that makes <strong>NPV equal to zero</strong>.
-                            </li>
-                            <li>It is the <strong>expected annual percentage yield</strong> of the investment.</li>
+                    <div id="note-npv" class="post-it-note">
+                        <p>The <span class="fluo">Net Present Value (NPV)</span> strictly measures the absolute <span
+                                class="fluo">value created</span> by taking on an investment.</p>
+                        <p class="mt-2"><strong>Golden Rule:</strong> Always <span class="fluo accept">Accept if NPV >
+                                0</span> and <span class="fluo err">Reject if NPV < 0</span>. It is the most reliable
+                                    metric in corporate finance because it assumes reinvestment at the cost of capital.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- IRR SECTION -->
+                <section class="content-card">
+                    <h2 class="section-title">2. Internal Rate of Return (IRR)</h2>
+
+                    <div class="code-block dark-mode">
+                        <code><span class="excel-func">=IRR</span>(<span class="param">range_including_t0</span>)</code>
+                    </div>
+
+                    <div class="alert-box">
+                        <span class="alert-icon">⚠️</span>
+                        <strong>ATTENTION:</strong> <span class="fluo">include initial investment!</span> The range must
+                        start from t=0.
+                    </div>
+
+                    <button class="btn-note mt-4" onclick="toggleNote('note-irr')">
+                        <span class="note-icon">📝</span> NOTE
+                    </button>
+
+                    <div id="note-irr" class="post-it-note">
+                        <p>The <span class="fluo">IRR</span> is the specific discount rate that forces the <span
+                                class="fluo">NPV to exactly zero</span>.</p>
+                        <ul class="mt-2">
+                            <li>It represents the expected <span class="fluo">percentage annual yield</span> of the
+                                project.</li>
+                            <li><strong>Mathematical Check:</strong> <code>NPV(IRR, range) = 0</code></li>
+                            <li><strong>Pitfall:</strong> Struggles with non-conventional cash flows (multiple sign
+                                changes).</li>
                         </ul>
                     </div>
                 </section>
 
-                <!-- Section 3: Loan Table -->
-                <section class="concept-card">
-                    <h2 class="card-title">3. Loan Table (Amortization)</h2>
+                <!-- LOAN TABLE SECTION -->
+                <section class="content-card">
+                    <h2 class="section-title">3. Loan Table (Amortization)</h2>
 
-                    <div class="excel-box">
-                        <div class="box-label">EXCEL CODE / CALCULS</div>
-                        <div class="code-content calculations">
-                            <ul>
-                                <li><code>Beginning Principal (n) = - Initial Investment</code></li>
-                                <li><code>Payment (at end of year) = Cash Flow</code></li>
-                                <li><code>Interest each year = Beginning Principal * IRR</code></li>
-                                <li><code>Principal repaid = Payment - Interest</code></li>
-                                <li><code>Ending principal = Beginning Principal - Principal Repaid</code></li>
-                            </ul>
-                        </div>
+                    <div class="table-wrapper">
+                        <table class="premium-table">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Principal (Beg)</th>
+                                    <th>Payment (CF)</th>
+                                    <th>Interest</th>
+                                    <th>Principal Repaid</th>
+                                    <th>Ending Principal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="year-col">0</td>
+                                    <td>-</td>
+                                    <td class="formula-cell"><code>-Initial Inv.</code></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td class="year-col">1</td>
+                                    <td class="formula-cell"><code>=End. Princ (n-1)</code></td>
+                                    <td class="formula-cell"><code>=CF 1</code></td>
+                                    <td class="formula-cell"><code>=Beg. Princ * IRR</code></td>
+                                    <td class="formula-cell"><code>=Pmt - Interest</code></td>
+                                    <td class="formula-cell"><code>=Beg. Princ - Repaid</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="year-col">2</td>
+                                    <td class="formula-cell"><code>=End. Princ 1</code></td>
+                                    <td class="formula-cell"><code>=CF 2</code></td>
+                                    <td class="formula-cell"><code>=Beg. Princ * IRR</code></td>
+                                    <td class="formula-cell"><code>=Pmt - Interest</code></td>
+                                    <td class="formula-cell"><code>=Beg. Princ - Repaid</code></td>
+                                </tr>
+                                <tr class="total-row">
+                                    <td class="year-col">n</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td class="formula-cell"><code>0</code> <span class="total-note">(Fully
+                                            Amortized)</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
-                    <button class="btn-theory" onclick="toggleTheory('theory-loan', this)">THEORY <span
-                            class="chevron">↓</span></button>
+                    <button class="btn-note mt-4" onclick="toggleNote('note-loan')">
+                        <span class="note-icon">📝</span> NOTE
+                    </button>
 
-                    <div id="theory-loan" class="theory-content">
-                        <ul>
-                            <li>The table shows how each payment (<strong>Cash Flow</strong>) is split between
-                                <strong>interest</strong> and <strong>principal repayment</strong>.</li>
-                            <li>Using the <strong>IRR</strong> ensures the loan is 100% repaid at the end:
-                                <strong>Ending Principal = 0</strong>.</li>
-                        </ul>
+                    <div id="note-loan" class="post-it-note">
+                        <p>This table deconstructs how a flat <span class="fluo">Cash Flow</span> is split into <span
+                                class="fluo">Interest</span> and <span class="fluo">Principal Repayment</span> over
+                            time.</p>
+                        <p class="mt-2">If you discount the cash flows at the IRR, the ending principal exactly hits
+                            <strong>0</strong> at year <em>n</em>, proving that the IRR fully covers the return of and
+                            return on the invested capital.</p>
                     </div>
                 </section>
+
             </div>
         </main>
     </div>
+
+    <!-- Overlay Note System -->
+    <div id="note-overlay" class="overlay" onclick="closeNote()"></div>
 
     <script src="script.js"></script>
 </body>

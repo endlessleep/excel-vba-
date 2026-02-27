@@ -1,14 +1,27 @@
 :root {
-    --bg-paper: #F8F9FA;
-    --bg-sidebar: #FFFFFF;
-    --excel-green: #217346;
-    --excel-green-hover: #195c37;
-    --excel-green-light: #e8f5e9;
-    --text-main: #333333;
-    --text-muted: #6C757D;
-    --border-color: #EAEAEA;
-    --box-bg: #FFFFFF;
-    --disabled-color: #ADB5BD;
+    /* Color Palette */
+    --clr-bg-page: #F8F9FA;
+    /* off-white requested */
+    --clr-bg-card: #F1F8E9;
+    /* Pastel Green */
+    --clr-excel-green: #217346;
+    --clr-excel-green-hover: #195c37;
+    --clr-text-main: #2C3539;
+    --clr-text-muted: #556B2F;
+    /* Dark Olive for muted text to fit theme */
+
+    /* Code Blocks */
+    --clr-code-bg: #1E1E1E;
+    --clr-code-text: #D4D4D4;
+    --clr-excel-func: #4EC9B0;
+    /* VS Code style cyan for functions */
+    --clr-param: #9CDCFE;
+
+    /* Post-it */
+    --clr-postit-bg: #ccffcc;
+    /* Light neon green */
+    --clr-postit-border: #217346;
+    --clr-postit-text: #000000;
 }
 
 * {
@@ -18,20 +31,41 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: var(--bg-paper);
-    color: var(--text-main);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background-color: var(--clr-bg-page);
+    color: var(--clr-text-main);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
 }
 
-strong {
-    font-weight: 700;
-    color: var(--excel-green);
+/* Utilities */
+.mt-2 {
+    margin-top: 0.5rem;
 }
 
-.mt-3 {
+.mt-4 {
     margin-top: 1.5rem;
+}
+
+strong {
+    font-weight: 700;
+}
+
+.fluo {
+    background-color: rgba(33, 115, 70, 0.15);
+    color: var(--clr-excel-green);
+    font-weight: 700;
+    padding: 0.1em 0.3em;
+    border-radius: 4px;
+}
+
+.fluo.accept {
+    background-color: #c8e6c9;
+}
+
+.fluo.err {
+    background-color: #ffcdd2;
+    color: #c62828;
 }
 
 .app-wrapper {
@@ -39,61 +73,82 @@ strong {
     min-height: 100vh;
 }
 
-/* --- Sidebar System --- */
+/* =========================================
+   Sidebar Architecture 
+   ========================================= */
 .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 280px;
-    background-color: var(--bg-sidebar);
-    border-right: 1px solid var(--border-color);
-    padding: 2rem 0;
-    flex-shrink: 0;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.02);
+    height: 100vh;
+    background-color: #FFFFFF;
+    border-right: 2px solid var(--clr-excel-green);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
 }
 
-.sidebar-header {
-    padding: 0 1.5rem;
-    margin-bottom: 2rem;
+.sidebar-brand {
+    padding: 2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid #EAEAEA;
+    background-color: var(--clr-excel-green);
+    color: white;
 }
 
-.sidebar-header h2 {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    font-weight: 700;
+.brand-icon {
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    color: var(--clr-excel-green);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.2rem;
+}
+
+.sidebar-brand span {
+    font-weight: 800;
     letter-spacing: 1px;
-    text-transform: uppercase;
 }
 
 .sidebar-nav {
-    display: flex;
-    flex-direction: column;
+    padding: 1.5rem 0;
+    flex: 1;
+    overflow-y: auto;
 }
 
-/* Folder Navigation */
-.folder {
-    margin-bottom: 0.25rem;
+.accordion-item {
+    border-bottom: 1px solid #F0F0F0;
 }
 
-.folder-btn {
+.accordion-header {
     width: 100%;
+    text-align: left;
     background: none;
     border: none;
-    padding: 0.75rem 1.5rem;
+    padding: 1rem 1.5rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--clr-text-main);
+    font-weight: 700;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    text-align: left;
-    font-family: inherit;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-main);
-    cursor: pointer;
     transition: background-color 0.2s;
 }
 
-.folder-btn:hover:not(.disabled) {
+.accordion-header:hover:not(.disabled) {
     background-color: #F8F9FA;
 }
 
-.folder-btn.disabled {
-    color: var(--disabled-color);
+.accordion-header.disabled {
+    color: #B0B0B0;
     cursor: not-allowed;
 }
 
@@ -102,351 +157,329 @@ strong {
     font-size: 1.1rem;
 }
 
-.folder-chevron {
+.chevron {
     margin-left: auto;
-    font-size: 0.8rem;
-    color: var(--text-muted);
+    font-size: 0.75rem;
     transition: transform 0.3s ease;
 }
 
-.folder.active .folder-chevron {
+.accordion-item.active .chevron {
     transform: rotate(180deg);
 }
 
-.folder-content {
+.accordion-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
+    transition: max-height 0.3s ease;
+    background-color: #FAFAFA;
 }
 
-.folder-content.show {
-    max-height: 200px;
-    /* arbitrary large enough value */
+.accordion-content.show {
+    max-height: 300px;
 }
 
-.nav-item {
+.nav-link {
     display: block;
-    padding: 0.6rem 1.5rem 0.6rem 3.5rem;
+    padding: 0.75rem 1.5rem 0.75rem 3.5rem;
     text-decoration: none;
-    color: var(--text-muted);
-    font-size: 0.95rem;
+    color: #6C757D;
+    font-size: 0.9rem;
     font-weight: 500;
     border-left: 3px solid transparent;
-    transition: all 0.2s ease;
+    transition: all 0.2s;
 }
 
-.nav-item:hover:not(.active) {
-    color: var(--text-main);
+.nav-link:hover:not(.disabled) {
+    color: var(--clr-text-main);
+    background-color: #F0F0F0;
 }
 
-.nav-item.active {
-    background-color: var(--excel-green-light);
-    border-left-color: var(--excel-green);
-    color: var(--excel-green);
-    font-weight: 600;
+.nav-link.active {
+    color: var(--clr-excel-green);
+    border-left-color: var(--clr-excel-green);
+    background-color: var(--clr-bg-card);
+    font-weight: 700;
 }
 
-/* --- Main Content --- */
+.nav-link.disabled {
+    color: #D3D3D3;
+    pointer-events: none;
+}
+
+/* =========================================
+   Main Content Layout 
+   ========================================= */
 .main-content {
-    flex: 1;
-    padding: 3.5rem 5rem;
-    max-width: 1000px;
-    margin: 0 auto;
+    margin-left: 280px;
+    /* offset sidebar */
+    padding: 4rem 5rem;
+    width: calc(100% - 280px);
+    max-width: 1100px;
 }
 
 .page-header {
     margin-bottom: 3rem;
+    border-bottom: 3px solid var(--clr-excel-green);
+    padding-bottom: 1rem;
 }
 
 .page-header h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--text-main);
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--clr-excel-green);
     letter-spacing: -0.5px;
+}
+
+/* Cards */
+.content-card {
+    background-color: var(--clr-bg-card);
+    border: 2px solid var(--clr-excel-green);
+    border-radius: 8px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    box-shadow: 4px 4px 0px rgba(33, 115, 70, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--clr-excel-green);
+    margin-bottom: 1.5rem;
     text-transform: uppercase;
 }
 
-.page-header h1 strong {
-    color: var(--excel-green);
+/* =========================================
+   Methods & Dark Mode Formulas
+   ========================================= */
+.methods-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1rem;
 }
 
-
-/* --- Concept Cards Premium --- */
-.concept-card {
-    background: var(--box-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 2.5rem;
-    margin-bottom: 2.5rem;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.02);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.method-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--clr-text-muted);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
 }
 
-.concept-card:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+.code-block {
+    background-color: var(--clr-code-bg);
+    color: var(--clr-code-text);
+    padding: 1.25rem;
+    border-radius: 6px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 1.05rem;
+    border-left: 4px solid var(--clr-excel-green);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.card-header {
+.code-comment {
+    color: #6A9955;
+    /* VS Code comment green */
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.excel-func {
+    color: var(--clr-excel-func);
+    font-weight: 700;
+}
+
+.param {
+    color: var(--clr-param);
+}
+
+/* Alerts */
+.alert-box {
+    margin-top: 1.5rem;
+    background-color: #E8F5E9;
+    border: 1px solid var(--clr-excel-green);
+    padding: 1rem 1.5rem;
+    border-radius: 6px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
+    gap: 0.75rem;
+    font-size: 1rem;
+    color: var(--clr-text-main);
 }
 
-.card-title {
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: var(--text-main);
-    margin: 0;
+.alert-icon {
+    font-size: 1.2rem;
 }
 
-/* --- Segmented Controls --- */
-.segmented-control {
-    display: inline-flex;
-    background-color: #F1F3F5;
-    padding: 0.25rem;
-    border-radius: 8px;
-}
-
-.segment-btn {
+/* =========================================
+   Post-it Note System 
+   ========================================= */
+.btn-note {
     background: transparent;
-    border: none;
-    color: var(--text-muted);
+    border: 2px solid var(--clr-excel-green);
+    color: var(--clr-excel-green);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 700;
     font-family: inherit;
     font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+    margin-top: 1.5rem;
 }
 
-.segment-btn.active {
-    background-color: #FFFFFF;
-    color: var(--excel-green);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+.btn-note:hover {
+    background-color: var(--clr-excel-green);
+    color: white;
 }
 
-.segment-btn:hover:not(.active) {
-    color: var(--text-main);
-}
-
-
-/* --- Tab Content Setup --- */
-.tab-content-wrapper {
-    position: relative;
-    min-height: 120px;
-    /* Prevent jumping */
-}
-
-.tab-pane {
+.post-it-note {
     display: none;
-    animation: fadeIn 0.3s ease-in-out;
+    margin-top: 1rem;
+    background-color: var(--clr-postit-bg);
+    border-left: 6px solid var(--clr-postit-border);
+    padding: 1.5rem;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    color: var(--clr-postit-text);
+    font-size: 1.05rem;
+    border-radius: 0 4px 4px 0;
+    animation: unfold 0.3s ease-out forwards;
 }
 
-.tab-pane.active {
+.post-it-note.open {
     display: block;
 }
 
-@keyframes fadeIn {
-    from {
+.post-it-note ul {
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+@keyframes unfold {
+    0% {
         opacity: 0;
-        transform: translateY(5px);
+        transform: translateY(-10px);
     }
 
-    to {
+    100% {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
 
-/* --- Content Formatting --- */
-.method-box {
-    background-color: #FAFAFA;
-    border: 1px solid var(--border-color);
-    border-left: 3px solid var(--excel-green);
-    border-radius: 6px;
-    padding: 1.5rem;
-}
-
-.method-box h3 {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    letter-spacing: 0.5px;
-    margin-bottom: 0.75rem;
-}
-
-.method-box code {
-    font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
-    font-size: 1rem;
-    color: #1F2937;
-}
-
-.method-box .param {
-    color: #4B5563;
-    font-style: italic;
-}
-
-.method-box .comment {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-left: 0.5rem;
-}
-
-/* Alerts */
-.alert-box {
-    margin-top: 1rem;
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.green-alert {
-    background-color: var(--excel-green-light);
-    color: var(--excel-green-hover);
-    border: 1px solid #c8e6c9;
-}
-
-.verification-box {
-    padding: 1rem;
-    background-color: #F8F9FA;
-    border-radius: 6px;
-    color: var(--text-main);
-    font-size: 0.95rem;
-}
-
-.verification-box code {
-    font-family: monospace;
-    background: #FFF;
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
-}
-
-/* Theory Elements */
-.tab-pane ul {
-    padding-left: 1.5rem;
-    margin: 0;
-}
-
-.tab-pane li {
-    margin-bottom: 1rem;
-    font-size: 1.05rem;
-}
-
-.tab-pane li::marker {
-    color: var(--excel-green);
-}
-
-.highlight {
-    padding: 0.15rem 0.5rem;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-.highlight.accept {
-    background-color: #DEF7EC;
-    color: #03543F;
-}
-
-.highlight.reject {
-    background-color: #FDE8E8;
-    color: #9B1C1C;
-}
-
-
-/* --- The Grand Finale: Premium Excel Table --- */
-.table-container {
+/* =========================================
+   Premium Loan Table 
+   ========================================= */
+.table-wrapper {
     overflow-x: auto;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    border: 2px solid var(--clr-excel-green);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-.excel-table {
+.premium-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.95rem;
-    text-align: left;
     background-color: white;
+    text-align: left;
+    font-size: 0.95rem;
 }
 
-.excel-table th {
-    background-color: var(--excel-green);
+.premium-table thead th {
+    background-color: var(--clr-excel-green);
     color: white;
-    font-weight: 600;
-    padding: 1rem;
+    font-weight: 700;
+    padding: 1.25rem 1rem;
     white-space: nowrap;
-}
-
-.excel-table th:not(:last-child) {
     border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.excel-table td {
+.premium-table thead th:last-child {
+    border-right: none;
+}
+
+.premium-table tbody td {
     padding: 1rem;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--text-main);
+    border-bottom: 1px solid #EAEAEA;
+    color: var(--clr-text-main);
+    border-right: 1px solid #EAEAEA;
 }
 
-.excel-table tbody tr:nth-child(even) {
-    background-color: #F9FAFB;
-    /* Subtle zebra striping */
+.premium-table tbody tr:nth-child(even) {
+    background-color: #F8F9FA;
+    /* Zebra striping */
 }
 
-.excel-table tbody tr:hover {
-    background-color: #F3F4F6;
+.premium-table tbody tr:hover {
+    background-color: #F1F8E9;
+    /* Highlight row */
 }
 
-.excel-table td code {
-    font-family: 'SFMono-Regular', Consolas, monospace;
-    font-size: 0.85rem;
-    color: var(--excel-green-hover);
-    background: rgba(33, 115, 70, 0.05);
-    padding: 0.2rem 0.4rem;
+.year-col {
+    font-weight: 700;
+    text-align: center;
+    color: var(--clr-excel-green);
+}
+
+.formula-cell code {
+    font-family: 'Consolas', monospace;
+    color: var(--clr-excel-green-hover);
+    background-color: rgba(33, 115, 70, 0.08);
+    padding: 0.2em 0.4em;
     border-radius: 4px;
+    font-size: 0.85rem;
 }
 
-.final-row td {
+.total-row {
+    background-color: #e8f5e9 !important;
+    font-weight: 700;
+}
+
+.total-row td {
     border-bottom: none;
 }
 
-.final-row td:last-child {
-    background-color: var(--excel-green-light);
-    color: var(--excel-green-hover);
+.total-note {
+    font-size: 0.8rem;
+    color: var(--clr-excel-green);
+    margin-left: 0.5rem;
+    font-weight: normal;
 }
 
 
-/* --- Responsive Adjustments --- */
-@media (max-width: 900px) {
-    .app-wrapper {
-        flex-direction: column;
+/* =========================================
+   Responsive 
+   ========================================= */
+@media (max-width: 992px) {
+    .methods-grid {
+        grid-template-columns: 1fr;
     }
+}
 
+@media (max-width: 768px) {
     .sidebar {
         width: 100%;
-        padding: 1rem 0;
-        box-shadow: none;
-        border-bottom: 1px solid var(--border-color);
+        height: auto;
+        position: relative;
         border-right: none;
+        border-bottom: 2px solid var(--clr-excel-green);
     }
 
     .main-content {
+        margin-left: 0;
+        width: 100%;
         padding: 2rem;
     }
 
-    .card-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
+    .accordion-content.show {
+        max-height: max-content;
     }
 }
