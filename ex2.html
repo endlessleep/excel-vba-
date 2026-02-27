@@ -75,7 +75,7 @@
                             <div class="code-block dark-mode" style="margin-top: 1rem;">
                                 <p style="margin-bottom: 0.5rem; color: #D4D4D4;">You need: A <span
                                         class="param">Discount Rate variable</span> , an <span
-                                        class="excel-func">NPV Formula</span> referencing that rate, and your <span
+                                        class="excel-func">NPV </span> referencing that rate, and your <span
                                         class="param">Cash Flows</span>.</p>
                             </div>
                         </div>
@@ -92,12 +92,9 @@
                                     • First column → <span class="param">Test discount rates</span> (0%, 3%, 6%, 9%, 12%, 15%, ...)
                                 </p>
                                 <p style="color: #D4D4D4;">
-                                 • Second column → <span class="param">NPV results</span> (1st case = NPV reference and the rest will be automatically generated)
+                                 • Second column → <span class="param">NPV results</span> (1st case = <span
+                                        class="excel-func">NPV reference </span> and the rest will be automatically generated)
                                 </p>
-                                <div class="code-comment mt-4">
-                                CRUCIAL: In the cell directly above the second column (top-right of the table),
-                                enter "=" and click on your NPV result cell. This creates the NPV reference.
-                                </div>
 
                              </div>
                         </div>
@@ -107,8 +104,7 @@
                             <h3 class="method-title">3️⃣ Select & Run</h3>
                             <div class="code-block dark-mode" style="margin-top: 1rem;">
                                 <ul style="margin-left: 1.5rem; margin-bottom: 1rem; color: #D4D4D4;">
-                                    <li>Select the <span class="param">entire range</span> (Rates + NPV Reference +
-                                        Empty result cells).</li>
+                                    <li>Select the <span class="param">entire data table </span> ().</li> (including the NPV reference, not the discount rate)
                                     <li>Go to: <strong>Data &rarr; What-If Analysis &rarr; Data Table</strong>.</li>
                                 </ul>
                                 <div class="code-comment">// Since your rates are in a column:</div>
@@ -163,15 +159,26 @@
 
                             <ul
                                 style="margin-top: 1.5rem; margin-bottom: 1.5rem; margin-left: 1.5rem; color: #D4D4D4; line-height: 2;">
-                                <li><strong>1st IRR:</strong> Guess small (0 or 0.05) &rarr; Searches the left region.
+    
+                                <li>
+                                    <strong>1st IRR:</strong> Choose a guess close to the first sign-change interval 
+                                    (identified in the Data Table or NPV graph). 
+                                    Excel converges to the root in that region.
                                 </li>
-                                <li><strong>2nd IRR:</strong> Guess large (0.5 or 1.0) &rarr; Searches the right region.
+
+                                <li>
+                                    <strong>2nd IRR:</strong> Choose a guess close to the second sign-change interval. 
+                                    Excel converges to the root located in that region.
                                 </li>
+
                             </ul>
 
-                            <div class="code-comment">// Rule of thumb:</div>
-                            <p style="color: #D4D4D4;">The guess just tells Excel where to <span class="param">start
-                                    looking</span> on the curve.</p>
+                            <div class="code-comment">// Rule:</div>
+                            <p style="color: #D4D4D4;">
+                                The guess does not determine the IRR value. 
+                                It determines which <span class="param">mathematical root</span> Excel converges to,
+                                based on the region where NPV changes sign.
+                            </p>
                         </div>
                     </div>
                 </section>
