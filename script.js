@@ -10,12 +10,6 @@ function toggleAccordion(btn) {
         item.classList.remove('active');
         content.classList.remove('show');
     } else {
-        // Optional: Close other open accordions if strictly 1 open at a time is wanted
-        // document.querySelectorAll('.accordion-item.active').forEach(openItem => {
-        //     openItem.classList.remove('active');
-        //     openItem.querySelector('.accordion-content').classList.remove('show');
-        // });
-
         item.classList.add('active');
         content.classList.add('show');
     }
