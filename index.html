@@ -96,12 +96,22 @@
 
                     </div>
 
+                    <div class="alert-box alert-red"
+                        style="padding: 0.75rem 1rem; font-size: 0.9rem; margin-top: 1.5rem;">
+                        <span class="alert-icon" style="font-size: 1rem;">🚨</span>
+                        <span><strong>ATTENTION :</strong> N'oubliez pas d'utiliser les <strong><span class="fluo err"
+                                    style="padding: 0 0.3em; margin: 0 0.2em;">$$</span></strong> (ex:
+                            <code>$A$1</code>) si vous étirez la formule pour bloquer la cellule du <em>discount
+                                rate</em> !</span>
+                    </div>
+
                     <button class="btn-note" onclick="toggleNote('note-npv')">
                         <span class="note-icon">📝</span> NOTE
                     </button>
 
                     <div id="note-npv" class="post-it-note">
-                        <p><span class="fluo">Net Present Value (NPV)</span> equals the present value of all cash flows discounted at rate r. It measures the net value added today by an investment.</p>
+                        <p><span class="fluo">Net Present Value (NPV)</span> equals the present value of all cash flows
+                            discounted at rate r. It measures the net value added today by an investment.</p>
                         <p class="mt-2"><strong> Rule:</strong> Always <span class="fluo accept">Accept if NPV >
                                 0</span> and <span class="fluo err">Reject if NPV < 0</span>.
                         </p>
@@ -109,9 +119,10 @@
                 </section>
 
                 <div id="note-npv" class="post-it-note">
-                    <p><span class="fluo">Net Present Value (NPV)</span> equals the present value of all cash flows discounted at rate r. It measures the net value added today by an investment.</p>
-                    <p class="mt-2"><strong>Rule:</strong> 
-                        <span class="fluo accept">Accept if NPV &gt; 0</span> and 
+                    <p><span class="fluo">Net Present Value (NPV)</span> equals the present value of all cash flows
+                        discounted at rate r. It measures the net value added today by an investment.</p>
+                    <p class="mt-2"><strong>Rule:</strong>
+                        <span class="fluo accept">Accept if NPV &gt; 0</span> and
                         <span class="fluo err">Reject if NPV &lt; 0</span>.
                     </p>
                 </div>
@@ -164,7 +175,8 @@
                             <tbody>
                                 <tr>
                                     <td class="year-col">t=1</td>
-                                    <td class="formula-cell"><code> Initial investment = Ending Principal (t-1) </code></td>
+                                    <td class="formula-cell"><code> Initial investment = Ending Principal (t-1) </code>
+                                    </td>
                                     <td class="formula-cell"><code>CF(t=1)</code></td>
                                     <td class="formula-cell"><code>Beginning Principal * IRR</code></td>
                                     <td class="formula-cell"><code>CF(t=1) - Interest</code></td>
@@ -188,11 +200,13 @@
                     </button>
 
                     <div id="note-loan" class="post-it-note">
-                        <p>how a <span class="fluo">Cash Flow</span> is split into <span
-                                class="fluo">Interest</span> and <span class="fluo">Principal Repayment</span> over time.</p>
+                        <p>how a <span class="fluo">Cash Flow</span> is split into <span class="fluo">Interest</span>
+                            and <span class="fluo">Principal Repayment</span> over time.</p>
                         <p class="mt-2">If you discount the cash flows at the IRR, the ending principal exactly hits
-                            <strong>0</strong> at year <em>t = T</em>, proving that the IRR fully covers the return of and
-                            return on the invested capital.</p>
+                            <strong>0</strong> at year <em>t = T</em>, proving that the IRR fully covers the return of
+                            and
+                            return on the invested capital.
+                        </p>
                     </div>
                 </section>
 
@@ -209,4 +223,5 @@
 </body>
 
 </html>
+
 </html>
