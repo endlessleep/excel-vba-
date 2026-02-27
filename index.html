@@ -22,32 +22,24 @@
                 <!-- Accordion Menu -->
                 <div class="accordion-item active">
                     <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="folder-icon">📂</span> LECTURE 1: Capital Budgeting
+                        <span class="folder-icon">📂</span> LECTURE 1: EXCEL
                         <span class="chevron">▼</span>
                     </button>
                     <div class="accordion-content show">
                         <a href="#" class="nav-link active">Ex 1: NPV & IRR</a>
-                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: Payback Period</a>
-                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 3: Profitability Index</a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: MULTIPLE INTERNAL RATES OF RETURN</a>
                     </div>
                 </div>
 
                 <div class="accordion-item">
                     <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="folder-icon">📁</span> LECTURE 2: Fixed Income
+                        <span class="folder-icon">📁</span> LECTURE 2: EXCEL
                         <span class="chevron">▼</span>
                     </button>
                     <div class="accordion-content">
-                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 1: Bond Pricing</a>
-                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: Yield to Maturity</a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 1: à suivre </a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: à suivre</a>
                     </div>
-                </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header disabled">
-                        <span class="folder-icon">📁</span> LECTURE 3: Risk & Return
-                        <span class="chevron">▼</span>
-                    </button>
                 </div>
             </nav>
         </aside>
@@ -86,10 +78,10 @@
                                 <div class="code-comment"> Step 1 (Discounting)</div>
                                 <code>=CF / (1+<span class="param">rate</span>)^<span class="param">period</span></code>
 
-                                <div class="code-comment mt-4">// Step 2 - case t=1 </div>
+                                <div class="code-comment mt-4"> Step 2 - case t=1 </div>
                                 <code><span class="excel-func">=SUM</span>(<span class="param">range_of_DISCOUNTED_CFs</span>)</code>
 
-                                <div class="code-comment mt-4">// Step 2 - case t=0 </div>
+                                <div class="code-comment mt-4"> Step 2 - case t=0 </div>
                                 <code>initial_CF + <span class="excel-func">SUM</span>(<span class="param">range_of_DISCOUNTED_CFs</span>)</code>
                             </div>
                         </div>
