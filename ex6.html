@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Modelling Using MS Excel and VBA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .math-block {
+            background-color: var(--clr-bg-card);
+            border: 2px dashed var(--clr-excel-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Consolas', monospace;
+            font-size: 1.1rem;
+            color: var(--clr-text-main);
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);
+        }
+
+        .vs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #EAEAEA;
+        }
+
+        .vs-table th,
+        .vs-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #EAEAEA;
+        }
+
+        .vs-table th {
+            background-color: #F8F9FA;
+            color: var(--clr-excel-green);
+            font-weight: 700;
+        }
+
+        .vs-table td {
+            background-color: white;
+            color: #444;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-wrapper">
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>EXCEL VBA CORE</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- Accordion Menu -->
+                <div class="accordion-item active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 1: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content show">
+                        <a href="index.html" class="nav-link">Ex 1: NPV & IRR</a>
+                        <a href="ex2.html" class="nav-link">Ex 2: Multiple IRRs</a>
+                        <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
+                        <a href="ex4.html" class="nav-link">Ex 4: Payment Schedule</a>
+                        <a href="ex5.html" class="nav-link">Ex 5: Future Value</a>
+                        <a href="ex6.html" class="nav-link active">Ex 6: Multiple Compounding</a>
+                        <a href="case-study.html" class="nav-link">Case Study: Retirement</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 2: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 1: à suivre </a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: à suivre</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <!-- ================= END SIDEBAR ================= -->
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1>EX 6: MULTIPLE COMPOUNDING</h1>
+                <p style="margin-top: 0.5rem; font-size: 1.1rem; color: var(--clr-text-muted);">The interest of
+                    interest: How compounding frequency changes everything.</p>
+            </header>
+
+            <div class="cards-container">
+
+                <!-- SECTION 1: THE M LEVER -->
+                <section class="content-card">
+                    <h2 class="section-title">
+                        <span style="font-size: 1.5rem; vertical-align: middle; margin-right: 0.5rem;">📈</span>
+                        1️⃣ THE 'm' LEVER (Compounding Frequency)
+                    </h2>
+
+                    <div class="method-column">
+                        <p style="margin-bottom: 1rem; color: #444; font-size: 1.05rem;">
+                            <strong>Definition:</strong> <code>m</code> is the Number of compounding periods per year
+                            (the number of times interest is added to the capital in a single year).
+                        </p>
+
+                        <div
+                            style="background-color: white; padding: 1.5rem; border-left: 4px solid var(--clr-excel-green); border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 2rem;">
+                            <h4 style="color: var(--clr-excel-green); margin-bottom: 0.5rem; font-size: 1.1rem;">The
+                                Division Rule</h4>
+                            <p style="color: #555; line-height: 1.6;">
+                                We never keep the annual rate as is. The <strong>Interest per compounding
+                                    period</strong> must be calculated as: <code>r / m</code>.
+                            </p>
+                        </div>
+
+                        <h3 style="color: var(--clr-text-main); font-size: 1.1rem;">Classic 'm' Values:</h3>
+                        <table class="vs-table">
+                            <thead>
+                                <tr>
+                                    <th>Frequency</th>
+                                    <th>Number of periods (m)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: bold; color: var(--clr-excel-green);">Annual</td>
+                                    <td>m = 1</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; color: var(--clr-excel-green);">Semi-Annual</td>
+                                    <td>m = 2</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; color: var(--clr-excel-green);">Monthly</td>
+                                    <td>m = 12</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; color: var(--clr-excel-green);">Daily</td>
+                                    <td>m = 365</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- SECTION 2: THE ACCRETION FORMULA -->
+                <section class="content-card">
+                    <h2 class="section-title">2️⃣ THE ACCRETION FORMULA</h2>
+
+                    <div class="method-column">
+                        <p style="margin-bottom: 1rem; color: #444; font-size: 1.05rem;">
+                            To calculate the Accretion in one year (or the Future Value after 1 year):
+                        </p>
+
+                        <div class="math-block">
+                            FV = PV &times; (1 + r/m)&#8319;
+                        </div>
+
+                        <div class="code-block dark-mode" style="margin-bottom: 1.5rem;">
+                            <code><span class="excel-func">=PV</span> * (1 + <span class="param">r</span>/<span class="param">m</span>)^<span class="param">m</span></code>
+                        </div>
+
+                        <p style="color: #444; font-style: italic;">
+                            <strong>The Intuition:</strong> As 'm' increases, the Future Value increases, but it grows
+                            at a decreasing rate.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- SECTION 3: THE SUMMIT (CONTINUOUS COMPOUNDING) -->
+                <section class="content-card" style="border-top: 4px solid #0D47A1;">
+                    <h2 class="section-title" style="color: #0D47A1;">3️⃣ THE SUMMIT: CONTINUOUS COMPOUNDING</h2>
+
+                    <div class="method-column">
+                        <p style="margin-bottom: 1rem; color: #444; font-size: 1.05rem;">
+                            When interests are added at every micro-second (m &rarr; &infin;):
+                        </p>
+
+                        <div
+                            style="background-color: #E3F2FD; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid #bbdefb;">
+                            <h4 style="color: #0D47A1; margin-bottom: 0.5rem; font-size: 1.1rem;">The Theoretical Limit
+                            </h4>
+                            <p style="color: #1565C0; line-height: 1.6;">
+                                We use the number <strong>e</strong> (the mathematical constant known as Euler's
+                                number). We use <strong>Continuous compounding with Exp</strong>.
+                            </p>
+                        </div>
+
+                        <div class="code-block dark-mode"
+                            style="margin-bottom: 1.5rem; background-color: #0D47A1; border: 1px solid #1E88E5;">
+                            <code>=<span class="param">PV</span> * <span class="excel-func">EXP</span>(<span class="param">r</span>)</code>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+        <!-- ================= END MAIN CONTENT ================= -->
+
+    </div>
+
+    <!-- Overlay Note System -->
+    <div id="note-overlay" class="overlay" onclick="closeNote()"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
