@@ -220,7 +220,7 @@
                     </h2>
                     <p
                         style="text-align: center; color: #555; font-size: 1.1rem; margin-bottom: 2rem; position: relative; z-index: 1;">
-                        Objectif : Trouver le dépôt annuel constant (D) pour financer sa liberté.
+                        Goal: Find the exact constant annual deposit (D) needed to finance your financial freedom.
                     </p>
 
                     <!-- CONTEXT: THE TWO PHASES OF LIFE -->
@@ -230,24 +230,24 @@
                             style="color: #0D47A1; font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 1px solid #E3F2FD; padding-bottom: 0.5rem;">
                             📌 Context: The Two Phases of Life</h3>
                         <p style="color: #444; font-size: 1.05rem; margin-bottom: 1rem;">
-                            Imagine une ligne du temps divisée en deux parties distinctes :
+                            Imagine a timeline clearly divided into two distinct parts:
                         </p>
                         <ul style="color: #555; line-height: 1.8; margin-left: 1.5rem; margin-bottom: 1rem;">
-                            <li><strong style="color: #0D47A1;">Phase 1 (Épargne) :</strong> Années 0 à 4 (5 dépôts). Tu
-                                travailles et tu mets de l'argent de côté.</li>
-                            <li><strong style="color: #0D47A1;">Phase 2 (Retraite) :</strong> Années 5 à 14 (10
-                                retraits). Tu ne travailles plus, tu vis sur tes réserves.</li>
+                            <li><strong style="color: #0D47A1;">Phase 1 (Saving):</strong> Years 0 to 4 (5 deposits).
+                                You work and save money.</li>
+                            <li><strong style="color: #0D47A1;">Phase 2 (Retirement):</strong> Years 5 to 14 (10
+                                withdrawals). You stop working and live off your reserves.</li>
                         </ul>
                         <p
                             style="color: #444; font-size: 1.05rem; font-weight: 500; font-style: italic; background-color: #f9f9f9; padding: 0.8rem; border-radius: 4px; border-left: 3px solid #0D47A1;">
-                            La Mission : Trouver le montant exact du dépôt (D) pour que ton compte tombe pile à 0 après
-                            le tout dernier retrait.
+                            The Mission: Find the exact deposit amount (D) so that your account balances to exactly 0
+                            after the very last withdrawal.
                         </p>
                     </div>
 
                     <h3
                         style="color: var(--clr-excel-green); margin-bottom: 1.5rem; border-bottom: 2px solid var(--clr-excel-green); padding-bottom: 0.5rem; display: inline-block; position: relative; z-index: 1;">
-                        ��️ THE 4-STEP DRILL (Deep Intuition)
+                        🏗️ THE 4-STEP DRILL (Deep Intuition)
                     </h3>
 
                     <div style="position: relative; z-index: 1;">
@@ -256,28 +256,32 @@
                             style="border-left-color: var(--clr-excel-green); background-color: white;">
                             <h3 class="step-title"
                                 style="color: var(--clr-excel-green); border-bottom-color: #E8F5E9; font-size: 1.3rem;">
-                                🟢 STEP 1 — Le besoin à la Retraite (Year 5)
+                                STEP 1 — The Retirement Need (Year 5)
                             </h3>
                             <p style="color: #444; font-size: 1.05rem; margin-bottom: 1rem;">
-                                <em>"À l'année 5, combien dois-je avoir ?"</em><br>
-                                Tu as besoin d'un énorme "sac d'argent" pour financer tes 10 années de repos. On
-                                "compresse" 10 retraits de 30k en un seul montant global.
+                                <em>"At year 5, how much money do I need to have?"</em><br>
+                                You need a massive "bag of cash" to fund your 10 years of resting. We "compress" 10
+                                withdrawals of 30k into one single global sum.
                             </p>
 
-                            <strong style="color: #333; display: block; margin-top: 1rem;">Calcul & Syntaxe :</strong>
+                            <strong style="color: #333; display: block; margin-top: 1rem;">Calculation &
+                                Syntax:</strong>
                             <div class="code-block dark-mode" style="margin: 0.5rem 0 1rem 0; padding: 1rem;">
+                                <div class="code-comment">// 1. General Excel Structure</div>
+                                <code><span class="excel-func">=PV</span>(<span class="param">rate</span> ; <span class="param">nper</span> ; <span class="param">pmt</span> <strong style="color: white; font-size: 1.2rem;">;</strong> <span class="param">[fv]</span> <strong style="color: white; font-size: 1.2rem;">;</strong> <span class="param">[type]</span>)</code>
+                                <div class="code-comment" style="margin-top: 1rem;">// 2. Applied Version</div>
                                 <code><span class="excel-func">=PV</span>(<span class="param">r</span> ; <span class="param">10</span> ; <span class="param">-30000</span> <strong style="color: white; font-size: 1.2rem;">;;</strong> 1)</code>
                             </div>
 
                             <div
                                 style="background: #f1f8f5; border: 1px solid #c8e6d6; padding: 1rem; border-radius: 6px; margin-top: 1rem;">
                                 <strong style="color: var(--clr-excel-green); display: block; margin-bottom: 0.5rem;">💡
-                                    L'Intuition :</strong>
+                                    The Intuition:</strong>
                                 <p style="font-size: 0.95rem; color: #444; margin: 0; line-height: 1.6;">
-                                    On veut savoir quelle somme exacte produit 10 retraits de 30k. Nous utiliserons la
-                                    variable <strong style="color: var(--clr-excel-green);">C<sub>5</sub></strong> pour
-                                    désigner ce résultat. C'est le prix de ta liberté au tout premier jour de ta
-                                    retraite.
+                                    We want to know the exact present value that generates 10 withdrawals of 30k. We
+                                    will use the variable <strong
+                                        style="color: var(--clr-excel-green);">C<sub>5</sub></strong> for this result.
+                                    This is the price of your freedom on the exact first day of your retirement.
                                 </p>
                             </div>
                         </div>
@@ -287,30 +291,38 @@
                             style="border-left-color: var(--clr-excel-green); background-color: white;">
                             <h3 class="step-title"
                                 style="color: var(--clr-excel-green); border-bottom-color: #E8F5E9; font-size: 1.3rem;">
-                                🟢 STEP 2 — La valeur de ce besoin aujourd'hui (Year 0)
+                                STEP 2 — The Value of this Need Today (Year 0)
                             </h3>
                             <p style="color: #444; font-size: 1.05rem; margin-bottom: 1rem;">
-                                <em>"Que représente ce montant gigantesque à la date d'aujourd'hui ?"</em><br>
-                                <strong>C<sub>5</sub></strong> est situé dans le futur. Pour le comparer à tes efforts
-                                d'aujourd'hui (tes dépôts), il faut le "ramener" à l'année 0. On le "dé-gonfle" en lui
-                                enlevant 5 ans d'intérêts.
+                                <em>"What does this huge amount represent in today's money?"</em><br>
+                                <strong>C<sub>5</sub></strong> is located in the future. To compare it with your efforts
+                                today (your deposits), you must bring it back to Year 0. We "deflate" it by stripping
+                                away 5 years of interest.
                             </p>
 
-                            <strong style="color: #333; display: block; margin-top: 1rem;">La Formule :</strong>
+                            <strong style="color: #333; display: block; margin-top: 1rem;">The Formula:</strong>
                             <div class="math-block"
-                                style="margin: 0.5rem 0 1rem 0; padding: 1.2rem; font-size: 1.2rem; font-weight: 600; border-color: rgba(33,115,70,0.3);">
+                                style="margin: 0.5rem 0 1rem 0; padding: 1.2rem; font-size: 1.2rem; font-weight: 600; border-color: rgba(33,115,70,0.3); text-align: left;">
+                                <div
+                                    style="color: #888; font-size: 0.9rem; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif; font-weight: normal;">
+                                    1. General Mathematical Structure:</div>
+                                PV<sub>today</sub> = FV / (1 + r)&#8319;
+
+                                <div
+                                    style="color: #888; font-size: 0.9rem; margin-top: 1rem; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif; font-weight: normal;">
+                                    2. Applied Version:</div>
                                 Target<sub>0</sub> = C<sub>5</sub> / (1 + r)&#8309;
                             </div>
 
                             <div
                                 style="background: #f1f8f5; border: 1px solid #c8e6d6; padding: 1rem; border-radius: 6px; margin-top: 1rem;">
                                 <strong style="color: var(--clr-excel-green); display: block; margin-bottom: 0.5rem;">💡
-                                    L'Intuition :</strong>
+                                    The Intuition:</strong>
                                 <p style="font-size: 0.95rem; color: #444; margin: 0; line-height: 1.6;">
-                                    Ce résultat s'appelle <strong
-                                        style="color: var(--clr-excel-green);">Target<sub>0</sub></strong>. C'est très
-                                    simple : si tu possédais cette somme exacte <em>tout de suite</em> sur ton compte,
-                                    tu pourrais t'arrêter de travailler aujourd'hui sans rien épargner de plus.
+                                    This result is called <strong
+                                        style="color: var(--clr-excel-green);">Target<sub>0</sub></strong>. It's
+                                    incredibly simple: if you had this exact amount <em>right now</em> in your bank
+                                    account, you could stop working today without ever saving another penny.
                                 </p>
                             </div>
                         </div>
@@ -320,32 +332,32 @@
                             style="background-color: #FFF3E0; border-left: 6px solid #FF9800; padding: 1.5rem; border-radius: 8px; margin: 2rem 0; box-shadow: 0 4px 15px rgba(255, 152, 0, 0.15);">
                             <h3
                                 style="color: #E65100; font-size: 1.3rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                                <span>🔍</span> LA MÉTHODE DIRECTE (Pour comprendre le "Pourquoi")
+                                <span>🔍</span> THE DIRECT METHOD (Understanding the "Why")
                             </h3>
                             <p style="color: #555; font-size: 1.05rem; margin-bottom: 1rem;">
-                                Si nous décidions de ne pas utiliser le confort d'Excel et de contourner les Steps 1 &
-                                2, nous devrions actualiser manuellement <strong>chaque retrait individuellement jusqu'à
-                                    l'année 0</strong> :
+                                If we decided not to use the convenience of Excel and bypass Steps 1 & 2, we would have
+                                to manually discount <strong>every single withdrawal individually back to Year
+                                    0</strong>:
                             </p>
 
                             <div class="math-block"
                                 style="background-color: white; border-color: #FFB74D; color: #E65100; font-size: 1.1rem; padding: 1rem; margin-bottom: 1rem; text-align: left;">
-                                Retrait 1 (An 5) : 30000 / (1+r)&#8309;<br>
-                                Retrait 2 (An 6) : 30000 / (1+r)&#8310;<br>
+                                Withdrawal 1 (Year 5): 30000 / (1+r)&#8309;<br>
+                                Withdrawal 2 (Year 6): 30000 / (1+r)&#8310;<br>
                                 ...<br>
-                                Retrait 10 (An 14) : 30000 / (1+r)&#185;&#8308;
+                                Withdrawal 10 (Year 14): 30000 / (1+r)&#185;&#8308;
                             </div>
 
                             <p style="color: #444; font-size: 1.05rem; margin-bottom: 1rem;">
-                                <strong>Total =</strong> La somme exacte de ces 10 énormes calculs = <strong
+                                <strong>Grand Total =</strong> The exact sum of these 10 massive calculations = <strong
                                     style="color: #E65100;">Target<sub>0</sub></strong>.
                             </p>
 
                             <p
                                 style="color: #444; font-size: 1rem; font-style: italic; background-color: #FFE0B2; padding: 0.8rem; border-radius: 4px; border-left: 3px solid #FF9800; margin: 0;">
-                                <strong>Conclusion finale :</strong> La méthode directe mathématique est atrocement
-                                longue. La magie des Steps 1 & 2 d'Excel, c'est de réussir à faire ces 10 calculs
-                                d'actualisation en seulement deux cliques !
+                                <strong>Final Conclusion:</strong> The mathematical direct method is painfully long. The
+                                true magic of Excel's Steps 1 & 2 is successfully performing these 10 discounting
+                                calculations in just two clicks!
                             </p>
                         </div>
 
@@ -354,28 +366,32 @@
                             style="border-left-color: var(--clr-excel-green); background-color: white;">
                             <h3 class="step-title"
                                 style="color: var(--clr-excel-green); border-bottom-color: #E8F5E9; font-size: 1.3rem;">
-                                🟢 STEP 3 — La puissance de 1€ d'épargne (Factor)
+                                STEP 3 — The Power of 1€ in Savings (Factor)
                             </h3>
                             <p style="color: #444; font-size: 1.05rem; margin-bottom: 1rem;">
-                                <em>"Maintenant, oublions la retraite. Plions-nous sur la phase d'épargne."</em><br>
-                                Puisque nous ne connaissons pas encore notre dépôt final (D), nous allons faire une
-                                simulation générique de l'effort : on épargne seulement 1€.
+                                <em>"Now, let's forget about retirement. Let's focus on the saving phase."</em><br>
+                                Since we do not yet know our final deposit (D), we will run a generic simulation of the
+                                effort: saving only 1€.
                             </p>
 
-                            <strong style="color: #333; display: block; margin-top: 1rem;">Calcul & Syntaxe :</strong>
+                            <strong style="color: #333; display: block; margin-top: 1rem;">Calculation &
+                                Syntax:</strong>
                             <div class="code-block dark-mode" style="margin: 0.5rem 0 1rem 0; padding: 1rem;">
+                                <div class="code-comment">// 1. General Excel Structure</div>
+                                <code><span class="excel-func">=PV</span>(<span class="param">rate</span> ; <span class="param">nper</span> ; <span class="param">pmt</span> <strong style="color: white; font-size: 1.2rem;">;</strong> <span class="param">[fv]</span> <strong style="color: white; font-size: 1.2rem;">;</strong> <span class="param">[type]</span>)</code>
+                                <div class="code-comment" style="margin-top: 1rem;">// 2. Applied Version</div>
                                 <code><span class="excel-func">=PV</span>(<span class="param">r</span> ; <span class="param">5</span> ; <span class="param">-1</span> <strong style="color: white; font-size: 1.2rem;">;;</strong> 1)</code>
                             </div>
 
                             <div
                                 style="background: #f1f8f5; border: 1px solid #c8e6d6; padding: 1rem; border-radius: 6px; margin-top: 1rem;">
                                 <strong style="color: var(--clr-excel-green); display: block; margin-bottom: 0.5rem;">💡
-                                    L'Intuition :</strong>
+                                    The Intuition:</strong>
                                 <p style="font-size: 0.95rem; color: #444; margin: 0; line-height: 1.6;">
-                                    Ce résultat magique s'appelle le <strong
-                                        style="color: var(--clr-excel-green);">Factor</strong>. Son message : "Voici
-                                    combien valent exactement 5 dépôts de 1€, s'ils étaient versés en une seule fois
-                                    aujourd'hui".
+                                    This magical result is called the <strong
+                                        style="color: var(--clr-excel-green);">Factor</strong>. Its message: "Here is
+                                    exactly how much 5 deposits of 1€ would be worth, if they were paid out all at once
+                                    today".
                                 </p>
                             </div>
                         </div>
@@ -385,31 +401,38 @@
                             style="border-left-color: var(--clr-excel-green); background-color: white; border-bottom: 4px solid var(--clr-excel-green);">
                             <h3 class="step-title"
                                 style="color: var(--clr-excel-green); border-bottom-color: #E8F5E9; font-size: 1.3rem;">
-                                �� STEP 4 — Le calcul final (Solving for D)
+                                STEP 4 — The Final Calculation (Solving for D)
                             </h3>
                             <p style="color: #444; font-size: 1.05rem; margin-bottom: 1rem;">
-                                <em>"Quel effort réel dois-je fournir pour atteindre ma cible ?"</em><br>
-                                En mathématiques, on sait que l'effort multiplié par sa puissance doit égaler l'objectif
-                                final ramené au présent :<br>
+                                <em>"What real effort must I make to reach my target?"</em><br>
+                                In mathematics, we know that the effort multiplied by its power must equal the final
+                                goal brought back to the present:<br>
                                 <strong
-                                    style="color: #0D47A1; display: block; background: #e3f2fd; padding: 0.5rem 1rem; border-radius: 4px; margin-top: 0.5rem;">Tes
-                                    Dépôts (D) &times; Factor = Target<sub>0</sub></strong>
+                                    style="color: #0D47A1; display: block; background: #e3f2fd; padding: 0.5rem 1rem; border-radius: 4px; margin-top: 0.5rem;">Your
+                                    Deposits (D) &times; Factor = Target<sub>0</sub></strong>
                             </p>
 
-                            <strong style="color: #333; display: block; margin-top: 1.5rem;">La Formule :</strong>
+                            <strong style="color: #333; display: block; margin-top: 1.5rem;">The Formula:</strong>
                             <div class="math-block"
-                                style="margin: 0.5rem 0 1rem 0; padding: 1.2rem; font-size: 1.3rem; font-weight: 700; border-color: var(--clr-excel-green); background-color: #E8F5E9; color: var(--clr-excel-green);">
+                                style="margin: 0.5rem 0 1rem 0; padding: 1.2rem; font-size: 1.3rem; font-weight: 700; border-color: var(--clr-excel-green); background-color: #E8F5E9; color: var(--clr-excel-green); text-align: left;">
+                                <div
+                                    style="color: #888; font-size: 0.9rem; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif; font-weight: normal;">
+                                    1. General Mathematical Structure:</div>
+                                Deposit = Target / Factor
+                                <div
+                                    style="color: #888; font-size: 0.9rem; margin-top: 1rem; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif; font-weight: normal;">
+                                    2. Applied Version:</div>
                                 D = Target<sub>0</sub> / Factor
                             </div>
 
                             <div
                                 style="background: #e8f5e9; border: 1px solid #c8e6d6; padding: 1rem; border-radius: 6px; margin-top: 1rem;">
                                 <strong style="color: var(--clr-excel-green); display: block; margin-bottom: 0.5rem;">💡
-                                    L'Intuition :</strong>
+                                    The Intuition:</strong>
                                 <p style="font-size: 0.95rem; color: #444; margin: 0; line-height: 1.6;">
-                                    On "ajuste" simplement l'unité de base (le dépôt de 1€) en le gonflant jusqu'à ce
-                                    qu'il percute de plein fouet, au centime près, la cible gigantesque ($Target_0$) que
-                                    l'on a chiffrée au Step 2.
+                                    We simply "scale up" the base unit (the 1€ deposit), inflating it until it crashes
+                                    head-on, down to the last cent, into the gigantic target ($Target_0$) we calculated
+                                    in Step 2.
                                 </p>
                             </div>
                         </div>
@@ -419,7 +442,7 @@
                 <div class="mt-4 text-center">
                     <button class="btn-note" onclick="toggleNote('note-annuity-trick')"
                         style="margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                        <span class="note-icon">🔥</span> L'ÉQUATION D'OR
+                        <span class="note-icon">🔥</span> THE GOLDEN EQUATION
                     </button>
                 </div>
 
@@ -427,12 +450,12 @@
                     style="background-color: #B2D3C2; max-width: 600px; margin: 1rem auto 0 auto; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transform: rotate(-1deg);">
                     <p
                         style="font-weight: 800; color: #111; font-size: 1.15rem; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; margin-bottom: 0.8rem; letter-spacing: 0.5px;">
-                        L'Équation Maîtresse !
+                        The Master Equation!
                     </p>
                     <p style="color: #111; line-height: 1.7; font-size: 1.05rem;">
-                        <strong>Tout l'argent qui sort</strong> (Phase 2 - Retraite) doit être rigoureusement,
-                        mathématiquement égal à <strong>tout l'argent qui rentre</strong> (Phase 1 - Dépôts), à
-                        condition que <em>le tout soit ramené exactement à la même date (Year 0)</em> !
+                        <strong>All outgoing money</strong> (Phase 2 - Retirement) must perfectly mathematically equal
+                        <strong>all incoming money</strong> (Phase 1 - Deposits), under the absolute condition that
+                        <em>everything is brought back strictly to the exact same date (Year 0)</em>!
                     </p>
                 </div>
 
