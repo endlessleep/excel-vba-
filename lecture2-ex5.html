@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 5: Portfolio Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .math-block {
+            background-color: var(--clr-bg-card);
+            border: 2px dashed var(--clr-excel-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Consolas', monospace;
+            font-size: 1.1rem;
+            color: var(--clr-text-main);
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);
+        }
+
+        .vs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #EAEAEA;
+        }
+
+        .vs-table th,
+        .vs-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #EAEAEA;
+        }
+
+        .vs-table th {
+            background-color: #F8F9FA;
+            color: var(--clr-excel-green);
+            font-weight: 700;
+        }
+
+        .vs-table td {
+            background-color: white;
+            color: #444;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-wrapper">
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>EXCEL VBA CORE</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- Accordion Menu -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 1: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="index.html" class="nav-link">Ex 1: NPV & IRR</a>
+                        <a href="ex2.html" class="nav-link">Ex 2: Multiple IRRs</a>
+                        <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
+                        <a href="ex4.html" class="nav-link">Ex 4: Payment Schedule</a>
+                        <a href="ex5.html" class="nav-link">Ex 5: Future Value</a>
+                        <a href="ex6.html" class="nav-link">Ex 6 & Case Study</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 2: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content show">
+                        <a href="lecture2-ex1.html" class="nav-link">Ex 1: Gordon Model</a>
+                        <a href="lecture2-ex2.html" class="nav-link">Ex 2: Two-Stage Model</a>
+                        <a href="lecture2-ex3.html" class="nav-link">Ex 3: Cost of Capital</a>
+                        <a href="lecture2-ex4.html" class="nav-link">Ex 4: CAPM & Regression</a>
+                        <a href="lecture2-ex5.html" class="nav-link active">Ex 5: Portfolio Analysis</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <!-- ================= END SIDEBAR ================= -->
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+
+
+
+
+            
+            <header class="page-header">
+                <h1>EX 5: PORTFOLIO CONSTRUCTION & ANALYSIS</h1>
+            </header>
+
+            <div class="content-scroll">
+
+                <!-- 1. BUILDING AN EQUALLY WEIGHTED PORTFOLIO -->
+                <section class="content-card" style="border-top: 4px solid #FBC02D;">
+                    <h2 class="section-title" style="color: #F57F17; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>⚖️</span> 1. BUILDING AN EQUALLY WEIGHTED PORTFOLIO
+                    </h2>
+                    <p style="color: #444; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.6;">
+                        <strong>Objective:</strong> Construct a portfolio where every single stock has the exact same importance.
+                    </p>
+
+                    <ol style="margin-left: 1.5rem; margin-bottom: 2.5rem; line-height: 1.8; color: #333; font-size: 1.05rem;">
+                        <li style="margin-bottom: 1.5rem;">
+                            <strong style="color: #F57F17; font-size: 1.15rem;">Step 1: Count the Stocks (N)</strong>
+                            <div class="code-block dark-mode" style="padding: 1rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                                <code>=COUNT(<span class="param">range_of_tickers</span>)</code>
+                            </div>
+                            <p style="color: #555; font-size: 0.95rem; margin: 0; padding-left: 0.5rem; border-left: 2px solid #F57F17;">
+                                <strong>Logic:</strong> <code>COUNT</code> ignores text (names) and only counts cells with numbers (like returns or prices) to give you the total number of assets, <strong style="color: #F57F17;">N</strong>.
+                            </p>
+                        </li>
+
+                        <li style="margin-bottom: 1.5rem;">
+                            <strong style="color: #F57F17; font-size: 1.15rem;">Step 2: Calculate Individual Weight (w<sub>i</sub>)</strong>
+                            <div class="math-block" style="border-color: #FFF59D; color: #F57F17; background-color: #FFFDE7; margin-top: 0.5rem; margin-bottom: 0.5rem; padding: 1rem;">
+                                w<sub>i</sub> = 1 / N
+                            </div>
+                            <div class="code-block dark-mode" style="padding: 1rem; margin-bottom: 0.5rem;">
+                                <code>=1 / COUNT(<span class="param">range</span>)</code>
+                            </div>
+                            <p style="color: #555; font-size: 0.95rem; margin: 0; padding-left: 0.5rem; border-left: 2px solid #F57F17;">
+                                <strong>Logic:</strong> If you have 10 stocks, each receives exactly 10% of your total capital (1/10). 
+                                <em>Simply copy this value across all stock columns!</em>
+                            </p>
+                        </li>
+
+                        <li>
+                            <strong style="color: #D32F2F; font-size: 1.15rem;">Step 3: The Sum Constraint</strong>
+                            <div class="math-block" style="border-color: #EF5350; color: #C62828; background-color: #FFEBEE; margin-top: 0.5rem; margin-bottom: 0.5rem; padding: 1rem; font-size: 1.25rem;">
+                                &Sigma; w<sub>i</sub> = 1
+                            </div>
+                            <div style="background-color: #FAFAFA; border: 1px dashed #D32F2F; padding: 1rem; border-radius: 4px; margin-top: 0.5rem;">
+                                <strong style="color: #D32F2F;">Excel Tip to avoid rounding errors!</strong><br>
+                                Instead of calculating the final stock's weight using <code>1/N</code>, force it to close perfectly at 100%:<br>
+                                <code style="background-color: #1E1E1E; color: #64FFDA; padding: 4px 8px; border-radius: 4px; display: inline-block; margin-top: 0.5rem;">=1 - SUM(<span style="color: #FF8A65;">all_other_weights</span>)</code>
+                            </div>
+                        </li>
+                    </ol>
+                </section>
+
+                <!-- 2. SLOPE & RSQ (THE BETA ENGINE) -->
+                <section class="content-card" style="border-top: 4px solid #1976D2;">
+                    <h2 class="section-title" style="color: #1976D2; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>📈</span> 2. SLOPE &amp; RSQ (THE BETA ENGINE)
+                    </h2>
+                    <p style="color: #444; font-size: 1.05rem; margin-bottom: 2rem; line-height: 1.6;">
+                        <strong>Objective:</strong> Measure the precise mathematical relationship between a single stock and the broader market (usually S&amp;P 500) using monthly returns.
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
+                        
+                        <!-- Module A: Beta -->
+                        <div style="background-color: #F8F9FA; border: 1px solid #BBDEFB; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                            <div style="background-color: #1976D2; color: white; padding: 1rem;">
+                                <h3 style="margin: 0; font-size: 1.15rem;">MODULE A: THE BETA (&beta;)</h3>
+                            </div>
+                            <div style="padding: 1.5rem;">
+                                <p style="color: #333; margin-top: 0; margin-bottom: 1rem;"><strong>Definition:</strong> <em>Intensity.</em> Measures the sensitivity of a stock to market variations.</p>
+                                
+                                <div class="math-block" style="border-color: #90CAF9; color: #1976D2; background-color: #E3F2FD; margin-bottom: 1rem; font-size: 1rem;">
+                                    &beta; = Cov(R<sub>i</sub> , R<sub>m</sub>) / Var(R<sub>m</sub>)
+                                </div>
+                                <div class="code-block dark-mode" style="padding: 1rem; margin-bottom: 1rem;">
+                                    <span class="code-comment" style="display:block; margin-bottom:5px;">// SLOPE is mathematically identical to Cov/Var!</span>
+                                    <code>=SLOPE(<span class="param">stock_returns</span> ; <span class="param">market_returns</span>)</code>
+                                </div>
+                                
+                                <strong style="color: #1976D2;">Interpretation:</strong>
+                                <ul style="margin-top: 0.5rem; margin-bottom: 0; color: #555; padding-left: 1.5rem;">
+                                    <li><strong>&beta; &gt; 1:</strong> Aggressive (More volatile than market)</li>
+                                    <li><strong>&beta; = 1:</strong> Matches the market precisely</li>
+                                    <li><strong>&beta; &lt; 1:</strong> Defensive (Less volatile than market)</li>
+                                    <li><strong>&beta; &lt; 0:</strong> Moves opposite to the market</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Module B: R SQ -->
+                        <div style="background-color: #F8F9FA; border: 1px solid #CE93D8; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                            <div style="background-color: #8E24AA; color: white; padding: 1rem;">
+                                <h3 style="margin: 0; font-size: 1.15rem;">MODULE B: THE R-SQUARED (R&sup2;)</h3>
+                            </div>
+                            <div style="padding: 1.5rem;">
+                                <p style="color: #333; margin-top: 0; margin-bottom: 1rem;"><strong>Definition:</strong> <em>Quality.</em> Measures the <strong>proportion</strong> of the stock's variations that are directly explained by the market.</p>
+                                
+                                <div class="math-block" style="border-color: #E1BEE7; color: #8E24AA; background-color: #F3E5F5; margin-bottom: 1rem; font-size: 1.1rem;">
+                                    R&sup2; = Corr(R<sub>i</sub> , R<sub>m</sub>)&sup2;
+                                </div>
+                                <div class="code-block dark-mode" style="padding: 1rem; margin-bottom: 1rem;">
+                                    <code>=RSQ(<span class="param">stock_returns</span> ; <span class="param">market_returns</span>)</code>
+                                </div>
+
+                                <strong style="color: #8E24AA;">Interpretation Example:</strong>
+                                <div style="background-color: white; padding: 1rem; border-left: 4px solid #8E24AA; margin-top: 0.5rem; color: #444;">
+                                    If <strong>R&sup2; = 0.60</strong>, it means:<br>
+                                    &rarr; <strong>60%</strong> of variations are explained by the market (Systematic Risk).<br>
+                                    &rarr; <strong>40%</strong> come from the company's own news/events (Specific/Idiosyncratic Risk).
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. PORTFOLIO RETURN -->
+                <section class="content-card" style="border-top: 4px solid #43A047;">
+                    <h2 class="section-title" style="color: #2E7D32; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🔗</span> 3. PORTFOLIO RETURN (SUMPRODUCT)
+                    </h2>
+                    <p style="color: #444; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.6;">
+                        <strong>Objective:</strong> Calculate the return of the entire portfolio by merging the returns of the individual stocks with their respective weights. Wait... SUMPRODUCT does not take a simple average! It takes a <strong>Weighted Average</strong>.
+                    </p>
+
+                    <strong style="color: #333; display: block; margin-bottom: 0.5rem;">Financial Formula:</strong>
+                    <div class="math-block" style="border-color: #A5D6A7; color: #2E7D32; background-color: #E8F5E9; margin-bottom: 2rem; font-size: 1.4rem;">
+                        R<sub>p</sub> = &Sigma; (w<sub>i</sub> &times; R<sub>i</sub>)
+                    </div>
+
+                    <strong style="color: #2E7D32; display: block; margin-bottom: 0.5rem; font-size: 1.15rem;">The Excel Power Tool:</strong>
+                    <div class="code-block dark-mode" style="padding: 1.5rem; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                        <span class="code-comment" style="display:block; margin-bottom:5px;">// Multiplies each return by its weight and sums all the products:</span>
+                        <code>=SUMPRODUCT(<span class="param">range_returns</span> ; <span class="param">range_weights</span>)</code>
+                    </div>
+
+                    <div style="background-color: #212121; color: white; padding: 1.5rem; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                        <strong style="color: #F44336; font-size: 1.2rem; display: block; margin-bottom: 1rem; text-transform: uppercase;">
+                            Critical Technical Rules
+                        </strong>
+                        <ul style="color: #E0E0E0; line-height: 1.8; margin-bottom: 0;">
+                            <li style="margin-bottom: 0.8rem;">
+                                <strong style="color: #64FFDA;">1. Alignment:</strong> Both ranges must strictly have the <strong>exact same size</strong> and align column by column (match stock to stock).
+                            </li>
+                            <li>
+                                <strong style="color: #FFCA28;">2. Master Locking ($):</strong> You MUST lock the weights range (e.g., <code>$B$2:$K$2</code>).<br>
+                                <em style="color: #9E9E9E; font-size: 0.95rem;">Why? Because your target weights stay constant every period, while the observed returns change every month as you drag the formula down!</em>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- SUMMARY RECAP TABLE -->
+                <h2 style="color: var(--clr-text-main); font-size: 1.8rem; margin: 4rem 0 2rem 0; text-align: center; border-bottom: 2px solid #EAEAEA; padding-bottom: 0.5rem; text-transform: uppercase;">
+                    EXECUTIVE SUMMARY RECAP
+                </h2>
+
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 3rem; text-align: left; box-shadow: 0 8px 25px rgba(0,0,0,0.1); background-color: white; border-radius: 8px; overflow: hidden;">
+                    <thead>
+                        <tr style="background-color: #212121; color: white;">
+                            <th style="padding: 15px; border-bottom: 3px solid #2E7D32; width: 25%; font-size: 1.1rem;">Concept</th>
+                            <th style="padding: 15px; border-bottom: 3px solid #1976D2; width: 25%; font-size: 1.1rem;">Excel Function</th>
+                            <th style="padding: 15px; border-bottom: 3px solid #8E24AA; width: 50%; font-size: 1.1rem;">Financial Meaning</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 1.05rem;">
+                        <tr style="border-bottom: 1px solid #EAEAEA;">
+                            <td style="padding: 15px; color: #1976D2; font-weight: bold;">Beta (&beta;)</td>
+                            <td style="padding: 15px;"><code style="background-color: #E3F2FD; color: #0D47A1; padding: 4px 8px; border-radius: 4px; font-weight: bold;">SLOPE</code></td>
+                            <td style="padding: 15px; color: #444;">Intensity of the reaction to the market.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #EAEAEA; background-color: #FAFAFA;">
+                            <td style="padding: 15px; color: #8E24AA; font-weight: bold;">R-Squared (R&sup2;)</td>
+                            <td style="padding: 15px;"><code style="background-color: #F3E5F5; color: #6A1B9A; padding: 4px 8px; border-radius: 4px; font-weight: bold;">RSQ</code></td>
+                            <td style="padding: 15px; color: #444;">Percentage of variance explained by the market.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; color: #2E7D32; font-weight: bold;">Portfolio Return (R<sub>p</sub>)</td>
+                            <td style="padding: 15px;"><code style="background-color: #E8F5E9; color: #1B5E20; padding: 4px 8px; border-radius: 4px; font-weight: bold;">SUMPRODUCT</code></td>
+                            <td style="padding: 15px; color: #444;">Weighted average of all individual returns.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- EXAM TIP POST-IT -->
+                <div id="note-timeline" class="post-it-note"
+                    style="background-color: #B2D3C2; max-width: 650px; margin: 0 auto 3rem auto; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transform: rotate(-1.5deg);">
+                    <p
+                        style="font-weight: 800; color: #111; font-size: 1.15rem; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; margin-bottom: 1rem; letter-spacing: 0.5px; text-transform: uppercase;">
+                        PRO TIP
+                    </p>
+                    <p style="color: #111; line-height: 1.8; font-size: 1.1rem; font-weight: 500;">
+                        A stock can have a <strong style="color: #D32F2F;">high Beta</strong> but a <strong style="color: #1976D2;">low R-squared</strong>. This means it reacts strongly to the market, but most of its movements are still caused by its own internal news!
+                    </p>
+                </div>
+
+            </div>
+</main>
+        <!-- ================= END MAIN CONTENT ================= -->
+
+    </div>
+
+    <!-- Overlay Note System -->
+    <div id="note-overlay" class="overlay" onclick="closeNote()"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
