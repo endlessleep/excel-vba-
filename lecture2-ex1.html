@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Modelling Using MS Excel and VBA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .math-block {
+            background-color: var(--clr-bg-card);
+            border: 2px dashed var(--clr-excel-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Consolas', monospace;
+            font-size: 1.1rem;
+            color: var(--clr-text-main);
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);
+        }
+
+        .vs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #EAEAEA;
+        }
+
+        .vs-table th,
+        .vs-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #EAEAEA;
+        }
+
+        .vs-table th {
+            background-color: #F8F9FA;
+            color: var(--clr-excel-green);
+            font-weight: 700;
+        }
+
+        .vs-table td {
+            background-color: white;
+            color: #444;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-wrapper">
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>EXCEL VBA CORE</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- Accordion Menu -->
+                <div class="accordion-item active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 1: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content show">
+                        <a href="index.html" class="nav-link">Ex 1: NPV & IRR</a>
+                        <a href="ex2.html" class="nav-link">Ex 2: Multiple IRRs</a>
+                        <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
+                        <a href="ex4.html" class="nav-link">Ex 4: Payment Schedule</a>
+                        <a href="ex5.html" class="nav-link">Ex 5: Future Value</a>
+                        <a href="ex6.html" class="nav-link active">Ex 6 & Case Study</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 2: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 1: à suivre </a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: à suivre</a>
+                    </div>
+                </div>
+        
+        <div class="accordion" onclick="toggleAccordion('lecture2-content')">
+            <h2>LECTURE 2: EQUITY VALUATION</h2>
+            <span class="arrow">▼</span>
+        </div>
+        <div id="lecture2-content" class="accordion-content show">
+            <a href="lecture2-ex1.html" class="nav-link active">Ex 1: Gordon Growth Model</a>
+        </div>
+    </nav>
+        </aside>
+        <!-- ================= END SIDEBAR ================= -->
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1 class="page-title">Ex 1: Share Valuation & Gordon Model</h1>
+                <p class="page-subtitle">Posséder une action, c'est posséder le droit de recevoir des dividendes pour l'éternité.</p>
+            </header>
+
+            <div class="content-scroll">
+                
+                <!-- INTRODUCTION -->
+                <div style="background-color: white; border-left: 6px solid #2E7D32; padding: 1.5rem; border-radius: 8px; margin-bottom: 2.5rem; box-shadow: 0 4px 15px rgba(46, 125, 50, 0.1);">
+                    <h3 style="color: #2E7D32; font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 1px solid #E8F5E9; padding-bottom: 0.5rem;">
+                        🏢 Qu'est-ce qu'une action (Stock) ?
+                    </h3>
+                    <p style="color: #444; font-size: 1.05rem; margin-bottom: 1rem; line-height: 1.6;">
+                        Posséder une action (equity), c'est acquérir le <strong>droit irrévocable de recevoir une part des profits futurs</strong> (les dividendes) de l'entreprise, et ce, jusqu'à la fin des temps.
+                    </p>
+                    <p style="color: #444; font-size: 1.1rem; font-weight: 500; font-style: italic; background-color: #F1F8E9; padding: 0.8rem; border-radius: 4px; border-left: 3px solid #2E7D32; margin: 0;">
+                        Conclusion logique : La Valeur de l'action aujourd'hui (P&sub0;) est simplement la Valeur Actuelle (Present Value) de <strong>tous</strong> les dividendes futurs.
+                    </p>
+                </div>
+
+                <!-- SECTION 1: FINITE HORIZON -->
+                <section class="content-card">
+                    <h2 class="section-title">1️⃣ FINITE HORIZON (NPV METHOD)</h2>
+                    
+                    <div class="method-column">
+                        <p style="margin-bottom: 1rem; color: #444; font-size: 1.05rem;">
+                            Si tu connais exactement les dividendes (D) pour les prochaines années, tu dois actualiser chacun d'entre eux manuellement.
+                        </p>
+
+                        <strong style="color: #333; display: block; margin-top: 1rem;">La Formule Mathématique :</strong>
+                        <div class="math-block" style="font-size: 1.1rem; padding: 1rem; border-color: rgba(33,115,70,0.3);">
+                            <span style="font-size: 1.3rem;">P&sub0; = &sum; [ D<sub>t</sub> / (1+r)&#7491; ]</span>
+                        </div>
+
+                        <strong style="color: #333; display: block; margin-top: 1.5rem;">L'Implémentation Excel :</strong>
+                        <div class="code-block dark-mode" style="margin-bottom: 1.5rem;">
+                            <div class="code-comment">// 1. Structure Générale</div>
+                            <code><span class="excel-func">=NPV</span>(<span class="param">rate</span> ; <span class="param">value1</span>, <span class="param">[value2]</span>, ...)</code>
+                            
+                            <div class="code-comment" style="margin-top: 1rem;">// 2. Exemple (Plage de dividendes)</div>
+                            <code><span class="excel-func">=NPV</span>(<span class="param">r</span> ; <span class="param">range_of_dividends</span>)</code>
+                        </div>
+
+                        <div style="background-color: #FFF3E0; border-left: 4px solid #FF9800; padding: 1rem; border-radius: 4px;">
+                            <strong style="color: #E65100;">⚠️ Rappel Crucial sur NPV :</strong><br>
+                            <span style="color: #555;">La fonction Excel <code>NPV</code> commence toujours son actualisation à la <strong>période 1 (t=1)</strong>. Ne mets jamais un flux de l'année 0 à l'intérieur de la parenthèse NPV !</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 2: INFINITE HORIZON -->
+                <section class="content-card" style="border-top: 4px solid var(--clr-excel-green);">
+                    <h2 class="section-title" style="color: var(--clr-excel-green);">2️⃣ INFINITE HORIZON (GORDON GROWTH MODEL)</h2>
+                    
+                    <div class="method-column">
+                        <p style="margin-bottom: 1rem; color: #444; font-size: 1.05rem;">
+                            Si les dividendes augmentent indéfiniment à un taux constant régulier (g), l'énorme somme infinie se compresse par miracle grâce aux mathématiques. C'est le <strong>Gordon Growth Model (Dividend Discount Model)</strong>.
+                        </p>
+
+                        <strong style="color: #333; display: block; margin-top: 1rem;">La Formule Magique :</strong>
+                        <div class="math-block" style="font-size: 1.4rem; font-weight: bold; background-color: #E8F5E9; border-color: var(--clr-excel-green); color: var(--clr-excel-green);">
+                            P&sub0; = D&sub1; / (r - g)
+                        </div>
+
+                        <div style="background-color: #FFEBEE; border: 2px solid #D32F2F; padding: 1rem; border-radius: 6px; margin-top: 1.5rem; text-align: center;">
+                            <strong style="color: #D32F2F; font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">🚨 CONDITION DE SURVIE ABSOLUE 🚨</strong>
+                            <span style="color: #B71C1C; font-size: 1.1rem; font-weight: bold;">Le modèle EXIGE que r > g</span>
+                        </div>
+                        
+                        <!-- MATHEMATICAL LOGIC -->
+                        <div style="background-color: #FAFAFA; border: 1px solid #E0E0E0; border-radius: 8px; padding: 1.5rem; margin-top: 2rem;">
+                            <h4 style="color: #333; margin-bottom: 1rem; border-bottom: 1px solid #EEE; padding-bottom: 0.5rem;">🧠 Pourquoi (r - g) au dénominateur ?</h4>
+                            <ul style="color: #555; line-height: 1.7; margin: 0; padding-left: 1.5rem;">
+                                <li><strong>Si g s'approche de r :</strong> Le dénominateur (r-g) tend vers 0. Diviser par presque zéro donne un chiffre gigantesque. Le prix de l'action explose vers <strong>l'infini</strong>.</li>
+                                <li><strong>Si g &ge; r :</strong> Les dividendes grandissent plus vite que les exigences mathématiques de l'économie. Le modèle "casse". Si une entreprise avait un g > r pour l'éternité, elle finirait par être <strong>plus grosse que l'économie mondiale elle-même</strong>. Impossible.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 3: DEEP DIVE -->
+                <section class="content-card">
+                    <h2 class="section-title">3️⃣ THE EPIC BATTLE: r vs g</h2>
+                    
+                    <p style="color: #555; font-size: 1.05rem; margin-bottom: 1.5rem; text-align: center;">
+                        Le prix de l'action est le résultat direct du combat entre ces deux forces macro-économiques.
+                    </p>
+
+                    <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                        <!-- 'r' Column -->
+                        <div style="flex: 1; min-width: 250px; background-color: #FFFDE7; padding: 1.5rem; border-radius: 8px; border-top: 4px solid #FBC02D;">
+                            <h3 style="color: #F57F17; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem;">
+                                <span>📉</span> La Force Qui Dégonfle (r)
+                            </h3>
+                            <strong style="color: #111; display: block; margin-bottom: 0.5rem;">Le Cost of Equity</strong>
+                            <p style="color: #555; line-height: 1.6; margin-bottom: 0;">
+                                C'est la force de gravité. C'est le rendement <strong>exigé</strong> par les investisseurs (Risk-free rate + Risk premium). Plus r est grand (l'investisseur a peur ou l'inflation est forte), plus il divise les dividendes violemment, <strong>faisant baisser le prix de l'action</strong>.
+                            </p>
+                        </div>
+
+                        <!-- 'g' Column -->
+                        <div style="flex: 1; min-width: 250px; background-color: #E8F5E9; padding: 1.5rem; border-radius: 8px; border-top: 4px solid #4CAF50;">
+                            <h3 style="color: #2E7D32; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem;">
+                                <span>📈</span> La Force Qui Booste (g)
+                            </h3>
+                            <strong style="color: #111; display: block; margin-bottom: 0.5rem;">Le Growth Rate</strong>
+                            <p style="color: #555; line-height: 1.6; margin-bottom: 0;">
+                                C'est la force de propulsion. C'est la vitesse de croissance interne 💸 des dividendes. Plus g est grand, plus les profits futurs s'envolent, <strong>faisant monter le prix de l'action</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 4: EXCEL IMPLEMENTATION -->
+                <section class="content-card">
+                    <h2 class="section-title">4️⃣ EXCEL IMPLEMENTATION & SAFETY</h2>
+                    
+                    <p style="color: #444; font-size: 1.05rem; margin-bottom: 1.5rem;">
+                        Puisque le modèle plante si (r &le; g), il faut <strong>toujours sécuriser ton Excel</strong> pour empêcher une division par zéro ou un prix négatif absurde.
+                    </p>
+
+                    <strong style="color: #333; display: block; margin-bottom: 0.5rem;">La Formule Sécurisée (IF Statement) :</strong>
+                    <div class="code-block dark-mode" style="margin-bottom: 1.5rem; padding: 1.5rem;">
+                        <code><span class="excel-func">=IF</span>(<span class="param">r</span> <= <span class="param">g</span> ; <span style="color: #FFA726;">"Error: r must be > g"</span> ; <span class="param">D1</span> / (<span class="param">r</span> - <span class="param">g</span>))</code>
+                    </div>
+                </section>
+
+                <div class="mt-4 text-center">
+                    <button class="btn-note" onclick="toggleNote('note-gordon-trick')"
+                        style="margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                        <span class="note-icon">🔥</span> LE PIÈGE MORTEL DE L'EXAMEN
+                    </button>
+                </div>
+
+                <div id="note-gordon-trick" class="post-it-note"
+                    style="background-color: #B2D3C2; max-width: 600px; margin: 2rem auto 2rem auto; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transform: rotate(1deg);">
+                    <p
+                        style="font-weight: 800; color: #111; font-size: 1.15rem; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; margin-bottom: 0.8rem; letter-spacing: 0.5px;">
+                        TRICK : D&#x2080; vs D&#x2081; !
+                    </p>
+                    <p style="color: #111; line-height: 1.7; font-size: 1.05rem;">
+                        C'est l'erreur classique. Le numérateur de Gordon DOIT être le prochain dividende futur (<strong style="color: #E65100;">D₁</strong>).<br><br>
+                        Si l'énoncé ou le Boss dit : <em>"Le dividende <strong>vient d'être payé</strong> aujourd'hui... a été payé... is currently paying"</em>, alors c'est <strong>D₀</strong> !<br><br>
+                        Tu DOIS le faire grandir d'un an avant de diviser :<br>
+                        <strong style="display: block; margin-top: 0.5rem; background: rgba(255,255,255,0.4); padding: 0.5rem; border-radius: 4px;">D₁ = D₀ &times; (1 + g)</strong>
+                    </p>
+                </div>
+
+            </div>
+        </main>
+        <!-- ================= END MAIN CONTENT ================= -->
+
+    </div>
+
+    <!-- Overlay Note System -->
+    <div id="note-overlay" class="overlay" onclick="closeNote()"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
