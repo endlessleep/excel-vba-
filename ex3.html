@@ -104,21 +104,18 @@
         <main class="main-content">
             <header class="page-header">
                 <h1>EX 3: ADVANCED DATA TABLES</h1>
-                <p style="margin-top: 0.5rem; font-size: 1.1rem; color: var(--clr-text-muted);">Master multi-variable
-                    sensitivity analysis.</p>
             </header>
 
             <div class="cards-container">
 
                 <!-- SECTION 1 -->
                 <section class="content-card">
-                    <h2 class="section-title">SECTION 1: 1 INPUT &rarr; 2 OUTPUTS (SIMPLE)</h2>
-                    <p style="margin-bottom: 1.5rem; font-size: 1.05rem;"><strong>Objective:</strong> Test 1 variable
-                        (e.g., Growth Rate) to observe its impact on 2 results (NPV and IRR).</p>
+                    <h2 class="section-title">SECTION 1: 1 INPUT &rarr; 2 OUTPUTS </h2>
+                    <p style="margin-bottom: 1.5rem; font-size: 1.05rem;"><strong>Objective:</strong> Vary 1 input (Growth Rate) for 2 outputs (NPV and IRR). </p>
 
                     <div class="methods-grid" style="grid-template-columns: 1fr;">
                         <div class="method-column">
-                            <h3 class="method-title">Visual Tutorial</h3>
+                            <h3 class="method-title">DATA TABLE</h3>
                             <div class="table-wrapper"
                                 style="margin-top: 1rem; border: 2px solid var(--clr-excel-green);">
                                 <table class="premium-table data-table-simple">
@@ -149,8 +146,8 @@
                                 </table>
                             </div>
                             <div class="code-comment mt-4" style="font-size: 0.95rem;">
-                                <strong>CRUCIAL:</strong> The cells immediately above the empty results must contain the
-                                exact reference to the calculation (e.g. <code>=B10</code>).
+                                <strong>ATTENTION:</strong> The cells immediately above the empty results must contain the
+                                exact reference to the calculation.
                             </div>
 
                             <div class="code-block dark-mode" style="margin-top: 1rem;">
@@ -165,13 +162,13 @@
 
                 <!-- SECTION 2 -->
                 <section class="content-card">
-                    <h2 class="section-title">SECTION 2: 2 INPUTS &rarr; 1 OUTPUT (THE MATRIX)</h2>
-                    <p style="margin-bottom: 1.5rem; font-size: 1.05rem;"><strong>Objective:</strong> Vary the Discount
-                        Rate AND the Growth Rate simultaneously for a single output (e.g., NPV).</p>
+                    <h2 class="section-title">SECTION 2: 2 INPUTS &rarr; 1 OUTPUT (THE MATRIX) </h2>
+                    <p style="margin-bottom: 1.5rem; font-size: 1.05rem;"><strong>Objective:</strong> Vary 2 inputs (Discount
+                        Rate AND Growth Rate) for a single output (NPV).</p>
 
                     <div class="methods-grid" style="grid-template-columns: 1fr;">
                         <div class="method-column">
-                            <h3 class="method-title">THE VISUAL MATRIX</h3>
+                            <h3 class="method-title"> DATA TABLE</h3>
                             <div class="table-wrapper"
                                 style="margin-top: 1rem; border: 1px solid #EAEAEA; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);">
                                 <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
@@ -179,8 +176,8 @@
                                         <td
                                             style="background-color: var(--clr-code-bg); color: var(--clr-param); font-family: 'Consolas', monospace; font-weight: 700; padding: 1.5rem 1rem; border-right: 2px solid white; border-bottom: 2px solid white; text-align: center;">
                                             =NPV Reference<br>
-                                            <span style="font-size: 0.75rem; color: #888; font-weight: normal;">(The
-                                                crucial corner)</span>
+                                            <span style="font-size: 0.75rem; color: #888; font-weight: normal;">(DO NOT FORGET THE OUTPUT
+                                            REFERENCE)</span>
                                         </td>
                                         <td colspan="3"
                                             style="background-color: var(--clr-excel-green); color: white; font-weight: 700; padding: 1rem; text-align: center; letter-spacing: 1px;">
