@@ -277,7 +277,141 @@
                     </p>
                 </div>
                 
-            </div>
+            
+
+                <!-- NEW SECTION 1: TOTAL RISK (SIGMA) & VOLATILITY -->
+                <h2 style="color: var(--clr-text-main); font-size: 1.8rem; margin: 4rem 0 2rem 0; text-align: center; border-bottom: 2px solid #EAEAEA; padding-bottom: 0.5rem; text-transform: uppercase;">
+                    EXTENSION: RISK STRUCTURE & VOLATILITY
+                </h2>
+
+                <section class="content-card" style="border-top: 4px solid #AB47BC;">
+                    <h2 class="section-title" style="color: #8E24AA; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>📉</span> 1. TOTAL RISK (SIGMA &sigma;) &amp; VOLATILITY
+                    </h2>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <strong style="color: #6A1B9A; font-size: 1.15rem; display: block; margin-bottom: 0.5rem;">What is Sigma (&sigma;)?</strong>
+                        <p style="color: #444; font-size: 1.05rem; margin-bottom: 0.5rem; line-height: 1.6;">
+                            <strong>Definition:</strong> The standard deviation of returns. It measures how much returns fluctuate around their average.<br>
+                        </p>
+                        <div style="background-color: #F3E5F5; padding: 1rem; border-left: 4px solid #AB47BC; border-radius: 4px; color: #4A148C;">
+                            <strong>Financial Meaning:</strong><br>
+                            Higher &sigma; &rarr; More volatile &rarr; More risky<br>
+                            Lower &sigma; &rarr; More stable &rarr; Less risky
+                        </div>
+                        <p style="color: #555; font-size: 1.05rem; margin-top: 0.8rem;">
+                            <strong>Logic:</strong> Sigma measures <em>Total Risk</em> (Market risk + Firm-specific risk).
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem; border-left: 4px solid #8E24AA; padding-left: 1.5rem;">
+                        <strong style="color: #6A1B9A; font-size: 1.15rem; display: block; margin-bottom: 0.5rem;">Monthly Volatility in Excel</strong>
+                        <div class="code-block dark-mode" style="padding: 1.5rem; margin-bottom: 1rem;">
+                            <code>=STDEV(<span class="param">range_of_monthly_returns</span>)</code>
+                        </div>
+                        <strong style="color: #D32F2F; display: block; margin-bottom: 0.5rem;">CRUCIAL RULE:</strong>
+                        <p style="color: #444; font-style: italic; margin-bottom: 1rem;">Always use Returns, never Prices.</p>
+                        <p style="color: #555; background: #FAFAFA; padding: 10px; border: 1px dashed #CCC;">
+                            <strong>Interpretation:</strong> If &sigma;<sub>monthly</sub> = 0.05, it means monthly returns typically fluctuate by about 5% around their average.
+                        </p>
+                    </div>
+
+                    <div style="background-color: #FAFAFA; border: 1px solid #EAEAEA; padding: 1.5rem; border-radius: 6px;">
+                        <strong style="color: #6A1B9A; font-size: 1.15rem; display: block; margin-bottom: 0.5rem;">Annualizing Volatility (The &radic;12 Rule)</strong>
+                        
+                        <div class="math-block" style="border-color: #CE93D8; background-color: white; color: #6A1B9A; margin: 1rem 0;">
+                            &sigma;<sub>annual</sub> = &radic;12 &times; &sigma;<sub>monthly</sub>
+                        </div>
+                        
+                        <strong style="color: #333; display: block; margin-bottom: 0.5rem;">Excel Formula:</strong>
+                        <div class="code-block dark-mode" style="padding: 1rem; margin-bottom: 1rem;">
+                            <code>=SQRT(12) * <span class="param">MonthlySigmaCell</span></code>
+                        </div>
+                        
+                        <p style="color: #555; margin: 0; line-height: 1.6;">
+                            <strong>Intuition:</strong> Variance scales with time (e.g., 12 months in a year). Since Sigma is the square root of Variance, to annualize Sigma, we multiply by the square root of 12.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- NEW SECTION 2: FREQUENCY DISTRIBUTION -->
+                <section class="content-card" style="border-top: 4px solid #00ACC1;">
+                    <h2 class="section-title" style="color: #00838F; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>📊</span> 2. FREQUENCY DISTRIBUTION &amp; RISK STRUCTURE
+                    </h2>
+                    
+                    <p style="color: #444; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.6;">
+                        <strong>Objective:</strong> Group raw returns into intervals (<strong style="color: #00838F;">Bins</strong>) to visualize the 'shape' of risk (e.g., Symmetry vs. Skewness) and understand how observations are distributed.
+                    </p>
+
+                    <div style="margin-bottom: 2rem;">
+                        <strong style="color: #00838F; font-size: 1.15rem; display: block; margin-bottom: 0.5rem;">The Excel FREQUENCY Function</strong>
+                        <div class="code-block dark-mode" style="padding: 1.5rem; margin-bottom: 1rem;">
+                            <code>=FREQUENCY(<span class="param">data_range</span> ; <span class="param">bins_range</span>)</code>
+                        </div>
+                        <ul style="color: #555; line-height: 1.8; list-style-type: square; margin-bottom: 1rem;">
+                            <li><strong style="color: #006064;">data_range:</strong> The observed values (returns).</li>
+                            <li><strong style="color: #006064;">bins_range:</strong> The <em>upper</em> boundaries of your categories.</li>
+                        </ul>
+                        <p style="background-color: #E0F7FA; padding: 1rem; border-left: 4px solid #00ACC1; color: #006064; margin-bottom: 0;">
+                            <strong>Bin Logic:</strong> Excel counts values strictly based on these upper limits, creating intervals like <code>(bin<sub>1</sub> , bin<sub>2</sub>]</code>.
+                        </p>
+                    </div>
+
+                    <div style="background-color: #FAFAFA; border: 1px solid #EAEAEA; padding: 1.5rem; border-radius: 6px;">
+                        <strong style="color: #00838F; font-size: 1.15rem; display: block; margin-bottom: 1rem;">Verification &amp; Relative Frequency</strong>
+                        
+                        <strong style="color: #333;">1. Total Check (Completeness)</strong>
+                        <div class="code-block dark-mode" style="padding: 1rem; margin-top: 0.5rem; margin-bottom: 1.5rem;">
+                            <code>=SUM(<span class="param">frequency_range</span>)</code> <span class="code-comment">// Must equal total observations</span>
+                        </div>
+
+                        <strong style="color: #333;">2. Relative Frequency (Percentage)</strong>
+                        <div class="code-block dark-mode" style="padding: 1rem; margin-top: 0.5rem; margin-bottom: 1rem;">
+                            <code>=<span class="param">Frequency_Cell</span> / <span class="param">$Total_Cell$</span></code> <span class="code-comment">// Notice the Absolute Reference ($)</span>
+                        </div>
+                        <p style="color: #555; margin: 0; font-size: 0.95rem;">
+                            <strong>Usage:</strong> This converts raw counts into probabilities, preparing the data perfectly for a Histogram.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- COMPARISON RECAP: SIGMA VS BETA -->
+                <div style="background-color: #212121; color: white; padding: 2rem; border-radius: 8px; margin: 3rem 0; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                    <h3 style="color: #FFCA28; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>📐</span> COMPARISON RECAP
+                    </h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div style="background-color: #303030; padding: 1.5rem; border-radius: 6px; border-top: 4px solid #AB47BC;">
+                            <strong style="color: #CE93D8; font-size: 1.2rem; display: block; margin-bottom: 0.8rem;">Sigma (&sigma;)</strong>
+                            <p style="margin: 0; color: #E0E0E0; font-size: 1.05rem;">
+                                Measures <strong>Total Risk</strong>.<br>
+                                Includes both Systematic (Market) risk and Unsystematic (Firm-specific) risk.
+                            </p>
+                        </div>
+                        <div style="background-color: #303030; padding: 1.5rem; border-radius: 6px; border-top: 4px solid #FBC02D;">
+                            <strong style="color: #FFF59D; font-size: 1.2rem; display: block; margin-bottom: 0.8rem;">Beta (&beta;)</strong>
+                            <p style="margin: 0; color: #E0E0E0; font-size: 1.05rem;">
+                                Measures <strong>Systematic Risk</strong> only.<br>
+                                Captures ONLY the sensitivity to broad market movements.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EXCEL INSTRUCTION POST-IT -->
+                <div id="note-frequency" class="post-it-note"
+                    style="background-color: #B2D3C2; max-width: 650px; margin: 3rem auto 2rem auto; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transform: rotate(1.5deg);">
+                    <p
+                        style="font-weight: 800; color: #111; font-size: 1.15rem; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; margin-bottom: 1rem; letter-spacing: 0.5px; text-transform: uppercase;">
+                        EXCEL TIP: ARRAY FUNCTIONS
+                    </p>
+                    <p style="color: #111; line-height: 1.8; font-size: 1.1rem; font-weight: 500;">
+                        <code>FREQUENCY</code> is an <strong style="color: #D32F2F;">array function</strong>. In older Excel versions, simply pressing Enter won't work. You must select the entire output range first, type the formula, and press <strong style="background: rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 4px;">Ctrl + Shift + Enter</strong> to apply it correctly!
+                    </p>
+                </div>
+
+</div>
 </main>
         <!-- ================= END MAIN CONTENT ================= -->
 
