@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 4: CAPM & Regression Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .math-block {
+            background-color: var(--clr-bg-card);
+            border: 2px dashed var(--clr-excel-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Consolas', monospace;
+            font-size: 1.1rem;
+            color: var(--clr-text-main);
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);
+        }
+
+        .vs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #EAEAEA;
+        }
+
+        .vs-table th,
+        .vs-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #EAEAEA;
+        }
+
+        .vs-table th {
+            background-color: #F8F9FA;
+            color: var(--clr-excel-green);
+            font-weight: 700;
+        }
+
+        .vs-table td {
+            background-color: white;
+            color: #444;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-wrapper">
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>EXCEL VBA CORE</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- Accordion Menu -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 1: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="index.html" class="nav-link">Ex 1: NPV & IRR</a>
+                        <a href="ex2.html" class="nav-link">Ex 2: Multiple IRRs</a>
+                        <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
+                        <a href="ex4.html" class="nav-link">Ex 4: Payment Schedule</a>
+                        <a href="ex5.html" class="nav-link">Ex 5: Future Value</a>
+                        <a href="ex6.html" class="nav-link">Ex 6 & Case Study</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 2: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content show">
+                        <a href="lecture2-ex1.html" class="nav-link">Ex 1: Gordon Model</a>
+                        <a href="lecture2-ex2.html" class="nav-link">Ex 2: Two-Stage Model</a>
+                        <a href="lecture2-ex3.html" class="nav-link">Ex 3: Cost of Capital</a>
+                        <a href="lecture2-ex4.html" class="nav-link active">Ex 4: CAPM & Regression</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <!-- ================= END SIDEBAR ================= -->
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+            
+            
+            
+            
+            <header class="page-header">
+                <h1>EX 4: CAPM & REGRESSION ANALYSIS</h1>
+            </header>
+
+            <div class="content-scroll">
+
+                <!-- THE BRIDGE: GORDON VS CAPM -->
+                <div style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border-left: 6px solid #2E7D32; padding: 1.5rem; border-radius: 8px; margin-bottom: 3rem; box-shadow: 0 4px 15px rgba(46, 125, 50, 0.15);">
+                    <h3 style="color: #1B5E20; font-size: 1.3rem; margin-bottom: 1rem; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🌉</span> THE BRIDGE: GORDON VS. CAPM
+                    </h3>
+                    <p style="color: #333; font-size: 1.1rem; margin-bottom: 1rem;">
+                        Two different paths, one ultimate goal: <strong>Determining the return required by investors (Cost of Equity, r<sub>e</sub>)</strong>.
+                    </p>
+                    <ul style="color: #444; font-size: 1.05rem; line-height: 1.8; list-style: none; padding-left: 0;">
+                        <li style="margin-bottom: 0.5rem;">
+                            <strong style="color: #2E7D32;">Gordon Model:</strong> Estimates Cost of Equity (r<sub>e</sub>) internally, based on Dividends and fundamental growth (g).
+                        </li>
+                        <li>
+                            <strong style="color: #1565C0;">CAPM:</strong> Estimates Cost of Equity (r<sub>e</sub>) externally, based on <strong>Market Risk (&beta;)</strong> and the time value of money (r<sub>f</sub>).
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 1. UNDERSTANDING STOCK RETURNS -->
+                <section class="content-card" style="border-top: 4px solid #1976D2;">
+                    <h2 class="section-title" style="color: #1976D2; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>📊</span> 1. UNDERSTANDING STOCK RETURNS
+                    </h2>
+                    <p style="color: #444; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.6;">
+                        <strong>Concept:</strong> CAPM works heavily with Returns, not raw Prices. It measures how much the price dances over time.
+                    </p>
+                    
+                    <strong style="color: #333; display: block; margin-bottom: 0.5rem;">Mathematical Formula:</strong>
+                    <div class="math-block" style="border-color: #90CAF9; color: #1976D2; background-color: #E3F2FD; margin-bottom: 1.5rem;">
+                        Return<sub>t</sub> = ( Price<sub>t</sub> / Price<sub>t-1</sub> ) - 1
+                    </div>
+
+                    <strong style="color: #333; display: block; margin-bottom: 0.5rem;">Excel Formula:</strong>
+                    <div class="code-block dark-mode" style="padding: 1.5rem; margin-bottom: 1.5rem;">
+                        <code>=<span class="param">CurrentPrice</span> / <span class="param">PreviousPrice</span> - 1</code>
+                    </div>
+
+                    <div style="background-color: #F8F9FA; padding: 1.5rem; border-left: 4px solid #9E9E9E; border-radius: 4px;">
+                        <strong style="color: #616161;">Intuition:</strong><br>
+                        <p style="color: #555; font-size: 1.05rem; margin-top: 0.5rem; margin-bottom: 0; line-height: 1.6;">
+                            This measures the percentage gain or loss between two periods. In CAPM, we focus entirely on the variability (volatility) of these returns as the very definition of <strong>Risk</strong>. The more it moves, the riskier it is.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 2. BETA - THE VOLATILITY SENSOR -->
+                <section class="content-card" style="border-top: 4px solid #FBC02D;">
+                    <h2 class="section-title" style="color: #F57F17; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>⚖️</span> 2. BETA (&beta;) &ndash; THE VOLATILITY SENSOR
+                    </h2>
+                    <p style="color: #444; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.6;">
+                        <strong>Definition:</strong> Beta measures how sensitive a specific stock is to broad market movements. It asks: <em>"If the market sneezes, does the stock catch a cold?"</em>
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                        <div>
+                            <strong style="color: #333; display: block; margin-bottom: 0.5rem;">Mathematical Formula:</strong>
+                            <div class="math-block" style="border-color: rgba(0,0,0,0.1); background-color: #FFFDE7; color: #F57F17;">
+                                &beta; = Cov(R<sub>stock</sub> , R<sub>market</sub>) / Var(R<sub>market</sub>)
+                            </div>
+                        </div>
+                        <div>
+                            <strong style="color: #333; display: block; margin-bottom: 0.5rem;">Excel Formula:</strong>
+                            <div class="code-block dark-mode" style="padding: 1.5rem;">
+                                <code>=COVAR(<span class="param">stock_returns</span> ; <span class="param">market_returns</span>) / VARP(<span class="param">market_returns</span>)</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <strong style="color: #333; display: block; margin-bottom: 1rem;">Interpretation Guide:</strong>
+                    <ul style="list-style: none; padding: 0; margin: 0; color: #444; font-size: 1.1rem; line-height: 2;">
+                        <li style="background: #F5F5F5; padding: 0.5rem 1rem; border-radius: 4px; margin-bottom: 0.5rem; border-left: 4px solid #9E9E9E;">
+                            <strong>&beta; = 1:</strong> Matches the market perfectly.
+                        </li>
+                        <li style="background: #FFEBEE; padding: 0.5rem 1rem; border-radius: 4px; margin-bottom: 0.5rem; border-left: 4px solid #D32F2F;">
+                            <strong>&beta; &gt; 1:</strong> Aggressive / Highly Volatile (High Risk).
+                        </li>
+                        <li style="background: #E8F5E9; padding: 0.5rem 1rem; border-radius: 4px; margin-bottom: 0.5rem; border-left: 4px solid #388E3C;">
+                            <strong>&beta; &lt; 1:</strong> Defensive / Stable (Low Risk).
+                        </li>
+                        <li style="background: #E3F2FD; padding: 0.5rem 1rem; border-radius: 4px; border-left: 4px solid #1976D2;">
+                            <strong>&beta; = 0:</strong> Risk-free (Zero correlation with the market).
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 3. THE CAPM EQUATION -->
+                <section class="content-card" style="border-top: 4px solid #D32F2F;">
+                    <h2 class="section-title" style="color: #C62828; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🛡️</span> 3. THE CAPM EQUATION
+                    </h2>
+                    
+                    <strong style="color: #333; display: block; margin-bottom: 0.5rem;">The Core Formula:</strong>
+                    <div class="math-block" style="border-color: #EF5350; background-color: #FFEBEE; color: #C62828; font-size: 1.4rem; padding: 1.5rem; margin-bottom: 2rem;">
+                        r<sub>e</sub> = r<sub>f</sub> + &beta; &times; [ E(r<sub>m</sub>) - r<sub>f</sub> ]
+                    </div>
+
+                    <strong style="color: #333; display: block; margin-bottom: 1rem; font-size: 1.1rem;">The Components:</strong>
+                    <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+                        <div style="background-color: #FAFAFA; border: 1px solid #EAEAEA; padding: 1.2rem; border-radius: 6px;">
+                            <strong style="color: #1565C0; font-size: 1.15rem;">r<sub>f</sub> (Risk-free rate)</strong>
+                            <p style="color: #555; margin-top: 0.5rem; margin-bottom: 0;">The absolute minimum return you expect just for waiting. Usually represented by government Treasury Bills.</p>
+                        </div>
+                        <div style="background-color: #FAFAFA; border: 1px solid #EAEAEA; padding: 1.2rem; border-radius: 6px;">
+                            <strong style="color: #E65100; font-size: 1.15rem;">[ E(r<sub>m</sub>) - r<sub>f</sub> ] (Market Risk Premium)</strong>
+                            <p style="color: #555; margin-top: 0.5rem; margin-bottom: 0;">The extra reward required for choosing dangerous stocks over a perfectly safe bank account.</p>
+                        </div>
+                    </div>
+
+                    <div style="background-color: #212121; color: white; padding: 1.5rem; border-radius: 6px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <strong style="color: #81C784; font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">FINAL RESULT</strong>
+                        <p style="margin: 0; font-size: 1.1rem;">This <strong style="color: white; font-size: 1.2rem;">r<sub>e</sub></strong> is your Cost of Equity. It serves as your Discount Rate to value the share!</p>
+                    </div>
+                </section>
+
+                <!-- 4. EXCEL REGRESSION SUMMARY OUTPUT -->
+                <section class="content-card" style="background-color: #1E1E1E; color: #E0E0E0; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                    <h2 class="section-title" style="color: #64FFDA; border-bottom: 1px solid #333; padding-bottom: 1rem; margin-bottom: 2rem;">
+                        4. EXCEL REGRESSION SUMMARY OUTPUT
+                    </h2>
+                    <p style="color: #B0BEC5; font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.6;">
+                        A step-by-step technical guide to generating and reading the regression table to estimate Beta from raw returns.
+                    </p>
+
+                    <ol style="margin-left: 1.5rem; margin-bottom: 2.5rem; line-height: 1.8; color: #E0E0E0; font-size: 1.05rem;">
+                        <li style="margin-bottom: 1rem;">
+                            <strong style="color: white;">Prepare two columns:</strong> Market returns (Independent <strong style="color: #64FFDA;">X</strong>) and Stock returns (Dependent <strong style="color: #FF8A65;">Y</strong>).
+                        </li>
+                        <li style="margin-bottom: 1rem;">
+                            <strong style="color: white;">Activate Toolpak:</strong> If missing, go to <code>File > Options > Add-ins > Manage Excel Add-ins > Go > Check "Analysis ToolPak"</code>.
+                        </li>
+                        <li style="margin-bottom: 1rem;">
+                            <strong style="color: white;">Run Regression:</strong> Go to <code>Data > Data Analysis > Regression</code>.
+                            <ul style="list-style-type: square; margin-top: 0.5rem; color: #B0BEC5;">
+                                <li><strong>Input Y Range:</strong> Stock returns (The asset you are measuring)</li>
+                                <li><strong>Input X Range:</strong> Market returns (The baseline index)</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <div style="background-color: #2D2D2D; border-left: 4px solid #64FFDA; padding: 1.5rem; border-radius: 4px;">
+                        <strong style="color: #64FFDA; font-size: 1.2rem; display: block; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">
+                            Reading the Summary Output
+                        </strong>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <strong style="color: white; border-bottom: 1px dotted #555; padding-bottom: 2px;">1. Regression Statistics:</strong>
+                            <p style="color: #B0BEC5; margin-top: 0.5rem; margin-bottom: 0;">Focus on <strong>R-Square</strong>. It shows the percentage (%) of the stock's movement that is directly explained by the market's movement.</p>
+                        </div>
+                        
+                        <div>
+                            <strong style="color: #FF8A65; border-bottom: 1px dotted #555; padding-bottom: 2px;">2. Coefficients Table (CRITICAL):</strong>
+                            <ul style="margin-top: 0.5rem; margin-bottom: 0; padding-left: 1.5rem; color: #E0E0E0; line-height: 1.8;">
+                                <li><strong style="color: white;">Intercept</strong> = Alpha (&alpha;)</li>
+                                <li><strong style="color: #64FFDA; font-size: 1.1rem; background: rgba(100,255,218,0.1); padding: 2px 6px; border-radius: 4px;">X Variable 1 = Beta (&beta;)</strong> This is your primary target.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- EXAM TIP POST-IT -->
+                <div id="note-timeline" class="post-it-note"
+                    style="background-color: #B2D3C2; max-width: 650px; margin: 3rem auto 2rem auto; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transform: rotate(-1.5deg);">
+                    <p
+                        style="font-weight: 800; color: #111; font-size: 1.15rem; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; margin-bottom: 1rem; letter-spacing: 0.5px; text-transform: uppercase;">
+                        EXAM TIP
+                    </p>
+                    <p style="color: #111; line-height: 1.8; font-size: 1.1rem; font-weight: 500;">
+                        If the regression output Coefficients Table gives you a <strong>P-value &gt; 0.05</strong>, it means your Beta might <strong style="color: #D32F2F;">not be statistically significant!</strong> The market does not reliably explain this stock.
+                    </p>
+                </div>
+                
+            </div>
+</main>
+        <!-- ================= END MAIN CONTENT ================= -->
+
+    </div>
+
+    <!-- Overlay Note System -->
+    <div id="note-overlay" class="overlay" onclick="closeNote()"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
