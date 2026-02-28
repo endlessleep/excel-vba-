@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 3: Cost of Capital & Dividend Growth</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .math-block {
+            background-color: var(--clr-bg-card);
+            border: 2px dashed var(--clr-excel-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Consolas', monospace;
+            font-size: 1.1rem;
+            color: var(--clr-text-main);
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);
+        }
+
+        .vs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #EAEAEA;
+        }
+
+        .vs-table th,
+        .vs-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #EAEAEA;
+        }
+
+        .vs-table th {
+            background-color: #F8F9FA;
+            color: var(--clr-excel-green);
+            font-weight: 700;
+        }
+
+        .vs-table td {
+            background-color: white;
+            color: #444;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-wrapper">
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>EXCEL VBA CORE</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- Accordion Menu -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 1: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="index.html" class="nav-link">Ex 1: NPV & IRR</a>
+                        <a href="ex2.html" class="nav-link">Ex 2: Multiple IRRs</a>
+                        <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
+                        <a href="ex4.html" class="nav-link">Ex 4: Payment Schedule</a>
+                        <a href="ex5.html" class="nav-link">Ex 5: Future Value</a>
+                        <a href="ex6.html" class="nav-link">Ex 6 & Case Study</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 2: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content show">
+                        <a href="lecture2-ex1.html" class="nav-link">Ex 1: Gordon Model</a>
+                        <a href="lecture2-ex2.html" class="nav-link active">Ex 2: Two-Stage Model</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <!-- ================= END SIDEBAR ================= -->
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+            
+            
+            
+            <header class="page-header">
+                <h1>EX 3: COST OF CAPITAL & DIVIDEND GROWTH</h1>
+            </header>
+
+            <div class="content-scroll">
+
+                <!-- 1. INTRODUCTION: THE LOGIC FLOW -->
+                <div style="background-color: white; border-left: 6px solid #0D47A1; padding: 1.5rem; border-radius: 8px; margin-bottom: 2.5rem; box-shadow: 0 4px 15px rgba(13, 71, 161, 0.1);">
+                    <h3 style="color: #0D47A1; font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 1px solid #E3F2FD; padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>💡</span> THE LOGIC FLOW
+                    </h3>
+                    <p style="color: #444; font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">
+                        Pour trouver le prix d'une action, on a besoin du rendement exigé <strong>(r)</strong>. Mais pour identifier <strong>r</strong>, on a d'abord besoin d'estimer la croissance <strong>(g)</strong>. Voici notre logique implacable :
+                    </p>
+                    <ul style="color: #555; font-size: 1.05rem; margin-bottom: 1rem; line-height: 1.8; padding-left: 1.5rem;">
+                        <li><strong>Étape 1 :</strong> Analyser la croissance passée (Simple vs CAGR).</li>
+                        <li><strong>Étape 2 :</strong> Utiliser cette croissance historique pour estimer le futur.</li>
+                        <li><strong>Étape 3 :</strong> Isoler <strong>r</strong> dans le modèle de Gordon.</li>
+                    </ul>
+                </div>
+
+                <!-- 2. SECTION 1: ANNUAL DIVIDEND GROWTH -->
+                <section class="content-card" style="border-top: 4px solid #2E7D32;">
+                    <h2 class="section-title" style="color: #2E7D32;">1️⃣ ANNUAL DIVIDEND GROWTH (LE PASSÉ PROCHE)</h2>
+                    <p style="color: #444; font-size: 1.05rem; margin-bottom: 1rem; line-height: 1.6;">
+                        <strong>Concept :</strong> On mesure l'augmentation d'une année sur l'autre (en pourcentage).
+                    </p>
+                    
+                    <strong style="color: #333; display: block; margin-top: 1.5rem; margin-bottom: 0.5rem;">Formule Mathématique :</strong>
+                    <div class="math-block" style="border-color: #81C784; color: #2E7D32; background-color: #E8F5E9;">
+                        g<sub>t</sub> = ( D<sub>t</sub> / D<sub>t-1</sub> ) - 1
+                    </div>
+
+                    <strong style="color: #333; display: block; margin-top: 1.5rem; margin-bottom: 0.5rem;">Formule Excel :</strong>
+                    <div class="code-block dark-mode" style="padding: 1.5rem;">
+                        <code>=<span class="param">Current_Div</span> / <span class="param">Previous_Div</span> - 1</code>
+                    </div>
+
+                    <p style="color: #555; font-size: 1.05rem; margin-top: 1.5rem; line-height: 1.6; background-color: #F8F9FA; padding: 1rem; border-left: 4px solid #9E9E9E; border-radius: 4px;">
+                        <strong>Intuition Économique :</strong><br>
+                        C'est un zoom sur une seule année. Ça montre la vitesse de croissance instantanée des dividendes, mais c'est <em>beaucoup trop instable</em> pour prédire sereinement le futur lointain d'une entreprise.
+                    </p>
+                </section>
+
+                <!-- 3. SECTION 2: THE CAGR -->
+                <section class="content-card" style="border-top: 4px solid #1976D2;">
+                    <h2 class="section-title" style="color: #1976D2; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>⚓</span> 2️⃣ THE CAGR (LA MOYENNE LISSÉE)
+                    </h2>
+                    <p style="color: #444; font-size: 1.05rem; margin-bottom: 1rem; line-height: 1.6;">
+                        <strong>Concept :</strong> Le <em>Compound Annual Growth Rate</em>. Il mesure le taux de croissance annuel moyen sur plusieurs années, en supposant que la croissance a été rigoureusement constante.
+                    </p>
+                    
+                    <strong style="color: #333; display: block; margin-top: 1.5rem; margin-bottom: 0.5rem;">Formule Mathématique :</strong>
+                    <div class="math-block" style="border-color: #90CAF9; color: #1976D2; background-color: #E3F2FD;">
+                        g = ( D<sub>final</sub> / D<sub>initial</sub> )<sup>(1/n)</sup> - 1
+                    </div>
+
+                    <strong style="color: #333; display: block; margin-top: 1.5rem; margin-bottom: 0.5rem;">Formule Excel :</strong>
+                    <div class="code-block dark-mode" style="padding: 1.5rem;">
+                        <code>=(<span class="param">Final_Div</span> / <span class="param">Initial_Div</span>)^(1/<span class="param">n</span>) - 1</code>
+                    </div>
+
+                    <p style="color: #555; font-size: 1.05rem; margin-top: 1.5rem; line-height: 1.6; background-color: #F8F9FA; padding: 1rem; border-left: 4px solid #1976D2; border-radius: 4px;">
+                        <strong>Intuition Économique :</strong><br>
+                        "Quelle croissance constante et régulière aurait transformé mon tout premier dividende en mon dernier dividende sur ces n années ?"<br><br>
+                        C'est cette croissance "moyenne et lissée" que le modèle de Gordon adore utiliser, car elle est beaucoup plus stable et pertinente pour estimer l'avenir infini. Le CAGR <strong>n'est pas</strong> la croissance totale, c'est la <em>vitesse moyenne lissée</em>.
+                    </p>
+                </section>
+
+                <!-- 4. SECTION 3: FROM GORDON TO COST OF EQUITY -->
+                <section class="content-card" style="border-top: 4px solid #FBC02D;">
+                    <h2 class="section-title" style="color: #F57F17; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🚀</span> 3️⃣ FROM GORDON TO COST OF EQUITY (L'ISOLEMENT DE r)
+                    </h2>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <span style="display: block; font-weight: bold; color: #333; margin-bottom: 0.5rem;">Le Point de Départ :</span>
+                        <div class="math-block" style="padding: 1rem; font-size: 1.3rem; border-color: rgba(0,0,0,0.1); background-color: #FFFDE7; color: #F57F17;">
+                            P<sub>0</sub> = D<sub>1</sub> / (r - g)
+                        </div>
+                    </div>
+
+                    <div style="background-color: #FFFDE7; border-left: 4px solid #FBC02D; padding: 1.5rem; margin-bottom: 2rem; border-radius: 4px;">
+                        <strong style="color: #F57F17;">Le Passage Crucial : De D<sub>0</sub> à D<sub>1</sub></strong>
+                        <p style="color: #555; margin-top: 0.5rem; margin-bottom: 0;">
+                            Pourquoi utilise-t-on D<sub>1</sub> et non D<sub>0</sub> ? Parce que le prix d'aujourd'hui reflète les versements du <strong>futur</strong> (et le premier du futur, c'est D<sub>1</sub>). Mais en réalité, on n'observe que le dividende passé D<sub>0</sub>. On doit donc l'estimer : <br>
+                            <code style="background: white; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 0.5rem; color: #D32F2F; font-weight: bold;">D<sub>1</sub> = D<sub>0</sub> &times; (1 + g)</code>
+                        </p>
+                    </div>
+
+                    <strong style="color: #333; display: block; margin-bottom: 1rem;">La Démonstration Mathématique (Étape par Étape) :</strong>
+                    <div style="background-color: #FAFAFA; padding: 1.5rem; border: 1px solid #EAEAEA; border-radius: 6px; font-family: 'Consolas', monospace; font-size: 1.2rem; line-height: 2.5; margin-bottom: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
+                        P<sub>0</sub> &times; (r - g) = D<sub>1</sub><br>
+                        r - g = D<sub>1</sub> / P<sub>0</sub><br>
+                        <span style="background-color: #FFF59D; padding: 0.2rem 0.5rem; border-radius: 4px; color: #D84315; font-weight: bold;">r = (D<sub>1</sub> / P<sub>0</sub>) + g</span><br>
+                        <span style="color: #555; font-size: 1.05rem; display: block; margin-top: 0.5rem;">Ou en substituant D<sub>1</sub> :</span>
+                        <span style="color: #F57F17; font-weight: bold;">r = [ D<sub>0</sub>(1+g) / P<sub>0</sub> ] + g</span>
+                    </div>
+
+                    <div style="background-color: #F8F9FA; padding: 1.5rem; border-left: 4px solid #4DB6AC; border-radius: 4px;">
+                        <strong style="color: #00796B;">L'Interprétation Économique : </strong><br>
+                        <code style="background: white; padding: 4px 8px; border-radius: 4px; display: inline-block; margin-top: 0.5rem; color: #00695C; font-weight: bold; font-size: 1.1rem; border: 1px solid #B2DFDB;">r = Dividend Yield + Growth</code>
+                        <p style="color: #555; margin-top: 1rem; margin-bottom: 0;">
+                            Le rendement total que l'actionnaire exige de l'entreprise est la somme de deux éléments :<br>
+                            <strong>1. Le Cash (Dividend Yield) :</strong> L'argent qu'il reçoit physiquement dans sa poche (D<sub>1</sub> / P<sub>0</sub>).<br>
+                            <strong>2. La Croissance de l'Entreprise (Growth) :</strong> La prise de valeur intrinsèque de l'entreprise que l'on ne reçoit pas tout de suite, mais qui continue de gonfler.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 5. SECTION 4: WHY TWO GROWTH RATES? -->
+                <section class="content-card" style="border-top: 4px solid #D32F2F;">
+                    <h2 class="section-title" style="color: #C62828; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>⏱️</span> 4️⃣ WHY TWO GROWTH RATES?
+                    </h2>
+                    <p style="color: #444; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.6;">
+                        La triste vérité : nous ne connaissons pas le futur. Nous sommes obligés d'estimer <strong>g</strong> en utilisant les données historiques. Mais sur combien d'années ?
+                    </p>
+                    
+                    <ul style="color: #555; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.8; list-style: none; padding-left: 0;">
+                        <li><strong style="color: #D32F2F;">Option 1:</strong> 10-year compound growth: <code style="background: #F8BBD011; padding: 2px 4px; border-radius: 3px;">g_10 = (D_final / D_initial)^(1/10) - 1</code></li>
+                        <li style="margin-top: 0.5rem;"><strong style="color: #D32F2F;">Option 2:</strong> 5-year compound growth: <code style="background: #F8BBD011; padding: 2px 4px; border-radius: 3px;">g_5 = (D_final / D_initial)^(1/5) - 1</code></li>
+                    </ul>
+
+                    <div style="background-color: #FFEBEE; border: 1px solid #EF9A9A; padding: 1.5rem; border-radius: 6px; text-align: center;">
+                        <strong style="color: #B71C1C; font-size: 1.15rem; display: block; margin-bottom: 0.5rem;">Conclusion : Different g &rarr; Different r</strong>
+                        <p style="color: #B71C1C; margin: 0; font-size: 1.05rem;">
+                            C'est pour cela qu'on effectue une <strong>Analyse de Sensibilité</strong>. Étant donné que le Cost of Equity (r) dépend chimiquement de (g), si ton estimation de la croissance historique change, ton rendement requis (r) estimé s'ajustera radicalement.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- TRICKS POST-IT -->
+                <div id="note-timeline" class="post-it-note"
+                    style="background-color: #B2D3C2; max-width: 650px; margin: 3rem auto 2rem auto; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transform: rotate(1.5deg);">
+                    <p
+                        style="font-weight: 800; color: #111; font-size: 1.15rem; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; margin-bottom: 1rem; letter-spacing: 0.5px; text-transform: uppercase;">
+                        MEMORY TRICK
+                    </p>
+                    <p style="color: #111; line-height: 1.8; font-size: 1.1rem; font-weight: 500;">
+                        <strong style="color: #2E7D32;">Dividend Yield</strong> is what you get in cash.<br>
+                        <strong style="color: #1565C0;">Growth</strong> is what the company keeps to grow.<br><br>
+                        Together, they form your total required return <strong style="color: #D32F2F; font-size: 1.2rem;">r</strong>.
+                    </p>
+                </div>
+                
+            </div>
+</main>
+        <!-- ================= END MAIN CONTENT ================= -->
+
+    </div>
+
+    <!-- Overlay Note System -->
+    <div id="note-overlay" class="overlay" onclick="closeNote()"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
