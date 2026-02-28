@@ -73,8 +73,7 @@
                         <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
                         <a href="ex4.html" class="nav-link">Ex 4: Payment Schedule</a>
                         <a href="ex5.html" class="nav-link">Ex 5: Future Value</a>
-                        <a href="ex6.html" class="nav-link active">Ex 6: Multiple Compounding</a>
-                        <a href="case-study.html" class="nav-link">Case Study: Retirement</a>
+                        <a href="ex6.html" class="nav-link active">Ex 6 & Case Study</a>
                     </div>
                 </div>
 
@@ -205,6 +204,121 @@
                     </div>
                 </section>
 
+                <!-- ================= START ADDED CASE STUDY ================= -->
+
+                <hr style="border: 0; border-top: 2px dashed #EAEAEA; margin: 3rem 0;">
+                <h2 style="color: var(--clr-text-main); font-size: 1.8rem; margin-bottom: 2rem; text-align: center;">
+                    CASE STUDY: THE RETIREMENT PROBLEM</h2>
+
+                <!-- THE GOLDEN EQUATION -->
+                <section class="content-card">
+                    <h2 class="section-title">
+                        <span style="font-size: 1.5rem; vertical-align: middle; margin-right: 0.5rem;">🏖️</span>
+                        THE GOLDEN EQUATION
+                    </h2>
+
+                    <div class="method-column">
+                        <p style="margin-bottom: 1rem; color: #444; font-size: 1.05rem; text-align: center;">
+                            The absolute foundation of matching your future lifestyle with your current savings:
+                        </p>
+
+                        <div class="math-block"
+                            style="font-size: 1.4rem; font-weight: 700; color: #0D47A1; border-color: #0D47A1; background-color: #E3F2FD;">
+                            PV(Deposits) = PV(Withdrawals)
+                        </div>
+                    </div>
+                </section>
+
+                <!-- THE 4-STEP DRILL (BLUE THEME) -->
+                <section class="content-card" style="background-color: #F8FBFE; border: 1px solid #BBDEFB;">
+                    <h2 class="section-title" style="color: #0D47A1; margin-bottom: 1.5rem;">
+                        <span style="font-size: 1.5rem; vertical-align: middle; margin-right: 0.5rem;">🏗️</span>
+                        THE 4-STEP DRILL
+                    </h2>
+
+                    <div class="method-column">
+
+                        <!-- STEP 1 -->
+                        <div class="step-card">
+                            <h3 class="step-title">
+                                <span class="step-number">1</span> Phase 1: Retirement Need (Year 5)
+                            </h3>
+                            <p style="color: #444; margin-bottom: 1rem;">
+                                Calculate the value of 8 withdrawals of 30,000.
+                            </p>
+                            <div class="code-block dark-mode" style="margin-bottom: 0.5rem;">
+                                <code><span class="excel-func">=PV</span>(<span class="param">r</span> ; <span class="param">8</span> ; <span class="param">-30000</span> <strong style="color: white; font-size: 1.2rem;">;;</strong> 1)</code>
+                            </div>
+                            <p style="font-size: 0.95rem; color: #555; font-style: italic;">
+                                Note: type=1 because we withdraw the money at the beginning of the year.
+                            </p>
+                        </div>
+
+                        <!-- STEP 2 -->
+                        <div class="step-card">
+                            <h3 class="step-title">
+                                <span class="step-number">2</span> Phase 2: Bring back to "Today" (Year 0)
+                            </h3>
+                            <p style="color: #444; margin-bottom: 1rem;">
+                                Discount the amount found in Phase 1 over 5 years. This is the <strong>Total
+                                    Goal</strong> you must have saved today.
+                            </p>
+                            <div class="code-block dark-mode" style="margin-bottom: 0.5rem;">
+                                <code><span class="param">Retirement_Capital</span> / (1 + <span class="param">r</span>)^<span class="param">5</span></code>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3 -->
+                        <div class="step-card">
+                            <h3 class="step-title">
+                                <span class="step-number">3</span> Phase 3: The Annuity Factor
+                            </h3>
+                            <p style="color: #444; margin-bottom: 1rem;">
+                                How much is $1 deposited every year for 5 years worth today?
+                            </p>
+                            <div class="code-block dark-mode" style="margin-bottom: 0.5rem;">
+                                <code><span class="excel-func">=PV</span>(<span class="param">r</span> ; <span class="param">5</span> ; <span class="param">-1</span> <strong style="color: white; font-size: 1.2rem;">;;</strong> 1)</code>
+                            </div>
+                        </div>
+
+                        <!-- STEP 4 -->
+                        <div class="step-card">
+                            <h3 class="step-title">
+                                <span class="step-number">4</span> Phase 4: Required Deposit
+                            </h3>
+                            <p style="color: #444; margin-bottom: 1rem;">
+                                The final result. This gives you the exact amount to save each year so the equality
+                                holds perfectly.
+                            </p>
+                            <div class="code-block dark-mode"
+                                style="background-color: #0D47A1; border: 1px solid #1E88E5;">
+                                <code><span class="param">Goal (Phase 2)</span> / <span class="param">Factor (Phase 3)</span></code>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <div class="mt-4 text-center">
+                    <button class="btn-note" onclick="toggleNote('note-annuity-trick')"
+                        style="margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                        <span class="note-icon">💡</span> PRO TRICK
+                    </button>
+                </div>
+
+                <div id="note-annuity-trick" class="post-it-note"
+                    style="background-color: #B2D3C2; max-width: 600px; margin: 1rem auto 0 auto;">
+                    <p
+                        style="font-weight: 700; color: #111; font-size: 1.1rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; margin-bottom: 0.8rem;">
+                        The Secret Factor!
+                    </p>
+                    <p style="color: #222; line-height: 1.6;">
+                        <strong>TRICK:</strong> The annuity factor (Step 3) uniquely allows you to transform a massive
+                        global sum into a series of highly manageable, constant annual payments.
+                    </p>
+                </div>
+
+                <!-- ================= END ADDED CASE STUDY ================= -->
             </div>
         </main>
         <!-- ================= END MAIN CONTENT ================= -->
