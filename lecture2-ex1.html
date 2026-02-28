@@ -49,6 +49,12 @@
             color: #444;
         }
     </style>
+
+    <style>
+        body, .app-wrapper, .content-scroll {
+            background-color: #E8F5E9 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -94,21 +100,29 @@
         <main class="main-content">
             <header class="content-header">
                 <h1 class="page-title">Ex 1: Share Valuation & Gordon Model</h1>
-                <p class="page-subtitle">Posséder une action, c'est posséder le droit de recevoir des dividendes pour l'éternité.</p>
+                <p class="page-subtitle">A share (stock) represents ownership in a company.</p>
             </header>
 
             <div class="content-scroll">
                 
                 <!-- INTRODUCTION -->
-                <div style="background-color: white; border-left: 6px solid #2E7D32; padding: 1.5rem; border-radius: 8px; margin-bottom: 2.5rem; box-shadow: 0 4px 15px rgba(46, 125, 50, 0.1);">
-                    <h3 style="color: #2E7D32; font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 1px solid #E8F5E9; padding-bottom: 0.5rem;">
-                        🏢 Qu'est-ce qu'une action (Stock) ?
+                <div style="background-color: #E8F5E9; border-left: 6px solid #2E7D32; padding: 1.5rem; border-radius: 8px; margin-bottom: 2.5rem; box-shadow: 0 4px 15px rgba(46, 125, 50, 0.1);">
+                    <h3 style="color: #2E7D32; font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 1px solid #C8E6D6; padding-bottom: 0.5rem;">
+                        🏢 What is a share (stock)?
                     </h3>
                     <p style="color: #444; font-size: 1.05rem; margin-bottom: 1rem; line-height: 1.6;">
-                        Posséder une action (equity), c'est acquérir le <strong>droit irrévocable de recevoir une part des profits futurs</strong> (les dividendes) de l'entreprise, et ce, jusqu'à la fin des temps.
+                        When you buy a share, you buy:
                     </p>
-                    <p style="color: #444; font-size: 1.1rem; font-weight: 500; font-style: italic; background-color: #F1F8E9; padding: 0.8rem; border-radius: 4px; border-left: 3px solid #2E7D32; margin: 0;">
-                        Conclusion logique : La Valeur de l'action aujourd'hui (P&sub0;) est simplement la Valeur Actuelle (Present Value) de <strong>tous</strong> les dividendes futurs.
+                    <ul style="color: #444; font-size: 1.05rem; margin-left: 1.5rem; margin-bottom: 1.5rem; line-height: 1.6;">
+                        <li><strong>The right to receive future dividends</strong></li>
+                        <li><strong>A claim on future profits</strong></li>
+                    </ul>
+                    <p style="color: #444; font-size: 1.05rem; margin-bottom: 1rem; line-height: 1.6;">
+                        So the value of a share comes from: <strong>The future cash flows it will generate.</strong>
+                    </p>
+                    <p style="color: #444; font-size: 1.1rem; font-weight: 500; font-style: italic; background-color: #FFFFFF; padding: 0.8rem; border-radius: 4px; border-left: 3px solid #2E7D32; margin: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                        In dividend models, we assume:<br>
+                        <span style="color: #2E7D32; font-weight: bold; display: block; margin-top: 0.5rem; font-size: 1.2rem;">Share value = Present value of all future dividends.</span>
                     </p>
                 </div>
 
@@ -118,26 +132,26 @@
                     
                     <div class="method-column">
                         <p style="margin-bottom: 1rem; color: #444; font-size: 1.05rem;">
-                            Si tu connais exactement les dividendes (D) pour les prochaines années, tu dois actualiser chacun d'entre eux manuellement.
+                            Use this when you have a list of dividends for a few years.
                         </p>
 
-                        <strong style="color: #333; display: block; margin-top: 1rem;">La Formule Mathématique :</strong>
+                        <strong style="color: #333; display: block; margin-top: 1rem;">The Mathematical Formula :</strong>
                         <div class="math-block" style="font-size: 1.1rem; padding: 1rem; border-color: rgba(33,115,70,0.3);">
-                            <span style="font-size: 1.3rem;">P&sub0; = &sum; [ D<sub>t</sub> / (1+r)&#7491; ]</span>
+                            <span style="font-size: 1.3rem;">Price = &sum; [ D<sub>t</sub> / (1+r)&#7491; ]</span>
                         </div>
 
-                        <strong style="color: #333; display: block; margin-top: 1.5rem;">L'Implémentation Excel :</strong>
+                        <strong style="color: #333; display: block; margin-top: 1.5rem;">The Excel Implementation :</strong>
                         <div class="code-block dark-mode" style="margin-bottom: 1.5rem;">
-                            <div class="code-comment">// 1. Structure Générale</div>
+                            <div class="code-comment">// 1. General Structure</div>
                             <code><span class="excel-func">=NPV</span>(<span class="param">rate</span> ; <span class="param">value1</span>, <span class="param">[value2]</span>, ...)</code>
                             
-                            <div class="code-comment" style="margin-top: 1rem;">// 2. Exemple (Plage de dividendes)</div>
+                            <div class="code-comment" style="margin-top: 1rem;">// 2. Example (Dividends Range)</div>
                             <code><span class="excel-func">=NPV</span>(<span class="param">r</span> ; <span class="param">range_of_dividends</span>)</code>
                         </div>
 
                         <div style="background-color: #FFF3E0; border-left: 4px solid #FF9800; padding: 1rem; border-radius: 4px;">
-                            <strong style="color: #E65100;">⚠️ Rappel Crucial sur NPV :</strong><br>
-                            <span style="color: #555;">La fonction Excel <code>NPV</code> commence toujours son actualisation à la <strong>période 1 (t=1)</strong>. Ne mets jamais un flux de l'année 0 à l'intérieur de la parenthèse NPV !</span>
+                            <strong style="color: #E65100;">🚨 ATTENTION</strong><br>
+                            <span style="color: #555;">NPV starts at Year 1. Never put Year 0 inside!</span>
                         </div>
                     </div>
                 </section>
@@ -148,25 +162,34 @@
                     
                     <div class="method-column">
                         <p style="margin-bottom: 1rem; color: #444; font-size: 1.05rem;">
-                            Si les dividendes augmentent indéfiniment à un taux constant régulier (g), l'énorme somme infinie se compresse par miracle grâce aux mathématiques. C'est le <strong>Gordon Growth Model (Dividend Discount Model)</strong>.
+                            Use this when dividends grow forever at a constant rate g.
                         </p>
 
-                        <strong style="color: #333; display: block; margin-top: 1rem;">La Formule Magique :</strong>
+                        <strong style="color: #333; display: block; margin-top: 1rem;">Simple Formula :</strong>
                         <div class="math-block" style="font-size: 1.4rem; font-weight: bold; background-color: #E8F5E9; border-color: var(--clr-excel-green); color: var(--clr-excel-green);">
-                            P&sub0; = D&sub1; / (r - g)
+                            Price = D&sub1; / (r - g)
                         </div>
 
-                        <div style="background-color: #FFEBEE; border: 2px solid #D32F2F; padding: 1rem; border-radius: 6px; margin-top: 1.5rem; text-align: center;">
-                            <strong style="color: #D32F2F; font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">🚨 CONDITION DE SURVIE ABSOLUE 🚨</strong>
-                            <span style="color: #B71C1C; font-size: 1.1rem; font-weight: bold;">Le modèle EXIGE que r > g</span>
+                        
+                        <div style="background-color: #FFF; border: 1px solid #EAEAEA; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
+                            <h4 style="color: #333; margin-bottom: 1rem; font-size: 1.15rem;">The Rules:</h4>
+                            <ul style="color: #555; line-height: 1.7; margin: 0; padding-left: 1.5rem;">
+                                <li><strong>r</strong> = Required return (Le rendement voulu par l'investisseur).</li>
+                                <li><strong>g</strong> = Growth rate (La vitesse de croissance du dividende).</li>
+                            </ul>
+                        </div>
+<div style="background-color: #FFEBEE; border: 2px solid #D32F2F; padding: 1rem; border-radius: 6px; margin-top: 1.5rem; text-align: center;">
+                            <strong style="color: #D32F2F; font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">🚨 ABSOLUTE SURVIVAL CONDITION 🚨</strong>
+                            <span style="color: #B71C1C; font-size: 1.1rem; font-weight: bold;">Condition: r MUST be greater than g (r > g)</span>
                         </div>
                         
-                        <!-- MATHEMATICAL LOGIC -->
-                        <div style="background-color: #FAFAFA; border: 1px solid #E0E0E0; border-radius: 8px; padding: 1.5rem; margin-top: 2rem;">
-                            <h4 style="color: #333; margin-bottom: 1rem; border-bottom: 1px solid #EEE; padding-bottom: 0.5rem;">🧠 Pourquoi (r - g) au dénominateur ?</h4>
-                            <ul style="color: #555; line-height: 1.7; margin: 0; padding-left: 1.5rem;">
-                                <li><strong>Si g s'approche de r :</strong> Le dénominateur (r-g) tend vers 0. Diviser par presque zéro donne un chiffre gigantesque. Le prix de l'action explose vers <strong>l'infini</strong>.</li>
-                                <li><strong>Si g &ge; r :</strong> Les dividendes grandissent plus vite que les exigences mathématiques de l'économie. Le modèle "casse". Si une entreprise avait un g > r pour l'éternité, elle finirait par être <strong>plus grosse que l'économie mondiale elle-même</strong>. Impossible.</li>
+                        <!-- WHY (R - G) INTUITION -->
+                        <div style="background-color: #FAFAFA; border: 1px solid #E0E0E0; border-radius: 8px; padding: 1.5rem; margin-top: 2rem; border-left: 5px solid #0D47A1;">
+                            <h4 style="color: #0D47A1; margin-bottom: 1rem; border-bottom: 1px solid #E3F2FD; padding-bottom: 0.5rem; font-size: 1.2rem;">🧠 WHY (r - g) ? (INTUITION)</h4>
+                            <ul style="color: #444; line-height: 1.8; margin: 0; padding-left: 1.5rem; font-size: 1.05rem;">
+                                <li><strong style="color: #2E7D32;">g pushes the price UP</strong> (More growth = More value).</li>
+                                <li><strong style="color: #D32F2F;">r pushes the price DOWN</strong> (More risk/discount = Less value).</li>
+                                <li><strong style="color: #0D47A1;">The difference (r - g) is the balance.</strong></li>
                             </ul>
                         </div>
                     </div>
@@ -205,17 +228,27 @@
                     </div>
                 </section>
 
-                <!-- SECTION 4: EXCEL IMPLEMENTATION -->
-                <section class="content-card">
-                    <h2 class="section-title">4️⃣ EXCEL IMPLEMENTATION & SAFETY</h2>
+                <!-- SECTION 4: EXCEL SAFETY -->
+                <section class="content-card" style="border-top: 4px solid #FBC02D;">
+                    <h2 class="section-title" style="color: #F57F17;">4️⃣ EXCEL SAFETY: THE 'IF' STRUCTURE</h2>
                     
-                    <p style="color: #444; font-size: 1.05rem; margin-bottom: 1.5rem;">
-                        Puisque le modèle plante si (r &le; g), il faut <strong>toujours sécuriser ton Excel</strong> pour empêcher une division par zéro ou un prix négatif absurde.
-                    </p>
+                    <div style="background-color: #FFFDE7; border: 1px solid #FBC02D; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(251, 192, 45, 0.1);">
+                        <h3 style="color: #F57F17; margin-bottom: 1rem; font-size: 1.25rem;">General IF structure :</h3>
+                        <div class="code-block dark-mode" style="margin-bottom: 2rem; padding: 1.5rem; border-color: #F57F17;">
+                            <code><span class="excel-func">=IF</span>( <span class="param">condition</span> ; <span style="color: #C5E1A5;">value_if_true</span> ; <span style="color: #EF9A9A;">value_if_false</span> )</code>
+                        </div>
 
-                    <strong style="color: #333; display: block; margin-bottom: 0.5rem;">La Formule Sécurisée (IF Statement) :</strong>
-                    <div class="code-block dark-mode" style="margin-bottom: 1.5rem; padding: 1.5rem;">
-                        <code><span class="excel-func">=IF</span>(<span class="param">r</span> <= <span class="param">g</span> ; <span style="color: #FFA726;">"Error: r must be > g"</span> ; <span class="param">D1</span> / (<span class="param">r</span> - <span class="param">g</span>))</code>
+                        <h3 style="color: #F57F17; margin-bottom: 1rem; font-size: 1.25rem;">Applied to Gordon Model :</h3>
+                        <div class="code-block dark-mode" style="margin-bottom: 1.5rem; padding: 1.5rem; border-color: #F57F17;">
+                            <code><span class="excel-func">=IF</span>( <span class="param">r</span> <= <span class="param">g</span> ; <span style="color: #FFA726;">"Formula doesn't work"</span> ; <span class="param">D1</span> / (<span class="param">r</span> - <span class="param">g</span>) )</code>
+                        </div>
+                        
+                        <div style="background-color: white; border-left: 4px solid #F57F17; padding: 1rem; border-radius: 4px; margin-top: 1.5rem;">
+                            <strong style="color: #E65100;">Explication :</strong>
+                            <p style="color: #555; margin: 0.5rem 0 0 0; line-height: 1.6;">
+                                Si le taux de croissance (g) est plus haut que le taux voulu (r), le modèle casse. Le 'IF' empêche Excel d'afficher une erreur moche ou un prix négatif.
+                            </p>
+                        </div>
                     </div>
                 </section>
 
@@ -230,12 +263,10 @@
                     style="background-color: #B2D3C2; max-width: 600px; margin: 2rem auto 2rem auto; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transform: rotate(1deg);">
                     <p
                         style="font-weight: 800; color: #111; font-size: 1.15rem; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; margin-bottom: 0.8rem; letter-spacing: 0.5px;">
-                        TRICK : D&#x2080; vs D&#x2081; !
+                        TRICK: D0 vs D1
                     </p>
                     <p style="color: #111; line-height: 1.7; font-size: 1.05rem;">
-                        C'est l'erreur classique. Le numérateur de Gordon DOIT être le prochain dividende futur (<strong style="color: #E65100;">D₁</strong>).<br><br>
-                        Si l'énoncé ou le Boss dit : <em>"Le dividende <strong>vient d'être payé</strong> aujourd'hui... a été payé... is currently paying"</em>, alors c'est <strong>D₀</strong> !<br><br>
-                        Tu DOIS le faire grandir d'un an avant de diviser :<br>
+                        If you have D0, calculate D1 first:<br>
                         <strong style="display: block; margin-top: 0.5rem; background: rgba(255,255,255,0.4); padding: 0.5rem; border-radius: 4px;">D₁ = D₀ &times; (1 + g)</strong>
                     </p>
                 </div>
