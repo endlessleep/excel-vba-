@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Modelling Using MS Excel and VBA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .math-block {
+            background-color: var(--clr-bg-card);
+            border: 2px dashed var(--clr-excel-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Consolas', monospace;
+            font-size: 1.1rem;
+            color: var(--clr-text-main);
+            margin: 1.5rem 0;
+        }
+
+        .duel-badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-blue {
+            background-color: #E3F2FD;
+            color: #0D47A1;
+        }
+
+        .badge-red {
+            background-color: #FFEBEE;
+            color: #B71C1C;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-wrapper">
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>EXCEL VBA CORE</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- Accordion Menu -->
+                <div class="accordion-item active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 1: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content show">
+                        <a href="index.html" class="nav-link">Ex 1: NPV & IRR</a>
+                        <a href="ex2.html" class="nav-link">Ex 2: Multiple IRRs</a>
+                        <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
+                        <a href="ex4.html" class="nav-link active">Ex 4: Payment Schedule</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 2: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 1: à suivre </a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: à suivre</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <!-- ================= END SIDEBAR ================= -->
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1>EX 4: PAYMENT SCHEDULE (AMORTIZATION)</h1>
+                <p style="margin-top: 0.5rem; font-size: 1.1rem; color: var(--clr-text-muted);">The goal is to find the
+                    exact payment required for the loan balance to perfectly hit 0 at maturity.</p>
+            </header>
+
+            <div class="cards-container">
+
+                <!-- DUEL OF CASES -->
+                <section class="content-card">
+                    <h2 class="section-title">THE VISUAL DUEL: FINDING THE MISSING VARIABLE</h2>
+
+                    <div class="methods-grid">
+                        <div class="method-column" style="border-top: 4px solid #0D47A1;">
+                            <h3 class="method-title">
+                                🔵 CASE 1: Payment is Given
+                            </h3>
+                            <p style="margin-bottom: 1rem; color: #444;">You know how much you pay back each month, but
+                                you do not know the real cost (the rate).</p>
+                            <p><strong>Goal:</strong> Find the Interest Rate.</p>
+                            <div class="code-block dark-mode" style="margin-top: 1rem;">
+                                <code><span class="excel-func">=IRR</span>(<span class="param">range_of_CFs</span>)</code>
+                            </div>
+                        </div>
+
+                        <div class="method-column" style="border-top: 4px solid #B71C1C;">
+                            <h3 class="method-title">
+                                🔴 CASE 2: Rate is Given
+                            </h3>
+                            <p style="margin-bottom: 1rem; color: #444;">The bank gives you the rate, but you need to
+                                calculate your fixed monthly output.</p>
+                            <p><strong>Goal:</strong> Find the Payment.</p>
+                            <div class="code-block dark-mode" style="margin-top: 1rem;">
+                                <code><span class="excel-func">=PMT</span>(<span class="param">rate</span>; <span class="param">term</span>; <span class="param">-principal</span>)</code>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 2: CASE 2 PMT DEEP DIVE -->
+                <section class="content-card">
+                    <h2 class="section-title">DEEP DIVE: CASE 2 (RATE IS GIVEN)</h2>
+
+                    <div class="method-column">
+                        <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+                            <strong>The Problem:</strong> You know the Capital, the Rate, and the Duration, but you do
+                            not know the specific Payment.
+                        </p>
+
+                        <div class="code-block dark-mode" style="margin-bottom: 1.5rem;">
+                            <div class="code-comment">// The Magic Excel Formula:</div>
+                            <code><span class="excel-func">=PMT</span>(<span class="param">interest_rate</span> ; <span class="param">loan_term</span> ; <span class="param">-loan_principal</span>)</code>
+                        </div>
+
+                        <ul style="color: #444; line-height: 1.8; margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li><strong>Detail 1:</strong> <code>loan_term</code> = the total number of periods.</li>
+                            <li><strong>Detail 2:</strong> <span class="fluo err"
+                                    style="color: white; padding: 0.1rem 0.3rem; border-radius: 4px;">IMPORTANT</span>
+                                You must put a minus sign (-) in front of the principal.</li>
+                        </ul>
+
+                        <div
+                            style="background-color: white; padding: 1.5rem; border-left: 4px solid var(--clr-excel-green); border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                            <h4 style="color: var(--clr-excel-green); margin-bottom: 0.5rem; font-size: 1.1rem;">What
+                                PMT actually does</h4>
+                            <p style="color: #555; line-height: 1.6;">
+                                PMT calculates the exact fixed payment required to <strong>totally amortize</strong> the
+                                loan at the end of every period, meaning the final remaining principal will be exactly
+                                0.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 3: ECONOMIC INTUITION -->
+                <section class="content-card">
+                    <h2 class="section-title">ECONOMIC INTUITION</h2>
+                    <p style="color: #444; line-height: 1.6; font-size: 1.05rem; margin-bottom: 1.5rem;">
+                        Explain that when you borrow, the bank gives you a <strong>Present Value (PV)</strong> today. In
+                        exchange, you promise future payments that must be discounted because of interest over time.
+                    </p>
+
+                    <div
+                        style="background-color: var(--clr-excel-green); color: white; padding: 1rem; border-radius: 8px; text-align: center; margin-bottom: 2rem;">
+                        <strong style="font-size: 1.15rem; letter-spacing: 0.5px;">THE CORE CONDITION (Golden
+                            Rule)</strong><br>
+                        <span style="font-size: 1.05rem; font-weight: 500;">The loan today MUST equal the Present Value
+                            of all future payments.</span>
+                    </div>
+
+                    <h3
+                        style="color: var(--clr-text-main); font-size: 1.2rem; border-bottom: 2px solid #EAEAEA; padding-bottom: 0.5rem; margin-bottom: 1rem;">
+                        The Mathematics</h3>
+                    <div class="math-block">
+                        Loan = <span style="color: #0D47A1;">Pmt</span>/(1+r) + <span
+                            style="color: #0D47A1;">Pmt</span>/(1+r)&sup2; + ... + <span
+                            style="color: #0D47A1;">Pmt</span>/(1+r)&#8319;
+                    </div>
+                    <p style="text-align: center; color: #555; font-style: italic;">
+                        PMT finds the exact value of the <strong>'Payment'</strong> that solves this equation perfectly.
+                    </p>
+
+                    <div class="mt-4 text-center">
+                        <button class="btn-note" onclick="toggleNote('note-payment-timing')" style="margin: 0 auto;">
+                            <span class="note-icon">💡</span> PRO TIP
+                        </button>
+                    </div>
+
+                    <div id="note-payment-timing" class="post-it-note"
+                        style="background-color: #B2D3C2; max-width: 600px; margin: 1rem auto 0 auto;">
+                        <p style="font-weight: 600; color: #111;">Note:</p>
+                        <p class="mt-2" style="color: #222;">
+                            The payment is always calculated at the <strong>end of the period</strong> by default in
+                            Excel (Type = 0).
+                        </p>
+                    </div>
+
+                </section>
+
+            </div>
+        </main>
+        <!-- ================= END MAIN CONTENT ================= -->
+
+    </div>
+
+    <!-- Overlay Note System -->
+    <div id="note-overlay" class="overlay" onclick="closeNote()"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
