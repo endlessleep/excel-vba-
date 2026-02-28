@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Modelling Using MS Excel and VBA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .math-block {
+            background-color: var(--clr-bg-card);
+            border: 2px dashed var(--clr-excel-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Consolas', monospace;
+            font-size: 1.1rem;
+            color: var(--clr-text-main);
+            margin: 1.5rem 0;
+        }
+
+        .vs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #EAEAEA;
+        }
+
+        .vs-table th,
+        .vs-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #EAEAEA;
+        }
+
+        .vs-table th {
+            background-color: #F8F9FA;
+            color: var(--clr-excel-green);
+            font-weight: 700;
+        }
+
+        .vs-table td {
+            background-color: white;
+            color: #444;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-wrapper">
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>EXCEL VBA CORE</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- Accordion Menu -->
+                <div class="accordion-item active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 1: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content show">
+                        <a href="index.html" class="nav-link">Ex 1: NPV & IRR</a>
+                        <a href="ex2.html" class="nav-link">Ex 2: Multiple IRRs</a>
+                        <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
+                        <a href="ex4.html" class="nav-link">Ex 4: Payment Schedule</a>
+                        <a href="ex5.html" class="nav-link active">Ex 5: Future Value</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 2: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 1: à suivre </a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: à suivre</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <!-- ================= END SIDEBAR ================= -->
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1>EX 5: FUTURE VALUE (FV)</h1>
+                <p style="margin-top: 0.5rem; font-size: 1.1rem; color: var(--clr-text-muted);">Calculate the final
+                    value of an investment after n periods with compound interest.</p>
+            </header>
+
+            <div class="cards-container">
+
+                <!-- SECTION 1: SIMPLE FV -->
+                <section class="content-card">
+                    <h2 class="section-title">
+                        <span style="font-size: 1.5rem; vertical-align: middle; margin-right: 0.5rem;">💰</span>
+                        1️⃣ SIMPLE FUTURE VALUE (Single Investment)
+                    </h2>
+
+                    <div class="method-column">
+                        <p style="margin-bottom: 1rem; color: #444; font-size: 1.05rem;">
+                            <strong>Situation:</strong> You deposit a sum once and wait without adding anything else.
+                            Only an initial investment (PV) exists, with no extra deposits.
+                        </p>
+
+                        <h3 style="color: var(--clr-text-main); font-size: 1.1rem; margin-top: 1.5rem;">Mathematical
+                            Formula:</h3>
+                        <div class="math-block" style="margin-top: 0.5rem; padding: 1rem;">
+                            FV = PV &times; (1 + r)&#8319;
+                        </div>
+
+                        <h3 style="color: var(--clr-text-main); font-size: 1.1rem; margin-top: 1.5rem;">Excel Formula:
+                        </h3>
+                        <div class="code-block dark-mode" style="margin-top: 0.5rem;">
+                            <code><span class="excel-func">=FV</span>(<span class="param">rate</span> ; <span class="param">nper</span> ; <strong style="color: white;">0</strong> ; <span class="param">-PV</span>)</code>
+                        </div>
+
+                        <p
+                            style="margin-top: 1.5rem; background-color: rgba(255, 255, 255, 0.4); padding: 0.8rem; border-radius: 4px; border-left: 4px solid var(--clr-excel-func);">
+                            <strong>⚠️ Golden Rule:</strong> Because there are no periodic deposits, the PMT argument
+                            must be explicitly equal to <strong>0</strong>.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- SECTION 2: ANNUITY FV -->
+                <section class="content-card">
+                    <h2 class="section-title">
+                        <span style="font-size: 1.5rem; vertical-align: middle; margin-right: 0.5rem;">🔄</span>
+                        2️⃣ FUTURE VALUE WITH ANNUAL DEPOSITS (Annuity)
+                    </h2>
+
+                    <div class="method-column">
+                        <p style="margin-bottom: 1rem; color: #444; font-size: 1.05rem;">
+                            <strong>Situation:</strong> You save the exact same amount every year (e.g., a Savings
+                            Plan).
+                        </p>
+
+                        <div class="code-block dark-mode" style="margin-bottom: 1.5rem;">
+                            <div class="code-comment">// Full Excel Structure:</div>
+                            <code><span class="excel-func">=FV</span>(<span class="param">rate</span> ; <span class="param">nper</span> ; <span class="param">pmt</span> ; <span class="param">[pv]</span> ; <span class="param">[type]</span>)</code>
+                        </div>
+
+                        <ul style="color: #444; line-height: 1.8; margin-left: 1.5rem; margin-bottom: 2rem;">
+                            <li><strong>pmt:</strong> The amount you deposit each period (e.g., -100).</li>
+                            <li><strong>pv:</strong> Your starting capital. If you start from 0, leave empty or type 0.
+                            </li>
+                            <li><strong>type:</strong> Defines the timing of the payment (Crucial).</li>
+                        </ul>
+
+                        <div
+                            style="background-color: white; padding: 1.5rem; border-left: 4px solid #0D47A1; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 2rem;">
+                            <h4
+                                style="color: #0D47A1; margin-bottom: 1rem; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🎯</span> Syntax Focus: Skipping Arguments
+                            </h4>
+                            <div class="code-block dark-mode" style="margin-bottom: 1rem;">
+                                <code><span class="excel-func">=FV</span>(<span class="param">rate</span> ; <span class="param">nper</span> ; <span class="param">-deposit</span> <strong style="color: white; font-size: 1.2rem;">;;</strong> 1)</code>
+                            </div>
+                            <p style="color: #555; line-height: 1.6;">
+                                By using the double semi-colon (<code>;;</code>) or double comma (<code>,,</code>
+                                depending on regional settings), you tell Excel to <strong>skip the PV argument</strong>
+                                (treating it as 0) while keeping its positional slot, so you can reach the
+                                <code>type</code> argument.
+                            </p>
+                        </div>
+
+                        <h3 style="color: var(--clr-text-main); font-size: 1.1rem;">THE DUEL: Type 0 vs Type 1</h3>
+                        <table class="vs-table">
+                            <thead>
+                                <tr>
+                                    <th>Value</th>
+                                    <th>Timing</th>
+                                    <th>Impact on FV</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: bold; color: var(--clr-excel-green);">0 (or omitted)</td>
+                                    <td>End of period</td>
+                                    <td>Standard calculation. Deposits don't earn interest for the very first period
+                                        they are made.</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold; color: #0D47A1;">1</td>
+                                    <td>Beginning of period</td>
+                                    <td>Because you deposit at the start of the year, the money works for <strong>one
+                                            extra year</strong> and generates more interest. FV will be higher.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </section>
+
+                <div class="mt-4 text-center">
+                    <button class="btn-note" onclick="toggleNote('note-sign-convention')"
+                        style="margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                        <span class="note-icon">📝</span> SIGN CONVENTION [IMPORTANT]
+                    </button>
+                </div>
+
+                <div id="note-sign-convention" class="post-it-note"
+                    style="background-color: #B2D3C2; max-width: 600px; margin: 1rem auto 0 auto;">
+                    <p
+                        style="font-weight: 700; color: #111; font-size: 1.1rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; margin-bottom: 0.8rem;">
+                        Sign Convention!
+                    </p>
+                    <p style="color: #222; line-height: 1.6;">
+                        Remember that deposits are cash outflows. You must <strong>always put a minus sign (-)</strong>
+                        in front of the PMT argument, otherwise your Future Value will render as negative.
+                    </p>
+                </div>
+
+            </div>
+        </main>
+        <!-- ================= END MAIN CONTENT ================= -->
+
+    </div>
+
+    <!-- Overlay Note System -->
+    <div id="note-overlay" class="overlay" onclick="closeNote()"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
