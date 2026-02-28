@@ -95,29 +95,34 @@
 
         <!-- ================= MAIN CONTENT ================= -->
         <main class="main-content">
-            
-            
-            
-            
+
+
+
+
             <header class="page-header">
                 <h1>EX 4: CAPM & REGRESSION ANALYSIS</h1>
-                <p style="text-align: center; color: #666; font-size: 1.1rem; margin-top: -10px; margin-bottom: 2rem;"><em>Capital Asset Pricing Model</em></p>
+                <p style="text-align: center; color: #666; font-size: 1.1rem; margin-top: -10px; margin-bottom: 2rem;">
+                    <em>Capital Asset Pricing Model</em></p>
             </header>
 
             <div class="content-scroll">
 
                 <!-- THE BRIDGE: GORDON VS CAPM -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem;">
-                    
+
                     <!-- CAPM Block -->
-                    <div style="background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); border-left: 6px solid #1565C0; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(21, 101, 192, 0.15);">
-                        <h3 style="color: #0D47A1; font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(13, 71, 161, 0.2); padding-bottom: 0.5rem;">
+                    <div
+                        style="background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); border-left: 6px solid #1565C0; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(21, 101, 192, 0.15);">
+                        <h3
+                            style="color: #0D47A1; font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(13, 71, 161, 0.2); padding-bottom: 0.5rem;">
                             1️⃣ r dans le CAPM
                         </h3>
-                        <div class="math-block" style="border-color: #64B5F6; color: #1565C0; background-color: rgba(255,255,255,0.6); margin-bottom: 1rem; padding: 0.8rem; font-size: 1.2rem;">
+                        <div class="math-block"
+                            style="border-color: #64B5F6; color: #1565C0; background-color: rgba(255,255,255,0.6); margin-bottom: 1rem; padding: 0.8rem; font-size: 1.2rem;">
                             r = r<sub>f</sub> + &beta; (E(r<sub>M</sub>) - r<sub>f</sub>)
                         </div>
-                        <ul style="color: #333; margin-bottom: 1rem; list-style: none; padding-left: 0; line-height: 1.8;">
+                        <ul
+                            style="color: #333; margin-bottom: 1rem; list-style: none; padding-left: 0; line-height: 1.8;">
                             <li>👉 Le rendement <strong>exigé</strong> par les investisseurs.</li>
                             <li>👉 Basé sur le risque <strong>systématique</strong>.</li>
                             <li>👉 <strong>Théorique</strong> et fondé sur le marché.</li>
@@ -128,20 +133,25 @@
                             <li><strong>Prime de risque</strong> du marché</li>
                             <li><strong>Beta</strong> (sensibilité au marché)</li>
                         </ul>
-                        <div style="background-color: rgba(255,255,255,0.8); padding: 0.5rem 1rem; border-radius: 4px; color: #1565C0; font-weight: bold; text-align: center;">
+                        <div
+                            style="background-color: rgba(255,255,255,0.8); padding: 0.5rem 1rem; border-radius: 4px; color: #1565C0; font-weight: bold; text-align: center;">
                             CAPM = modèle basé sur le risque
                         </div>
                     </div>
 
                     <!-- Gordon Block -->
-                    <div style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border-left: 6px solid #2E7D32; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(46, 125, 50, 0.15);">
-                        <h3 style="color: #1B5E20; font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(27, 94, 32, 0.2); padding-bottom: 0.5rem;">
+                    <div
+                        style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border-left: 6px solid #2E7D32; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(46, 125, 50, 0.15);">
+                        <h3
+                            style="color: #1B5E20; font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(27, 94, 32, 0.2); padding-bottom: 0.5rem;">
                             🔵 2️⃣ r dans Gordon (r implicite)
                         </h3>
-                        <div class="math-block" style="border-color: #81C784; color: #2E7D32; background-color: rgba(255,255,255,0.6); margin-bottom: 1rem; padding: 0.8rem; font-size: 1.2rem;">
+                        <div class="math-block"
+                            style="border-color: #81C784; color: #2E7D32; background-color: rgba(255,255,255,0.6); margin-bottom: 1rem; padding: 0.8rem; font-size: 1.2rem;">
                             r = (D<sub>1</sub> / P<sub>0</sub>) + g
                         </div>
-                        <ul style="color: #333; margin-bottom: 1rem; list-style: none; padding-left: 0; line-height: 1.8;">
+                        <ul
+                            style="color: #333; margin-bottom: 1rem; list-style: none; padding-left: 0; line-height: 1.8;">
                             <li>👉 Le rendement <strong>implicite</strong> contenu dans le prix actuel.</li>
                             <li>👉 <strong>Déduit</strong> du prix observé.</li>
                             <li>👉 Basé sur dividendes + croissance.</li>
@@ -152,7 +162,8 @@
                             <li><strong>Dividende</strong></li>
                             <li>Hypothèse de <strong>croissance g</strong></li>
                         </ul>
-                        <div style="background-color: rgba(255,255,255,0.8); padding: 0.5rem 1rem; border-radius: 4px; color: #2E7D32; font-weight: bold; text-align: center;">
+                        <div
+                            style="background-color: rgba(255,255,255,0.8); padding: 0.5rem 1rem; border-radius: 4px; color: #2E7D32; font-weight: bold; text-align: center;">
                             Gordon = modèle basé sur cash flows
                         </div>
                     </div>
@@ -165,11 +176,13 @@
                         <span>📊</span> 1. UNDERSTANDING STOCK RETURNS
                     </h2>
                     <p style="color: #444; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.6;">
-                        <strong>Concept:</strong> CAPM works with returns rather than raw prices. It measures how sensitive a stock’s returns are to movements in the overall market.
+                        <strong>Concept:</strong> CAPM works with returns rather than raw prices. It measures how
+                        sensitive a stock’s returns are to movements in the overall market.
                     </p>
-                    
+
                     <strong style="color: #333; display: block; margin-bottom: 0.5rem;">Mathematical Formula:</strong>
-                    <div class="math-block" style="border-color: #90CAF9; color: #1976D2; background-color: #E3F2FD; margin-bottom: 1.5rem;">
+                    <div class="math-block"
+                        style="border-color: #90CAF9; color: #1976D2; background-color: #E3F2FD; margin-bottom: 1.5rem;">
                         Return<sub>t</sub> = ( Price<sub>t</sub> / Price<sub>t-1</sub> ) - 1
                     </div>
 
@@ -178,10 +191,14 @@
                         <code>=<span class="param">CurrentPrice</span> / <span class="param">PreviousPrice</span> - 1</code>
                     </div>
 
-                    <div style="background-color: #F8F9FA; padding: 1.5rem; border-left: 4px solid #9E9E9E; border-radius: 4px;">
+                    <div
+                        style="background-color: #F8F9FA; padding: 1.5rem; border-left: 4px solid #9E9E9E; border-radius: 4px;">
                         <strong style="color: #616161;">Intuition:</strong><br>
-                        <p style="color: #555; font-size: 1.05rem; margin-top: 0.5rem; margin-bottom: 0; line-height: 1.6;">
-                            This measures the percentage gain or loss between two periods. In CAPM, we focus entirely on the variability (volatility) of these returns as the very definition of <strong>Risk</strong>. The more it moves, the riskier it is.
+                        <p
+                            style="color: #555; font-size: 1.05rem; margin-top: 0.5rem; margin-bottom: 0; line-height: 1.6;">
+                            This measures the percentage gain or loss between two periods. In CAPM, we focus entirely on
+                            the variability (volatility) of these returns as the very definition of
+                            <strong>Risk</strong>. The more it moves, the riskier it is.
                         </p>
                     </div>
                 </section>
@@ -192,13 +209,16 @@
                         <span>⚖️</span> 2. BETA (&beta;) &ndash; THE VOLATILITY SENSOR
                     </h2>
                     <p style="color: #444; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.6;">
-                        <strong>Definition:</strong> Beta measures how sensitive a specific stock is to broad market movements. It asks: <em>"If the market sneezes, does the stock catch a cold?"</em>
+                        <strong>Definition:</strong> Beta measures how sensitive a specific stock is to broad market
+                        movements. It asks: <em>"If the market sneezes, does the stock catch a cold?"</em>
                     </p>
-                    
+
                     <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2rem;">
                         <div>
-                            <strong style="color: #333; display: block; margin-bottom: 0.5rem;">Mathematical Formula:</strong>
-                            <div class="math-block" style="border-color: rgba(0,0,0,0.1); background-color: #FFFDE7; color: #F57F17;">
+                            <strong style="color: #333; display: block; margin-bottom: 0.5rem;">Mathematical
+                                Formula:</strong>
+                            <div class="math-block"
+                                style="border-color: rgba(0,0,0,0.1); background-color: #FFFDE7; color: #F57F17;">
                                 &beta; = Cov(R<sub>stock</sub> , R<sub>market</sub>) / Var(R<sub>market</sub>)
                             </div>
                         </div>
@@ -211,17 +231,22 @@
                     </div>
 
                     <strong style="color: #333; display: block; margin-bottom: 1rem;">Interpretation Guide:</strong>
-                    <ul style="list-style: none; padding: 0; margin: 0; color: #444; font-size: 1.1rem; line-height: 2;">
-                        <li style="background: #F5F5F5; padding: 0.5rem 1rem; border-radius: 4px; margin-bottom: 0.5rem; border-left: 4px solid #9E9E9E;">
+                    <ul
+                        style="list-style: none; padding: 0; margin: 0; color: #444; font-size: 1.1rem; line-height: 2;">
+                        <li
+                            style="background: #F5F5F5; padding: 0.5rem 1rem; border-radius: 4px; margin-bottom: 0.5rem; border-left: 4px solid #9E9E9E;">
                             <strong>&beta; = 1:</strong> Matches the market perfectly.
                         </li>
-                        <li style="background: #FFEBEE; padding: 0.5rem 1rem; border-radius: 4px; margin-bottom: 0.5rem; border-left: 4px solid #D32F2F;">
+                        <li
+                            style="background: #FFEBEE; padding: 0.5rem 1rem; border-radius: 4px; margin-bottom: 0.5rem; border-left: 4px solid #D32F2F;">
                             <strong>&beta; &gt; 1:</strong> Aggressive / Highly Volatile (High Risk).
                         </li>
-                        <li style="background: #E8F5E9; padding: 0.5rem 1rem; border-radius: 4px; margin-bottom: 0.5rem; border-left: 4px solid #388E3C;">
+                        <li
+                            style="background: #E8F5E9; padding: 0.5rem 1rem; border-radius: 4px; margin-bottom: 0.5rem; border-left: 4px solid #388E3C;">
                             <strong>&beta; &lt; 1:</strong> Defensive / Stable (Low Risk).
                         </li>
-                        <li style="background: #E3F2FD; padding: 0.5rem 1rem; border-radius: 4px; border-left: 4px solid #1976D2;">
+                        <li
+                            style="background: #E3F2FD; padding: 0.5rem 1rem; border-radius: 4px; border-left: 4px solid #1976D2;">
                             <strong>&beta; = 0:</strong> Risk-free (Zero correlation with the market).
                         </li>
                     </ul>
@@ -232,48 +257,67 @@
                     <h2 class="section-title" style="color: #C62828; display: flex; align-items: center; gap: 0.5rem;">
                         <span>🛡️</span> 3. THE CAPM EQUATION
                     </h2>
-                    
+
                     <strong style="color: #333; display: block; margin-bottom: 0.5rem;">The Core Formula:</strong>
-                    <div class="math-block" style="border-color: #EF5350; background-color: #FFEBEE; color: #C62828; font-size: 1.4rem; padding: 1.5rem; margin-bottom: 2rem;">
+                    <div class="math-block"
+                        style="border-color: #EF5350; background-color: #FFEBEE; color: #C62828; font-size: 1.4rem; padding: 1.5rem; margin-bottom: 2rem;">
                         r<sub>e</sub> = r<sub>f</sub> + &beta; &times; [ E(r<sub>m</sub>) - r<sub>f</sub> ]
                     </div>
 
-                    <strong style="color: #333; display: block; margin-bottom: 1rem; font-size: 1.1rem;">The Components:</strong>
+                    <strong style="color: #333; display: block; margin-bottom: 1rem; font-size: 1.1rem;">The
+                        Components:</strong>
                     <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
-                        <div style="background-color: #FAFAFA; border: 1px solid #EAEAEA; padding: 1.2rem; border-radius: 6px;">
+                        <div
+                            style="background-color: #FAFAFA; border: 1px solid #EAEAEA; padding: 1.2rem; border-radius: 6px;">
                             <strong style="color: #1565C0; font-size: 1.15rem;">r<sub>f</sub> (Risk-free rate)</strong>
-                            <p style="color: #555; margin-top: 0.5rem; margin-bottom: 0;">The absolute minimum return you expect just for waiting. Usually represented by government Treasury Bills.</p>
+                            <p style="color: #555; margin-top: 0.5rem; margin-bottom: 0;">The absolute minimum return
+                                you expect just for waiting. Usually represented by government Treasury Bills.</p>
                         </div>
-                        <div style="background-color: #FAFAFA; border: 1px solid #EAEAEA; padding: 1.2rem; border-radius: 6px;">
-                            <strong style="color: #E65100; font-size: 1.15rem;">[ E(r<sub>m</sub>) - r<sub>f</sub> ] (Market Risk Premium)</strong>
-                            <p style="color: #555; margin-top: 0.5rem; margin-bottom: 0;">The extra reward required for choosing dangerous stocks over a perfectly safe bank account.</p>
+                        <div
+                            style="background-color: #FAFAFA; border: 1px solid #EAEAEA; padding: 1.2rem; border-radius: 6px;">
+                            <strong style="color: #E65100; font-size: 1.15rem;">[ E(r<sub>m</sub>) - r<sub>f</sub> ]
+                                (Market Risk Premium)</strong>
+                            <p style="color: #555; margin-top: 0.5rem; margin-bottom: 0;">The extra reward required for
+                                choosing dangerous stocks over a perfectly safe bank account.</p>
                         </div>
                     </div>
 
-                    <div style="background-color: #212121; color: white; padding: 1.5rem; border-radius: 6px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                        <strong style="color: #81C784; font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">FINAL RESULT</strong>
-                        <p style="margin: 0; font-size: 1.1rem;">This <strong style="color: white; font-size: 1.2rem;">r<sub>e</sub></strong> is your Cost of Equity. It serves as your Discount Rate to value the share!</p>
+                    <div
+                        style="background-color: #212121; color: white; padding: 1.5rem; border-radius: 6px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <strong style="color: #81C784; font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">FINAL
+                            RESULT</strong>
+                        <p style="margin: 0; font-size: 1.1rem;">This <strong
+                                style="color: white; font-size: 1.2rem;">r<sub>e</sub></strong> is your Cost of Equity.
+                            It serves as your Discount Rate to value the share!</p>
                     </div>
                 </section>
 
                 <!-- 4. EXCEL REGRESSION SUMMARY OUTPUT -->
-                <section class="content-card" style="background-color: #1E1E1E; color: #E0E0E0; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-                    <h2 class="section-title" style="color: #64FFDA; border-bottom: 1px solid #333; padding-bottom: 1rem; margin-bottom: 2rem;">
+                <section class="content-card"
+                    style="background-color: #1E1E1E; color: #E0E0E0; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                    <h2 class="section-title"
+                        style="color: #64FFDA; border-bottom: 1px solid #333; padding-bottom: 1rem; margin-bottom: 2rem;">
                         4. EXCEL REGRESSION SUMMARY OUTPUT
                     </h2>
                     <p style="color: #B0BEC5; font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.6;">
-                        A step-by-step technical guide to generating and reading the regression table to estimate Beta from raw returns.
+                        A step-by-step technical guide to generating and reading the regression table to estimate Beta
+                        from raw returns.
                     </p>
 
-                    <ol style="margin-left: 1.5rem; margin-bottom: 2.5rem; line-height: 1.8; color: #E0E0E0; font-size: 1.05rem;">
+                    <ol
+                        style="margin-left: 1.5rem; margin-bottom: 2.5rem; line-height: 1.8; color: #E0E0E0; font-size: 1.05rem;">
                         <li style="margin-bottom: 1rem;">
-                            <strong style="color: white;">Prepare two columns:</strong> Market returns (Independent <strong style="color: #64FFDA;">X</strong>) and Stock returns (Dependent <strong style="color: #FF8A65;">Y</strong>).
+                            <strong style="color: white;">Prepare two columns:</strong> Market returns (Independent
+                            <strong style="color: #64FFDA;">X</strong>) and Stock returns (Dependent <strong
+                                style="color: #FF8A65;">Y</strong>).
                         </li>
                         <li style="margin-bottom: 1rem;">
-                            <strong style="color: white;">Activate Toolpak:</strong> If missing, go to <code>File > Options > Add-ins > Manage Excel Add-ins > Go > Check "Analysis ToolPak"</code>.
+                            <strong style="color: white;">Activate Toolpak:</strong> If missing, go to
+                            <code>File > Options > Add-ins > Manage Excel Add-ins > Go > Check "Analysis ToolPak"</code>.
                         </li>
                         <li style="margin-bottom: 1rem;">
-                            <strong style="color: white;">Run Regression:</strong> Go to <code>Data > Data Analysis > Regression</code>.
+                            <strong style="color: white;">Run Regression:</strong> Go to
+                            <code>Data > Data Analysis > Regression</code>.
                             <ul style="list-style-type: square; margin-top: 0.5rem; color: #B0BEC5;">
                                 <li><strong>Input Y Range:</strong> Stock returns (The asset you are measuring)</li>
                                 <li><strong>Input X Range:</strong> Market returns (The baseline index)</li>
@@ -281,21 +325,30 @@
                         </li>
                     </ol>
 
-                    <div style="background-color: #2D2D2D; border-left: 4px solid #64FFDA; padding: 1.5rem; border-radius: 4px;">
-                        <strong style="color: #64FFDA; font-size: 1.2rem; display: block; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">
+                    <div
+                        style="background-color: #2D2D2D; border-left: 4px solid #64FFDA; padding: 1.5rem; border-radius: 4px;">
+                        <strong
+                            style="color: #64FFDA; font-size: 1.2rem; display: block; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">
                             Reading the Summary Output
                         </strong>
-                        
+
                         <div style="margin-bottom: 1.5rem;">
-                            <strong style="color: white; border-bottom: 1px dotted #555; padding-bottom: 2px;">1. Regression Statistics:</strong>
-                            <p style="color: #B0BEC5; margin-top: 0.5rem; margin-bottom: 0;">Focus on <strong>R-Square</strong>. It shows the percentage (%) of the stock's movement that is directly explained by the market's movement.</p>
+                            <strong style="color: white; border-bottom: 1px dotted #555; padding-bottom: 2px;">1.
+                                Regression Statistics:</strong>
+                            <p style="color: #B0BEC5; margin-top: 0.5rem; margin-bottom: 0;">Focus on
+                                <strong>R-Square</strong>. It shows the percentage (%) of the stock's movement that is
+                                directly explained by the market's movement.</p>
                         </div>
-                        
+
                         <div>
-                            <strong style="color: #FF8A65; border-bottom: 1px dotted #555; padding-bottom: 2px;">2. Coefficients Table (CRITICAL):</strong>
-                            <ul style="margin-top: 0.5rem; margin-bottom: 0; padding-left: 1.5rem; color: #E0E0E0; line-height: 1.8;">
+                            <strong style="color: #FF8A65; border-bottom: 1px dotted #555; padding-bottom: 2px;">2.
+                                Coefficients Table (CRITICAL):</strong>
+                            <ul
+                                style="margin-top: 0.5rem; margin-bottom: 0; padding-left: 1.5rem; color: #E0E0E0; line-height: 1.8;">
                                 <li><strong style="color: white;">Intercept</strong> = Alpha (&alpha;)</li>
-                                <li><strong style="color: #64FFDA; font-size: 1.1rem; background: rgba(100,255,218,0.1); padding: 2px 6px; border-radius: 4px;">X Variable 1 = Beta (&beta;)</strong> This is your primary target.</li>
+                                <li><strong
+                                        style="color: #64FFDA; font-size: 1.1rem; background: rgba(100,255,218,0.1); padding: 2px 6px; border-radius: 4px;">X
+                                        Variable 1 = Beta (&beta;)</strong> This is your primary target.</li>
                             </ul>
                         </div>
                     </div>
@@ -309,14 +362,17 @@
                         EXAM TIP
                     </p>
                     <p style="color: #111; line-height: 1.8; font-size: 1.1rem; font-weight: 500;">
-                        If the regression output Coefficients Table gives you a <strong>P-value &gt; 0.05</strong>, it means your Beta might <strong style="color: #D32F2F;">not be statistically significant!</strong> The market does not reliably explain this stock.
+                        If the regression output Coefficients Table gives you a <strong>P-value &gt; 0.05</strong>, it
+                        means your Beta might <strong style="color: #D32F2F;">not be statistically significant!</strong>
+                        The market does not reliably explain this stock.
                     </p>
                 </div>
-                
-            
+
+
 
                 <!-- NEW SECTION 1: TOTAL RISK (SIGMA) & VOLATILITY -->
-                <h2 style="color: var(--clr-text-main); font-size: 1.8rem; margin: 4rem 0 2rem 0; text-align: center; border-bottom: 2px solid #EAEAEA; padding-bottom: 0.5rem; text-transform: uppercase;">
+                <h2
+                    style="color: var(--clr-text-main); font-size: 1.8rem; margin: 4rem 0 2rem 0; text-align: center; border-bottom: 2px solid #EAEAEA; padding-bottom: 0.5rem; text-transform: uppercase;">
                     EXTENSION: RISK STRUCTURE & VOLATILITY
                 </h2>
 
@@ -324,48 +380,62 @@
                     <h2 class="section-title" style="color: #8E24AA; display: flex; align-items: center; gap: 0.5rem;">
                         <span>📉</span> 1. TOTAL RISK (SIGMA &sigma;) &amp; VOLATILITY
                     </h2>
-                    
+
                     <div style="margin-bottom: 2rem;">
-                        <strong style="color: #6A1B9A; font-size: 1.15rem; display: block; margin-bottom: 0.5rem;">What is Sigma (&sigma;)?</strong>
+                        <strong style="color: #6A1B9A; font-size: 1.15rem; display: block; margin-bottom: 0.5rem;">What
+                            is Sigma (&sigma;)?</strong>
                         <p style="color: #444; font-size: 1.05rem; margin-bottom: 0.5rem; line-height: 1.6;">
-                            <strong>Definition:</strong> The standard deviation of returns. It measures how much returns fluctuate around their average.<br>
+                            <strong>Definition:</strong> The standard deviation of returns. It measures how much returns
+                            fluctuate around their average.<br>
                         </p>
-                        <div style="background-color: #F3E5F5; padding: 1rem; border-left: 4px solid #AB47BC; border-radius: 4px; color: #4A148C;">
+                        <div
+                            style="background-color: #F3E5F5; padding: 1rem; border-left: 4px solid #AB47BC; border-radius: 4px; color: #4A148C;">
                             <strong>Financial Meaning:</strong><br>
                             Higher &sigma; &rarr; More volatile &rarr; More risky<br>
                             Lower &sigma; &rarr; More stable &rarr; Less risky
                         </div>
                         <p style="color: #555; font-size: 1.05rem; margin-top: 0.8rem;">
-                            <strong>Logic:</strong> Sigma measures <em>Total Risk</em> (Market risk + Firm-specific risk).
+                            <strong>Logic:</strong> Sigma measures <em>Total Risk</em> (Market risk + Firm-specific
+                            risk).
                         </p>
                     </div>
 
                     <div style="margin-bottom: 2rem; border-left: 4px solid #8E24AA; padding-left: 1.5rem;">
-                        <strong style="color: #6A1B9A; font-size: 1.15rem; display: block; margin-bottom: 0.5rem;">Monthly Volatility in Excel</strong>
+                        <strong
+                            style="color: #6A1B9A; font-size: 1.15rem; display: block; margin-bottom: 0.5rem;">Monthly
+                            Volatility in Excel</strong>
                         <div class="code-block dark-mode" style="padding: 1.5rem; margin-bottom: 1rem;">
                             <code>=STDEV(<span class="param">range_of_monthly_returns</span>)</code>
                         </div>
                         <strong style="color: #D32F2F; display: block; margin-bottom: 0.5rem;">CRUCIAL RULE:</strong>
-                        <p style="color: #444; font-style: italic; margin-bottom: 1rem;">Always use Returns, never Prices.</p>
+                        <p style="color: #444; font-style: italic; margin-bottom: 1rem;">Always use Returns, never
+                            Prices.</p>
                         <p style="color: #555; background: #FAFAFA; padding: 10px; border: 1px dashed #CCC;">
-                            <strong>Interpretation:</strong> If &sigma;<sub>monthly</sub> = 0.05, it means monthly returns typically fluctuate by about 5% around their average.
+                            <strong>Interpretation:</strong> If &sigma;<sub>monthly</sub> = 0.05, it means monthly
+                            returns typically fluctuate by about 5% around their average.
                         </p>
                     </div>
 
-                    <div style="background-color: #FAFAFA; border: 1px solid #EAEAEA; padding: 1.5rem; border-radius: 6px;">
-                        <strong style="color: #6A1B9A; font-size: 1.15rem; display: block; margin-bottom: 0.5rem;">Annualizing Volatility (The &radic;12 Rule)</strong>
-                        
-                        <div class="math-block" style="border-color: #CE93D8; background-color: white; color: #6A1B9A; margin: 1rem 0;">
+                    <div
+                        style="background-color: #FAFAFA; border: 1px solid #EAEAEA; padding: 1.5rem; border-radius: 6px;">
+                        <strong
+                            style="color: #6A1B9A; font-size: 1.15rem; display: block; margin-bottom: 0.5rem;">Annualizing
+                            Volatility (The &radic;12 Rule)</strong>
+
+                        <div class="math-block"
+                            style="border-color: #CE93D8; background-color: white; color: #6A1B9A; margin: 1rem 0;">
                             &sigma;<sub>annual</sub> = &radic;12 &times; &sigma;<sub>monthly</sub>
                         </div>
-                        
+
                         <strong style="color: #333; display: block; margin-bottom: 0.5rem;">Excel Formula:</strong>
                         <div class="code-block dark-mode" style="padding: 1rem; margin-bottom: 1rem;">
                             <code>=SQRT(12) * <span class="param">MonthlySigmaCell</span></code>
                         </div>
-                        
+
                         <p style="color: #555; margin: 0; line-height: 1.6;">
-                            <strong>Intuition:</strong> Variance scales with time (e.g., 12 months in a year). Since Sigma is the square root of Variance, to annualize Sigma, we multiply by the square root of 12.
+                            <strong>Intuition:</strong> Variance scales with time (e.g., 12 months in a year). Since
+                            Sigma is the square root of Variance, to annualize Sigma, we multiply by the square root of
+                            12.
                         </p>
                     </div>
                 </section>
@@ -375,46 +445,57 @@
                     <h2 class="section-title" style="color: #00838F; display: flex; align-items: center; gap: 0.5rem;">
                         <span>📊</span> 2. FREQUENCY DISTRIBUTION &amp; RISK STRUCTURE
                     </h2>
-                    
+
                     <p style="color: #444; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.6;">
-                        <strong>Objective:</strong> Group raw returns into intervals (<strong style="color: #00838F;">Bins</strong>) to visualize the 'shape' of risk (e.g., Symmetry vs. Skewness) and understand how observations are distributed.
+                        <strong>Objective:</strong> Group raw returns into intervals (<strong
+                            style="color: #00838F;">Bins</strong>) to visualize the 'shape' of risk (e.g., Symmetry vs.
+                        Skewness) and understand how observations are distributed.
                     </p>
 
                     <div style="margin-bottom: 2rem;">
-                        <strong style="color: #00838F; font-size: 1.15rem; display: block; margin-bottom: 0.5rem;">The Excel FREQUENCY Function</strong>
+                        <strong style="color: #00838F; font-size: 1.15rem; display: block; margin-bottom: 0.5rem;">The
+                            Excel FREQUENCY Function</strong>
                         <div class="code-block dark-mode" style="padding: 1.5rem; margin-bottom: 1rem;">
                             <code>=FREQUENCY(<span class="param">data_range</span> ; <span class="param">bins_range</span>)</code>
                         </div>
-                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left; box-shadow: 0 2px 8px rgba(0,0,0,0.05); background-color: white;">
+                        <table
+                            style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left; box-shadow: 0 2px 8px rgba(0,0,0,0.05); background-color: white;">
                             <thead>
                                 <tr style="background-color: #00ACC1; color: white;">
                                     <th style="padding: 10px; border: 1px solid #00838F; width: 30%;">Argument</th>
-                                    <th style="padding: 10px; border: 1px solid #00838F; width: 40%;">Description</th>
-                                    <th style="padding: 10px; border: 1px solid #00838F; width: 30%;">Example</th>
+                                    <th style="padding: 10px; border: 1px solid #00838F;">Description</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr style="background-color: #E0F7FA;">
-                                    <td style="padding: 10px; border: 1px solid #B2EBF2;"><strong style="color: #006064;">data_range</strong></td>
-                                    <td style="padding: 10px; border: 1px solid #B2EBF2; color: #555;">The observed values (returns)</td>
-                                    <td style="padding: 10px; border: 1px solid #B2EBF2; color: #999;"><em>(e.g., C6:C120)</em></td>
+                                    <td style="padding: 10px; border: 1px solid #B2EBF2;"><strong
+                                            style="color: #006064;">data_range</strong></td>
+                                    <td style="padding: 10px; border: 1px solid #B2EBF2; color: #555;">The observed
+                                        values (returns)</td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 10px; border: 1px solid #B2EBF2;"><strong style="color: #006064;">bins_range</strong></td>
-                                    <td style="padding: 10px; border: 1px solid #B2EBF2; color: #555;">The <em>upper</em> boundaries of categories</td>
-                                    <td style="padding: 10px; border: 1px solid #B2EBF2; color: #999;"><em>(e.g., F6:F15)</em></td>
+                                    <td style="padding: 10px; border: 1px solid #B2EBF2;"><strong
+                                            style="color: #006064;">bins_range</strong></td>
+                                    <td style="padding: 10px; border: 1px solid #B2EBF2; color: #555;">The
+                                        <em>upper</em> boundaries of categories</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <p style="background-color: #E0F7FA; padding: 1rem; border-left: 4px solid #00ACC1; color: #006064; margin-bottom: 0;">
-                            <strong>Bin Logic:</strong> Excel counts values strictly based on these upper limits, creating intervals like <code>(bin<sub>1</sub> , bin<sub>2</sub>]</code>.
+                        <p
+                            style="background-color: #E0F7FA; padding: 1rem; border-left: 4px solid #00ACC1; color: #006064; margin-bottom: 0;">
+                            <strong>Bin Logic:</strong> Excel counts values strictly based on these upper limits,
+                            creating intervals like <code>(bin<sub>1</sub> , bin<sub>2</sub>]</code>.
                         </p>
                     </div>
 
-                    <div style="background-color: #FAFAFA; border: 1px solid #EAEAEA; padding: 1.5rem; border-radius: 6px;">
-                        <strong style="color: #00838F; font-size: 1.15rem; display: block; margin-bottom: 1rem;">Verification &amp; Relative Frequency</strong>
-                        
-                        <table style="width: 100%; border-collapse: collapse; text-align: left; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <div
+                        style="background-color: #FAFAFA; border: 1px solid #EAEAEA; padding: 1.5rem; border-radius: 6px;">
+                        <strong
+                            style="color: #00838F; font-size: 1.15rem; display: block; margin-bottom: 1rem;">Verification
+                            &amp; Relative Frequency</strong>
+
+                        <table
+                            style="width: 100%; border-collapse: collapse; text-align: left; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
                             <thead>
                                 <tr style="background-color: #333; color: white;">
                                     <th style="padding: 12px; border: 1px solid #444; width: 30%;">Step</th>
@@ -424,14 +505,30 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style="padding: 12px; border: 1px solid #DDD; background-color: white; color: #333; font-weight: bold;">1. Total Check<br><span style="font-weight: normal; font-size: 0.9rem; color: #777;">(Completeness)</span></td>
-                                    <td style="padding: 12px; border: 1px solid #DDD; background-color: #1E1E1E; color: #64FFDA; font-family: monospace;">=SUM(frequency_range)</td>
-                                    <td style="padding: 12px; border: 1px solid #DDD; background-color: white; color: #555; font-size: 0.95rem;">// Must equal total observations</td>
+                                    <td
+                                        style="padding: 12px; border: 1px solid #DDD; background-color: white; color: #333; font-weight: bold;">
+                                        1. Total Check<br><span
+                                            style="font-weight: normal; font-size: 0.9rem; color: #777;">(Completeness)</span>
+                                    </td>
+                                    <td
+                                        style="padding: 12px; border: 1px solid #DDD; background-color: #1E1E1E; color: #64FFDA; font-family: monospace;">
+                                        =SUM(frequency_range)</td>
+                                    <td
+                                        style="padding: 12px; border: 1px solid #DDD; background-color: white; color: #555; font-size: 0.95rem;">
+                                        // Must equal total observations</td>
                                 </tr>
                                 <tr>
-                                    <td style="padding: 12px; border: 1px solid #DDD; background-color: #F9F9F9; color: #333; font-weight: bold;">2. Relative Frequency<br><span style="font-weight: normal; font-size: 0.9rem; color: #777;">(Percentage)</span></td>
-                                    <td style="padding: 12px; border: 1px solid #DDD; background-color: #1E1E1E; color: #64FFDA; font-family: monospace;">=Frequency_Cell / $Total_Cell$</td>
-                                    <td style="padding: 12px; border: 1px solid #DDD; background-color: #F9F9F9; color: #D32F2F; font-weight: bold; font-size: 0.95rem;">// Notice the Absolute Reference ($)</td>
+                                    <td
+                                        style="padding: 12px; border: 1px solid #DDD; background-color: #F9F9F9; color: #333; font-weight: bold;">
+                                        2. Relative Frequency<br><span
+                                            style="font-weight: normal; font-size: 0.9rem; color: #777;">(Percentage)</span>
+                                    </td>
+                                    <td
+                                        style="padding: 12px; border: 1px solid #DDD; background-color: #1E1E1E; color: #64FFDA; font-family: monospace;">
+                                        =Frequency_Cell / $Total_Cell$</td>
+                                    <td
+                                        style="padding: 12px; border: 1px solid #DDD; background-color: #F9F9F9; color: #D32F2F; font-weight: bold; font-size: 0.95rem;">
+                                        // Notice the Absolute Reference ($)</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -439,20 +536,28 @@
                 </section>
 
                 <!-- COMPARISON RECAP: SIGMA VS BETA -->
-                <div style="background-color: #212121; color: white; padding: 2rem; border-radius: 8px; margin: 3rem 0; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                    <h3 style="color: #FFCA28; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                <div
+                    style="background-color: #212121; color: white; padding: 2rem; border-radius: 8px; margin: 3rem 0; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                    <h3
+                        style="color: #FFCA28; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
                         <span>📐</span> COMPARISON RECAP
                     </h3>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                        <div style="background-color: #303030; padding: 1.5rem; border-radius: 6px; border-top: 4px solid #AB47BC;">
-                            <strong style="color: #CE93D8; font-size: 1.2rem; display: block; margin-bottom: 0.8rem;">Sigma (&sigma;)</strong>
+                        <div
+                            style="background-color: #303030; padding: 1.5rem; border-radius: 6px; border-top: 4px solid #AB47BC;">
+                            <strong
+                                style="color: #CE93D8; font-size: 1.2rem; display: block; margin-bottom: 0.8rem;">Sigma
+                                (&sigma;)</strong>
                             <p style="margin: 0; color: #E0E0E0; font-size: 1.05rem;">
                                 Measures <strong>Total Risk</strong>.<br>
                                 Includes both Systematic (Market) risk and Unsystematic (Firm-specific) risk.
                             </p>
                         </div>
-                        <div style="background-color: #303030; padding: 1.5rem; border-radius: 6px; border-top: 4px solid #FBC02D;">
-                            <strong style="color: #FFF59D; font-size: 1.2rem; display: block; margin-bottom: 0.8rem;">Beta (&beta;)</strong>
+                        <div
+                            style="background-color: #303030; padding: 1.5rem; border-radius: 6px; border-top: 4px solid #FBC02D;">
+                            <strong
+                                style="color: #FFF59D; font-size: 1.2rem; display: block; margin-bottom: 0.8rem;">Beta
+                                (&beta;)</strong>
                             <p style="margin: 0; color: #E0E0E0; font-size: 1.05rem;">
                                 Measures <strong>Systematic Risk</strong> only.<br>
                                 Captures ONLY the sensitivity to broad market movements.
@@ -469,12 +574,16 @@
                         EXCEL TIP: ARRAY FUNCTIONS
                     </p>
                     <p style="color: #111; line-height: 1.8; font-size: 1.1rem; font-weight: 500;">
-                        <code>FREQUENCY</code> is an <strong style="color: #D32F2F;">array function</strong>. In older Excel versions, simply pressing Enter won't work. You must select the entire output range first, type the formula, and press <strong style="background: rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 4px;">Ctrl + Shift + Enter</strong> to apply it correctly!
+                        <code>FREQUENCY</code> is an <strong style="color: #D32F2F;">array function</strong>. In older
+                        Excel versions, simply pressing Enter won't work. You must select the entire output range first,
+                        type the formula, and press <strong
+                            style="background: rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 4px;">Ctrl +
+                            Shift + Enter</strong> to apply it correctly!
                     </p>
                 </div>
 
-</div>
-</main>
+            </div>
+        </main>
         <!-- ================= END MAIN CONTENT ================= -->
 
     </div>
