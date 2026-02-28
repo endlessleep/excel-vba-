@@ -101,26 +101,62 @@
             
             <header class="page-header">
                 <h1>EX 4: CAPM & REGRESSION ANALYSIS</h1>
+                <p style="text-align: center; color: #666; font-size: 1.1rem; margin-top: -10px; margin-bottom: 2rem;"><em>Capital Asset Pricing Model</em></p>
             </header>
 
             <div class="content-scroll">
 
                 <!-- THE BRIDGE: GORDON VS CAPM -->
-                <div style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border-left: 6px solid #2E7D32; padding: 1.5rem; border-radius: 8px; margin-bottom: 3rem; box-shadow: 0 4px 15px rgba(46, 125, 50, 0.15);">
-                    <h3 style="color: #1B5E20; font-size: 1.3rem; margin-bottom: 1rem; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 0.5rem;">
-                        <span>🌉</span> THE BRIDGE: GORDON VS. CAPM
-                    </h3>
-                    <p style="color: #333; font-size: 1.1rem; margin-bottom: 1rem;">
-                        Two different paths, one ultimate goal: <strong>Determining the return required by investors (Cost of Equity, r<sub>e</sub>)</strong>.
-                    </p>
-                    <ul style="color: #444; font-size: 1.05rem; line-height: 1.8; list-style: none; padding-left: 0;">
-                        <li style="margin-bottom: 0.5rem;">
-                            <strong style="color: #2E7D32;">Gordon Model:</strong> Estimates Cost of Equity (r<sub>e</sub>) internally, based on Dividends and fundamental growth (g).
-                        </li>
-                        <li>
-                            <strong style="color: #1565C0;">CAPM:</strong> Estimates Cost of Equity (r<sub>e</sub>) externally, based on <strong>Market Risk (&beta;)</strong> and the time value of money (r<sub>f</sub>).
-                        </li>
-                    </ul>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem;">
+                    
+                    <!-- CAPM Block -->
+                    <div style="background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); border-left: 6px solid #1565C0; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(21, 101, 192, 0.15);">
+                        <h3 style="color: #0D47A1; font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(13, 71, 161, 0.2); padding-bottom: 0.5rem;">
+                            1️⃣ r dans le CAPM
+                        </h3>
+                        <div class="math-block" style="border-color: #64B5F6; color: #1565C0; background-color: rgba(255,255,255,0.6); margin-bottom: 1rem; padding: 0.8rem; font-size: 1.2rem;">
+                            r = r<sub>f</sub> + &beta; (E(r<sub>M</sub>) - r<sub>f</sub>)
+                        </div>
+                        <ul style="color: #333; margin-bottom: 1rem; list-style: none; padding-left: 0; line-height: 1.8;">
+                            <li>👉 Le rendement <strong>exigé</strong> par les investisseurs.</li>
+                            <li>👉 Basé sur le risque <strong>systématique</strong>.</li>
+                            <li>👉 <strong>Théorique</strong> et fondé sur le marché.</li>
+                        </ul>
+                        <strong style="color: #0D47A1; display: block; margin-bottom: 0.5rem;">Il dépend de :</strong>
+                        <ul style="color: #444; margin-bottom: 1rem; padding-left: 1.5rem; line-height: 1.6;">
+                            <li><strong>r<sub>f</sub></strong> (taux sans risque)</li>
+                            <li><strong>Prime de risque</strong> du marché</li>
+                            <li><strong>Beta</strong> (sensibilité au marché)</li>
+                        </ul>
+                        <div style="background-color: rgba(255,255,255,0.8); padding: 0.5rem 1rem; border-radius: 4px; color: #1565C0; font-weight: bold; text-align: center;">
+                            CAPM = modèle basé sur le risque
+                        </div>
+                    </div>
+
+                    <!-- Gordon Block -->
+                    <div style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border-left: 6px solid #2E7D32; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(46, 125, 50, 0.15);">
+                        <h3 style="color: #1B5E20; font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(27, 94, 32, 0.2); padding-bottom: 0.5rem;">
+                            🔵 2️⃣ r dans Gordon (r implicite)
+                        </h3>
+                        <div class="math-block" style="border-color: #81C784; color: #2E7D32; background-color: rgba(255,255,255,0.6); margin-bottom: 1rem; padding: 0.8rem; font-size: 1.2rem;">
+                            r = (D<sub>1</sub> / P<sub>0</sub>) + g
+                        </div>
+                        <ul style="color: #333; margin-bottom: 1rem; list-style: none; padding-left: 0; line-height: 1.8;">
+                            <li>👉 Le rendement <strong>implicite</strong> contenu dans le prix actuel.</li>
+                            <li>👉 <strong>Déduit</strong> du prix observé.</li>
+                            <li>👉 Basé sur dividendes + croissance.</li>
+                        </ul>
+                        <strong style="color: #1B5E20; display: block; margin-bottom: 0.5rem;">Il dépend de :</strong>
+                        <ul style="color: #444; margin-bottom: 1rem; padding-left: 1.5rem; line-height: 1.6;">
+                            <li>Prix actuel <strong>P<sub>0</sub></strong></li>
+                            <li><strong>Dividende</strong></li>
+                            <li>Hypothèse de <strong>croissance g</strong></li>
+                        </ul>
+                        <div style="background-color: rgba(255,255,255,0.8); padding: 0.5rem 1rem; border-radius: 4px; color: #2E7D32; font-weight: bold; text-align: center;">
+                            Gordon = modèle basé sur cash flows
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- 1. UNDERSTANDING STOCK RETURNS -->
@@ -129,7 +165,7 @@
                         <span>📊</span> 1. UNDERSTANDING STOCK RETURNS
                     </h2>
                     <p style="color: #444; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.6;">
-                        <strong>Concept:</strong> CAPM works heavily with Returns, not raw Prices. It measures how much the price dances over time.
+                        <strong>Concept:</strong> CAPM works with returns rather than raw prices. It measures how sensitive a stock’s returns are to movements in the overall market.
                     </p>
                     
                     <strong style="color: #333; display: block; margin-bottom: 0.5rem;">Mathematical Formula:</strong>
@@ -349,10 +385,27 @@
                         <div class="code-block dark-mode" style="padding: 1.5rem; margin-bottom: 1rem;">
                             <code>=FREQUENCY(<span class="param">data_range</span> ; <span class="param">bins_range</span>)</code>
                         </div>
-                        <ul style="color: #555; line-height: 1.8; list-style-type: square; margin-bottom: 1rem;">
-                            <li><strong style="color: #006064;">data_range:</strong> The observed values (returns).</li>
-                            <li><strong style="color: #006064;">bins_range:</strong> The <em>upper</em> boundaries of your categories.</li>
-                        </ul>
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left; box-shadow: 0 2px 8px rgba(0,0,0,0.05); background-color: white;">
+                            <thead>
+                                <tr style="background-color: #00ACC1; color: white;">
+                                    <th style="padding: 10px; border: 1px solid #00838F; width: 30%;">Argument</th>
+                                    <th style="padding: 10px; border: 1px solid #00838F; width: 40%;">Description</th>
+                                    <th style="padding: 10px; border: 1px solid #00838F; width: 30%;">Example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #E0F7FA;">
+                                    <td style="padding: 10px; border: 1px solid #B2EBF2;"><strong style="color: #006064;">data_range</strong></td>
+                                    <td style="padding: 10px; border: 1px solid #B2EBF2; color: #555;">The observed values (returns)</td>
+                                    <td style="padding: 10px; border: 1px solid #B2EBF2; color: #999;"><em>(e.g., C6:C120)</em></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid #B2EBF2;"><strong style="color: #006064;">bins_range</strong></td>
+                                    <td style="padding: 10px; border: 1px solid #B2EBF2; color: #555;">The <em>upper</em> boundaries of categories</td>
+                                    <td style="padding: 10px; border: 1px solid #B2EBF2; color: #999;"><em>(e.g., F6:F15)</em></td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <p style="background-color: #E0F7FA; padding: 1rem; border-left: 4px solid #00ACC1; color: #006064; margin-bottom: 0;">
                             <strong>Bin Logic:</strong> Excel counts values strictly based on these upper limits, creating intervals like <code>(bin<sub>1</sub> , bin<sub>2</sub>]</code>.
                         </p>
@@ -361,18 +414,27 @@
                     <div style="background-color: #FAFAFA; border: 1px solid #EAEAEA; padding: 1.5rem; border-radius: 6px;">
                         <strong style="color: #00838F; font-size: 1.15rem; display: block; margin-bottom: 1rem;">Verification &amp; Relative Frequency</strong>
                         
-                        <strong style="color: #333;">1. Total Check (Completeness)</strong>
-                        <div class="code-block dark-mode" style="padding: 1rem; margin-top: 0.5rem; margin-bottom: 1.5rem;">
-                            <code>=SUM(<span class="param">frequency_range</span>)</code> <span class="code-comment">// Must equal total observations</span>
-                        </div>
-
-                        <strong style="color: #333;">2. Relative Frequency (Percentage)</strong>
-                        <div class="code-block dark-mode" style="padding: 1rem; margin-top: 0.5rem; margin-bottom: 1rem;">
-                            <code>=<span class="param">Frequency_Cell</span> / <span class="param">$Total_Cell$</span></code> <span class="code-comment">// Notice the Absolute Reference ($)</span>
-                        </div>
-                        <p style="color: #555; margin: 0; font-size: 0.95rem;">
-                            <strong>Usage:</strong> This converts raw counts into probabilities, preparing the data perfectly for a Histogram.
-                        </p>
+                        <table style="width: 100%; border-collapse: collapse; text-align: left; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                            <thead>
+                                <tr style="background-color: #333; color: white;">
+                                    <th style="padding: 12px; border: 1px solid #444; width: 30%;">Step</th>
+                                    <th style="padding: 12px; border: 1px solid #444; width: 40%;">Excel Formula</th>
+                                    <th style="padding: 12px; border: 1px solid #444; width: 30%;">Important Note</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 12px; border: 1px solid #DDD; background-color: white; color: #333; font-weight: bold;">1. Total Check<br><span style="font-weight: normal; font-size: 0.9rem; color: #777;">(Completeness)</span></td>
+                                    <td style="padding: 12px; border: 1px solid #DDD; background-color: #1E1E1E; color: #64FFDA; font-family: monospace;">=SUM(frequency_range)</td>
+                                    <td style="padding: 12px; border: 1px solid #DDD; background-color: white; color: #555; font-size: 0.95rem;">// Must equal total observations</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border: 1px solid #DDD; background-color: #F9F9F9; color: #333; font-weight: bold;">2. Relative Frequency<br><span style="font-weight: normal; font-size: 0.9rem; color: #777;">(Percentage)</span></td>
+                                    <td style="padding: 12px; border: 1px solid #DDD; background-color: #1E1E1E; color: #64FFDA; font-family: monospace;">=Frequency_Cell / $Total_Cell$</td>
+                                    <td style="padding: 12px; border: 1px solid #DDD; background-color: #F9F9F9; color: #D32F2F; font-weight: bold; font-size: 0.95rem;">// Notice the Absolute Reference ($)</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </section>
 
