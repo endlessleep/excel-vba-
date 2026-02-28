@@ -49,12 +49,6 @@
             color: #444;
         }
     </style>
-
-    <style>
-        body, .app-wrapper, .content-scroll {
-            background-color: #E8F5E9 !important;
-        }
-    </style>
 </head>
 
 <body>
@@ -104,52 +98,62 @@
             </header>
 
             <div class="content-scroll">
-                
+
                 <!-- INTRODUCTION -->
-                <div style="background-color: #E8F5E9; border-left: 6px solid #2E7D32; padding: 1.5rem; border-radius: 8px; margin-bottom: 2.5rem; box-shadow: 0 4px 15px rgba(46, 125, 50, 0.1);">
-                    <h3 style="color: #2E7D32; font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 1px solid #C8E6D6; padding-bottom: 0.5rem;">
+                <div
+                    style="background-color: #E8F5E9; border-left: 6px solid #2E7D32; padding: 1.5rem; border-radius: 8px; margin-bottom: 2.5rem; box-shadow: 0 4px 15px rgba(46, 125, 50, 0.1);">
+                    <h3
+                        style="color: #2E7D32; font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 1px solid #C8E6D6; padding-bottom: 0.5rem;">
                         🏢 What is a share (stock)?
                     </h3>
                     <p style="color: #444; font-size: 1.05rem; margin-bottom: 1rem; line-height: 1.6;">
                         When you buy a share, you buy:
                     </p>
-                    <ul style="color: #444; font-size: 1.05rem; margin-left: 1.5rem; margin-bottom: 1.5rem; line-height: 1.6;">
+                    <ul
+                        style="color: #444; font-size: 1.05rem; margin-left: 1.5rem; margin-bottom: 1.5rem; line-height: 1.6;">
                         <li><strong>The right to receive future dividends</strong></li>
                         <li><strong>A claim on future profits</strong></li>
                     </ul>
                     <p style="color: #444; font-size: 1.05rem; margin-bottom: 1rem; line-height: 1.6;">
                         So the value of a share comes from: <strong>The future cash flows it will generate.</strong>
                     </p>
-                    <p style="color: #444; font-size: 1.1rem; font-weight: 500; font-style: italic; background-color: #FFFFFF; padding: 0.8rem; border-radius: 4px; border-left: 3px solid #2E7D32; margin: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <p
+                        style="color: #444; font-size: 1.1rem; font-weight: 500; font-style: italic; background-color: #FFFFFF; padding: 0.8rem; border-radius: 4px; border-left: 3px solid #2E7D32; margin: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
                         In dividend models, we assume:<br>
-                        <span style="color: #2E7D32; font-weight: bold; display: block; margin-top: 0.5rem; font-size: 1.2rem;">Share value = Present value of all future dividends.</span>
+                        <span
+                            style="color: #2E7D32; font-weight: bold; display: block; margin-top: 0.5rem; font-size: 1.2rem;">Share
+                            value = Present value of all future dividends.</span>
                     </p>
                 </div>
 
                 <!-- SECTION 1: FINITE HORIZON -->
                 <section class="content-card">
                     <h2 class="section-title">1️⃣ FINITE HORIZON (NPV METHOD)</h2>
-                    
+
                     <div class="method-column">
                         <p style="margin-bottom: 1rem; color: #444; font-size: 1.05rem;">
                             Use this when you have a list of dividends for a few years.
                         </p>
 
-                        <strong style="color: #333; display: block; margin-top: 1rem;">The Mathematical Formula :</strong>
-                        <div class="math-block" style="font-size: 1.1rem; padding: 1rem; border-color: rgba(33,115,70,0.3);">
+                        <strong style="color: #333; display: block; margin-top: 1rem;">The Mathematical Formula
+                            :</strong>
+                        <div class="math-block"
+                            style="font-size: 1.1rem; padding: 1rem; border-color: rgba(33,115,70,0.3);">
                             <span style="font-size: 1.3rem;">Price = &sum; [ D<sub>t</sub> / (1+r)&#7491; ]</span>
                         </div>
 
-                        <strong style="color: #333; display: block; margin-top: 1.5rem;">The Excel Implementation :</strong>
+                        <strong style="color: #333; display: block; margin-top: 1.5rem;">The Excel Implementation
+                            :</strong>
                         <div class="code-block dark-mode" style="margin-bottom: 1.5rem;">
                             <div class="code-comment">// 1. General Structure</div>
                             <code><span class="excel-func">=NPV</span>(<span class="param">rate</span> ; <span class="param">value1</span>, <span class="param">[value2]</span>, ...)</code>
-                            
+
                             <div class="code-comment" style="margin-top: 1rem;">// 2. Example (Dividends Range)</div>
                             <code><span class="excel-func">=NPV</span>(<span class="param">r</span> ; <span class="param">range_of_dividends</span>)</code>
                         </div>
 
-                        <div style="background-color: #FFF3E0; border-left: 4px solid #FF9800; padding: 1rem; border-radius: 4px;">
+                        <div
+                            style="background-color: #FFF3E0; border-left: 4px solid #FF9800; padding: 1rem; border-radius: 4px;">
                             <strong style="color: #E65100;">🚨 ATTENTION</strong><br>
                             <span style="color: #555;">NPV starts at Year 1. Never put Year 0 inside!</span>
                         </div>
@@ -158,37 +162,49 @@
 
                 <!-- SECTION 2: INFINITE HORIZON -->
                 <section class="content-card" style="border-top: 4px solid var(--clr-excel-green);">
-                    <h2 class="section-title" style="color: var(--clr-excel-green);">2️⃣ INFINITE HORIZON (GORDON GROWTH MODEL)</h2>
-                    
+                    <h2 class="section-title" style="color: var(--clr-excel-green);">2️⃣ INFINITE HORIZON (GORDON GROWTH
+                        MODEL)</h2>
+
                     <div class="method-column">
                         <p style="margin-bottom: 1rem; color: #444; font-size: 1.05rem;">
                             Use this when dividends grow forever at a constant rate g.
                         </p>
 
                         <strong style="color: #333; display: block; margin-top: 1rem;">Simple Formula :</strong>
-                        <div class="math-block" style="font-size: 1.4rem; font-weight: bold; background-color: #E8F5E9; border-color: var(--clr-excel-green); color: var(--clr-excel-green);">
+                        <div class="math-block"
+                            style="font-size: 1.4rem; font-weight: bold; background-color: #E8F5E9; border-color: var(--clr-excel-green); color: var(--clr-excel-green);">
                             Price = D&sub1; / (r - g)
                         </div>
 
-                        
-                        <div style="background-color: #FFF; border: 1px solid #EAEAEA; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
+
+                        <div
+                            style="background-color: #FFF; border: 1px solid #EAEAEA; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
                             <h4 style="color: #333; margin-bottom: 1rem; font-size: 1.15rem;">The Rules:</h4>
                             <ul style="color: #555; line-height: 1.7; margin: 0; padding-left: 1.5rem;">
                                 <li><strong>r</strong> = Required return (Le rendement voulu par l'investisseur).</li>
                                 <li><strong>g</strong> = Growth rate (La vitesse de croissance du dividende).</li>
                             </ul>
                         </div>
-<div style="background-color: #FFEBEE; border: 2px solid #D32F2F; padding: 1rem; border-radius: 6px; margin-top: 1.5rem; text-align: center;">
-                            <strong style="color: #D32F2F; font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">🚨 ABSOLUTE SURVIVAL CONDITION 🚨</strong>
-                            <span style="color: #B71C1C; font-size: 1.1rem; font-weight: bold;">Condition: r MUST be greater than g (r > g)</span>
+                        <div
+                            style="background-color: #FFEBEE; border: 2px solid #D32F2F; padding: 1rem; border-radius: 6px; margin-top: 1.5rem; text-align: center;">
+                            <strong style="color: #D32F2F; font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">🚨
+                                ABSOLUTE SURVIVAL CONDITION 🚨</strong>
+                            <span style="color: #B71C1C; font-size: 1.1rem; font-weight: bold;">Condition: r MUST be
+                                greater than g (r > g)</span>
                         </div>
-                        
+
                         <!-- WHY (R - G) INTUITION -->
-                        <div style="background-color: #FAFAFA; border: 1px solid #E0E0E0; border-radius: 8px; padding: 1.5rem; margin-top: 2rem; border-left: 5px solid #0D47A1;">
-                            <h4 style="color: #0D47A1; margin-bottom: 1rem; border-bottom: 1px solid #E3F2FD; padding-bottom: 0.5rem; font-size: 1.2rem;">🧠 WHY (r - g) ? (INTUITION)</h4>
-                            <ul style="color: #444; line-height: 1.8; margin: 0; padding-left: 1.5rem; font-size: 1.05rem;">
-                                <li><strong style="color: #2E7D32;">g pushes the price UP</strong> (More growth = More value).</li>
-                                <li><strong style="color: #D32F2F;">r pushes the price DOWN</strong> (More risk/discount = Less value).</li>
+                        <div
+                            style="background-color: #FAFAFA; border: 1px solid #E0E0E0; border-radius: 8px; padding: 1.5rem; margin-top: 2rem; border-left: 5px solid #0D47A1;">
+                            <h4
+                                style="color: #0D47A1; margin-bottom: 1rem; border-bottom: 1px solid #E3F2FD; padding-bottom: 0.5rem; font-size: 1.2rem;">
+                                🧠 WHY (r - g) ? (INTUITION)</h4>
+                            <ul
+                                style="color: #444; line-height: 1.8; margin: 0; padding-left: 1.5rem; font-size: 1.05rem;">
+                                <li><strong style="color: #2E7D32;">g pushes the price UP</strong> (More growth = More
+                                    value).</li>
+                                <li><strong style="color: #D32F2F;">r pushes the price DOWN</strong> (More risk/discount
+                                    = Less value).</li>
                                 <li><strong style="color: #0D47A1;">The difference (r - g) is the balance.</strong></li>
                             </ul>
                         </div>
@@ -198,31 +214,41 @@
                 <!-- SECTION 3: DEEP DIVE -->
                 <section class="content-card">
                     <h2 class="section-title">3️⃣ THE EPIC BATTLE: r vs g</h2>
-                    
+
                     <p style="color: #555; font-size: 1.05rem; margin-bottom: 1.5rem; text-align: center;">
                         Le prix de l'action est le résultat direct du combat entre ces deux forces macro-économiques.
                     </p>
 
                     <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
                         <!-- 'r' Column -->
-                        <div style="flex: 1; min-width: 250px; background-color: #FFFDE7; padding: 1.5rem; border-radius: 8px; border-top: 4px solid #FBC02D;">
-                            <h3 style="color: #F57F17; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem;">
+                        <div
+                            style="flex: 1; min-width: 250px; background-color: #FFFDE7; padding: 1.5rem; border-radius: 8px; border-top: 4px solid #FBC02D;">
+                            <h3
+                                style="color: #F57F17; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem;">
                                 <span>📉</span> La Force Qui Dégonfle (r)
                             </h3>
-                            <strong style="color: #111; display: block; margin-bottom: 0.5rem;">Le Cost of Equity</strong>
+                            <strong style="color: #111; display: block; margin-bottom: 0.5rem;">Le Cost of
+                                Equity</strong>
                             <p style="color: #555; line-height: 1.6; margin-bottom: 0;">
-                                C'est la force de gravité. C'est le rendement <strong>exigé</strong> par les investisseurs (Risk-free rate + Risk premium). Plus r est grand (l'investisseur a peur ou l'inflation est forte), plus il divise les dividendes violemment, <strong>faisant baisser le prix de l'action</strong>.
+                                C'est la force de gravité. C'est le rendement <strong>exigé</strong> par les
+                                investisseurs (Risk-free rate + Risk premium). Plus r est grand (l'investisseur a peur
+                                ou l'inflation est forte), plus il divise les dividendes violemment, <strong>faisant
+                                    baisser le prix de l'action</strong>.
                             </p>
                         </div>
 
                         <!-- 'g' Column -->
-                        <div style="flex: 1; min-width: 250px; background-color: #E8F5E9; padding: 1.5rem; border-radius: 8px; border-top: 4px solid #4CAF50;">
-                            <h3 style="color: #2E7D32; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem;">
+                        <div
+                            style="flex: 1; min-width: 250px; background-color: #E8F5E9; padding: 1.5rem; border-radius: 8px; border-top: 4px solid #4CAF50;">
+                            <h3
+                                style="color: #2E7D32; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem;">
                                 <span>📈</span> La Force Qui Booste (g)
                             </h3>
                             <strong style="color: #111; display: block; margin-bottom: 0.5rem;">Le Growth Rate</strong>
                             <p style="color: #555; line-height: 1.6; margin-bottom: 0;">
-                                C'est la force de propulsion. C'est la vitesse de croissance interne 💸 des dividendes. Plus g est grand, plus les profits futurs s'envolent, <strong>faisant monter le prix de l'action</strong>.
+                                C'est la force de propulsion. C'est la vitesse de croissance interne 💸 des dividendes.
+                                Plus g est grand, plus les profits futurs s'envolent, <strong>faisant monter le prix de
+                                    l'action</strong>.
                             </p>
                         </div>
                     </div>
@@ -231,22 +257,28 @@
                 <!-- SECTION 4: EXCEL SAFETY -->
                 <section class="content-card" style="border-top: 4px solid #FBC02D;">
                     <h2 class="section-title" style="color: #F57F17;">4️⃣ EXCEL SAFETY: THE 'IF' STRUCTURE</h2>
-                    
-                    <div style="background-color: #FFFDE7; border: 1px solid #FBC02D; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(251, 192, 45, 0.1);">
+
+                    <div
+                        style="background-color: #FFFDE7; border: 1px solid #FBC02D; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(251, 192, 45, 0.1);">
                         <h3 style="color: #F57F17; margin-bottom: 1rem; font-size: 1.25rem;">General IF structure :</h3>
-                        <div class="code-block dark-mode" style="margin-bottom: 2rem; padding: 1.5rem; border-color: #F57F17;">
+                        <div class="code-block dark-mode"
+                            style="margin-bottom: 2rem; padding: 1.5rem; border-color: #F57F17;">
                             <code><span class="excel-func">=IF</span>( <span class="param">condition</span> ; <span style="color: #C5E1A5;">value_if_true</span> ; <span style="color: #EF9A9A;">value_if_false</span> )</code>
                         </div>
 
-                        <h3 style="color: #F57F17; margin-bottom: 1rem; font-size: 1.25rem;">Applied to Gordon Model :</h3>
-                        <div class="code-block dark-mode" style="margin-bottom: 1.5rem; padding: 1.5rem; border-color: #F57F17;">
+                        <h3 style="color: #F57F17; margin-bottom: 1rem; font-size: 1.25rem;">Applied to Gordon Model :
+                        </h3>
+                        <div class="code-block dark-mode"
+                            style="margin-bottom: 1.5rem; padding: 1.5rem; border-color: #F57F17;">
                             <code><span class="excel-func">=IF</span>( <span class="param">r</span> <= <span class="param">g</span> ; <span style="color: #FFA726;">"Formula doesn't work"</span> ; <span class="param">D1</span> / (<span class="param">r</span> - <span class="param">g</span>) )</code>
                         </div>
-                        
-                        <div style="background-color: white; border-left: 4px solid #F57F17; padding: 1rem; border-radius: 4px; margin-top: 1.5rem;">
+
+                        <div
+                            style="background-color: white; border-left: 4px solid #F57F17; padding: 1rem; border-radius: 4px; margin-top: 1.5rem;">
                             <strong style="color: #E65100;">Explication :</strong>
                             <p style="color: #555; margin: 0.5rem 0 0 0; line-height: 1.6;">
-                                Si le taux de croissance (g) est plus haut que le taux voulu (r), le modèle casse. Le 'IF' empêche Excel d'afficher une erreur moche ou un prix négatif.
+                                Si le taux de croissance (g) est plus haut que le taux voulu (r), le modèle casse. Le
+                                'IF' empêche Excel d'afficher une erreur moche ou un prix négatif.
                             </p>
                         </div>
                     </div>
@@ -267,7 +299,9 @@
                     </p>
                     <p style="color: #111; line-height: 1.7; font-size: 1.05rem;">
                         If you have D0, calculate D1 first:<br>
-                        <strong style="display: block; margin-top: 0.5rem; background: rgba(255,255,255,0.4); padding: 0.5rem; border-radius: 4px;">D₁ = D₀ &times; (1 + g)</strong>
+                        <strong
+                            style="display: block; margin-top: 0.5rem; background: rgba(255,255,255,0.4); padding: 0.5rem; border-radius: 4px;">D₁
+                            = D₀ &times; (1 + g)</strong>
                     </p>
                 </div>
 
