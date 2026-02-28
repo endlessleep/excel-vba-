@@ -62,12 +62,12 @@
 
             <nav class="sidebar-nav">
                 <!-- Accordion Menu -->
-                <div class="accordion-item active">
+                <div class="accordion-item">
                     <button class="accordion-header" onclick="toggleAccordion(this)">
                         <span class="folder-icon">📂</span> LECTURE 1: EXCEL
                         <span class="chevron">▼</span>
                     </button>
-                    <div class="accordion-content show">
+                    <div class="accordion-content">
                         <a href="index.html" class="nav-link">Ex 1: NPV & IRR</a>
                         <a href="ex2.html" class="nav-link">Ex 2: Multiple IRRs</a>
                         <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
@@ -79,23 +79,14 @@
 
                 <div class="accordion-item">
                     <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="folder-icon">📁</span> LECTURE 2: EXCEL
+                        <span class="folder-icon">📂</span> LECTURE 2: EXCEL
                         <span class="chevron">▼</span>
                     </button>
-                    <div class="accordion-content">
-                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 1: à suivre </a>
-                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: à suivre</a>
+                    <div class="accordion-content show">
+                        <a href="lecture2-ex1.html" class="nav-link active">Ex 1: Gordon Model</a>
                     </div>
                 </div>
-        
-        <div class="accordion" onclick="toggleAccordion('lecture2-content')">
-            <h2>LECTURE 2: EQUITY VALUATION</h2>
-            <span class="arrow">▼</span>
-        </div>
-        <div id="lecture2-content" class="accordion-content show">
-            <a href="lecture2-ex1.html" class="nav-link active">Ex 1: Gordon Growth Model</a>
-        </div>
-    </nav>
+            </nav>
         </aside>
         <!-- ================= END SIDEBAR ================= -->
 
