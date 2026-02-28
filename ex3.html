@@ -113,12 +113,12 @@
                 <!-- SECTION 1 -->
                 <section class="content-card">
                     <h2 class="section-title">SECTION 1: 1 INPUT &rarr; 2 OUTPUTS (SIMPLE)</h2>
-                    <p style="margin-bottom: 1.5rem; font-size: 1.05rem;"><strong>Objectif :</strong> Tester 1 variable
-                        (ex: Growth Rate) pour voir l'impact sur 2 résultats (NPV et IRR).</p>
+                    <p style="margin-bottom: 1.5rem; font-size: 1.05rem;"><strong>Objective:</strong> Test 1 variable
+                        (e.g., Growth Rate) to observe its impact on 2 results (NPV and IRR).</p>
 
                     <div class="methods-grid" style="grid-template-columns: 1fr;">
                         <div class="method-column">
-                            <h3 class="method-title">Tuto Visuel</h3>
+                            <h3 class="method-title">Visual Tutorial</h3>
                             <div class="table-wrapper"
                                 style="margin-top: 1rem; border: 2px solid var(--clr-excel-green);">
                                 <table class="premium-table data-table-simple">
@@ -132,31 +132,32 @@
                                     <tbody>
                                         <tr>
                                             <td style="font-weight: 700; color: var(--clr-excel-green);">2%</td>
-                                            <td style="color:#aaa;"><em>result</em></td>
-                                            <td style="color:#aaa;"><em>result</em></td>
+                                            <td style="color:#888;"><em>result</em></td>
+                                            <td style="color:#888;"><em>result</em></td>
                                         </tr>
                                         <tr>
                                             <td style="font-weight: 700; color: var(--clr-excel-green);">4%</td>
-                                            <td style="color:#aaa;"><em>result</em></td>
-                                            <td style="color:#aaa;"><em>result</em></td>
+                                            <td style="color:#888;"><em>result</em></td>
+                                            <td style="color:#888;"><em>result</em></td>
                                         </tr>
                                         <tr>
                                             <td style="font-weight: 700; color: var(--clr-excel-green);">6%</td>
-                                            <td style="color:#aaa;"><em>result</em></td>
-                                            <td style="color:#aaa;"><em>result</em></td>
+                                            <td style="color:#888;"><em>result</em></td>
+                                            <td style="color:#888;"><em>result</em></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="code-comment mt-4" style="font-size: 0.95rem;">
-                                <strong>CRUCIAL :</strong> Les cellules juste au-dessus des futurs résultats doivent
-                                contenir la référence exacte vers le calcul.
+                                <strong>CRUCIAL:</strong> The cells immediately above the empty results must contain the
+                                exact reference to the calculation (e.g. <code>=B10</code>).
                             </div>
 
                             <div class="code-block dark-mode" style="margin-top: 1rem;">
-                                <div class="code-comment">// Action :</div>
-                                <p style="color: #D4D4D4;">Select Table &rarr; Data Table</p>
-                                <code>Column input cell = <span class="param">cellule du Growth Rate</span></code>
+                                <div class="code-comment">// Action:</div>
+                                <p style="color: #D4D4D4; margin-bottom: 0.5rem;">Select Table &rarr; Data &rarr;
+                                    What-If Analysis &rarr; Data Table</p>
+                                <code>Column input cell = <span class="param">Growth Rate Cell Reference</span></code>
                             </div>
                         </div>
                     </div>
@@ -165,73 +166,90 @@
                 <!-- SECTION 2 -->
                 <section class="content-card">
                     <h2 class="section-title">SECTION 2: 2 INPUTS &rarr; 1 OUTPUT (THE MATRIX)</h2>
-                    <p style="margin-bottom: 1.5rem; font-size: 1.05rem;"><strong>Objectif :</strong> Faire varier le
-                        Discount Rate ET le Growth Rate en même temps pour un seul output (NPV).</p>
+                    <p style="margin-bottom: 1.5rem; font-size: 1.05rem;"><strong>Objective:</strong> Vary the Discount
+                        Rate AND the Growth Rate simultaneously for a single output (e.g., NPV).</p>
 
                     <div class="methods-grid" style="grid-template-columns: 1fr;">
                         <div class="method-column">
-                            <h3 class="method-title">LA MATRICE VISUELLE (DÉTAILS DE FOU)</h3>
+                            <h3 class="method-title">THE VISUAL MATRIX</h3>
                             <div class="table-wrapper"
-                                style="margin-top: 1rem; box-shadow: 0 4px 20px rgba(33, 115, 70, 0.15);">
-                                <table class="matrix-table" style="width: 100%; border-collapse: collapse;">
+                                style="margin-top: 1rem; border: 1px solid #EAEAEA; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);">
+                                <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
                                     <tr>
-                                        <td class="matrix-corner">
+                                        <td
+                                            style="background-color: var(--clr-code-bg); color: var(--clr-param); font-family: 'Consolas', monospace; font-weight: 700; padding: 1.5rem 1rem; border-right: 2px solid white; border-bottom: 2px solid white; text-align: center;">
                                             =NPV Reference<br>
-                                            <span style="font-size: 0.75rem; color: #888; font-weight: normal;">(L'angle
-                                                où tout se joue)</span>
+                                            <span style="font-size: 0.75rem; color: #888; font-weight: normal;">(The
+                                                crucial corner)</span>
                                         </td>
-                                        <td colspan="3" class="matrix-top-row">DISCOUNT RATES</td>
+                                        <td colspan="3"
+                                            style="background-color: var(--clr-excel-green); color: white; font-weight: 700; padding: 1rem; text-align: center; letter-spacing: 1px;">
+                                            DISCOUNT RATES
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td rowspan="4" class="matrix-side-col"
-                                            style="writing-mode: vertical-rl; transform: rotate(180deg); text-align: center;">
+                                        <td rowspan="4"
+                                            style="background-color: #F8F9FA; color: var(--clr-excel-green); font-weight: 700; border-right: 2px solid #EAEAEA; writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; padding: 1rem; letter-spacing: 1px;">
                                             GROWTH RATES</td>
-                                        <td style="font-weight: 700; background-color: #e8f5e9;">8%</td>
-                                        <td style="font-weight: 700; background-color: #e8f5e9;">10%</td>
-                                        <td style="font-weight: 700; background-color: #e8f5e9;">12%</td>
+                                        <td
+                                            style="font-weight: 700; background-color: #e8f5e9; padding: 0.85rem; text-align: center; border-bottom: 1px solid #d0e8d3; border-right: 1px solid #d0e8d3;">
+                                            8%</td>
+                                        <td
+                                            style="font-weight: 700; background-color: #e8f5e9; padding: 0.85rem; text-align: center; border-bottom: 1px solid #d0e8d3; border-right: 1px solid #d0e8d3;">
+                                            10%</td>
+                                        <td
+                                            style="font-weight: 700; background-color: #e8f5e9; padding: 0.85rem; text-align: center; border-bottom: 1px solid #d0e8d3;">
+                                            12%</td>
                                     </tr>
                                     <tr>
-                                        <td style="font-weight: 700; background-color: #f1f8e9;">1%</td>
-                                        <td class="matrix-body-cell">NPV</td>
-                                        <td class="matrix-body-cell">NPV</td>
+                                        <td
+                                            style="font-weight: 700; background-color: #f1f8e9; color: var(--clr-excel-green); padding: 0.85rem; text-align: center; border-bottom: 1px solid #EAEAEA; border-right: 1px solid #EAEAEA;">
+                                            1%</td>
+                                        <td
+                                            style="background-color: white; color: #888; font-style: italic; text-align: center; border-bottom: 1px solid #EAEAEA; border-right: 1px solid #EAEAEA;">
+                                            NPV</td>
+                                        <td
+                                            style="background-color: white; color: #888; font-style: italic; text-align: center; border-bottom: 1px solid #EAEAEA;">
+                                            NPV</td>
                                     </tr>
                                     <tr>
-                                        <td style="font-weight: 700; background-color: #f1f8e9;">2%</td>
-                                        <td class="matrix-body-cell">NPV</td>
-                                        <td class="matrix-body-cell">NPV</td>
+                                        <td
+                                            style="font-weight: 700; background-color: #f1f8e9; color: var(--clr-excel-green); padding: 0.85rem; text-align: center; border-bottom: 1px solid #EAEAEA; border-right: 1px solid #EAEAEA;">
+                                            2%</td>
+                                        <td
+                                            style="background-color: white; color: #888; font-style: italic; text-align: center; border-bottom: 1px solid #EAEAEA; border-right: 1px solid #EAEAEA;">
+                                            NPV</td>
+                                        <td
+                                            style="background-color: white; color: #888; font-style: italic; text-align: center; border-bottom: 1px solid #EAEAEA;">
+                                            NPV</td>
                                     </tr>
                                     <tr>
-                                        <td style="font-weight: 700; background-color: #f1f8e9;">3%</td>
-                                        <td class="matrix-body-cell">NPV</td>
-                                        <td class="matrix-body-cell">NPV</td>
+                                        <td
+                                            style="font-weight: 700; background-color: #f1f8e9; color: var(--clr-excel-green); padding: 0.85rem; text-align: center; border-right: 1px solid #EAEAEA;">
+                                            3%</td>
+                                        <td
+                                            style="background-color: white; color: #888; font-style: italic; text-align: center; border-right: 1px solid #EAEAEA;">
+                                            NPV</td>
+                                        <td
+                                            style="background-color: white; color: #888; font-style: italic; text-align: center;">
+                                            NPV</td>
                                     </tr>
                                 </table>
                             </div>
 
                             <div class="code-block dark-mode mt-4">
-                                <div class="code-comment">// Tuto Pas-à-Pas :</div>
+                                <div class="code-comment">// Step-by-Step Tutorial:</div>
                                 <ul style="color: #D4D4D4; margin-left: 1.5rem; margin-bottom: 1rem; line-height: 1.8;">
-                                    <li>Sélectionne <strong>tout le rectangle</strong> (incluant l'angle
-                                        <code>=NPV Reference</code>).</li>
+                                    <li>Select the <strong>entire rectangle</strong> (including the top-left corner
+                                        <code>=NPV Reference</code>).
+                                    </li>
                                     <li>Go to: Data &rarr; What-If Analysis &rarr; Data Table.</li>
                                 </ul>
-                                <code>Row input cell = <span class="param">cellule du Discount Rate</span></code><br>
+                                <code>Row input cell = <span class="param">Discount Rate Reference</span></code><br>
                                 <code
-                                    style="display: inline-block; margin-top: 0.5rem;">Column input cell = <span class="param">cellule du Growth Rate</span></code>
+                                    style="display: inline-block; margin-top: 0.5rem;">Column input cell = <span class="param">Growth Rate Reference</span></code>
                             </div>
                         </div>
-                    </div>
-
-                    <button class="btn-note" onclick="toggleNote('note-recalc')">
-                        <span class="note-icon">💡</span> ASTUCE PRO
-                    </button>
-
-                    <div id="note-recalc" class="post-it-note" style="background-color: #B2D3C2;">
-                        <p style="font-weight: 600; color: #111;">Si les chiffres ne changent pas, appuie sur <span
-                                class="fluo accept" style="background-color: #ffffff; color: #217346;">F9</span>.</p>
-                        <p class="mt-2" style="color: #222;">Excel bloque parfois le calcul automatique des Data Tables
-                            pour économiser de la batterie et de la RAM ! Appuyer sur F9 force le recalcul de la
-                            feuille.</p>
                     </div>
                 </section>
 
