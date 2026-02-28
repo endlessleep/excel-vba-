@@ -94,33 +94,39 @@
         <!-- ================= MAIN CONTENT ================= -->
         <main class="main-content">
             
+            
             <header class="page-header">
                 <h1>EX 2: TWO-STAGE GORDON MODEL</h1>
             </header>
 
             <div class="content-scroll">
 
-                <!-- BASIC PRINCIPLE & CORE INTUITION (Points 1 & 8) -->
+                <!-- CONTEXT & BASIC PRINCIPLE -->
                 <div style="background-color: white; border-left: 6px solid #0D47A1; padding: 1.5rem; border-radius: 8px; margin-bottom: 2.5rem; box-shadow: 0 4px 15px rgba(13, 71, 161, 0.1);">
                     <h3 style="color: #0D47A1; font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 1px solid #E3F2FD; padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span>💡</span> The Core Principle of Share Valuation
+                        <span>💡</span> Why Two Stages?
                     </h3>
-                    <p style="color: #444; font-size: 1.1rem; margin-bottom: 1rem; line-height: 1.6;">
+                    <p style="color: #444; font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">
+                        Real companies (like Tech startups) grow very fast at the beginning <strong>(g&#8321;)</strong>, but they cannot grow faster than the economy forever. Eventually, they slow down to a stable, long-term rate <strong>(g&#8322;)</strong>. To value them, we must separate these two lives.
+                    </p>
+
+                    <h4 style="color: #1565C0; font-size: 1.1rem; margin-bottom: 0.5rem;">The Core Principle of Share Valuation</h4>
+                    <p style="color: #555; font-size: 1.05rem; margin-bottom: 1rem; line-height: 1.6;">
                         A share is worth the <strong>present value of all future dividends</strong>. Price today reflects future cash flows.
                     </p>
-                    <div class="math-block" style="border-color: #90CAF9; color: #1565C0; background-color: #F8BBD011;">
+                    <div class="math-block" style="border-color: #90CAF9; color: #1565C0; background-color: #F8BBD011; margin-bottom: 1rem;">
                         P&#8320; = &sum; [ D<sub>t</sub> / (1+r)&#7491; ]
                     </div>
-                    <p style="color: #555; font-size: 1.05rem; margin-top: 1rem; line-height: 1.6;">
-                        <strong>Important:</strong> Price is at <em>time 0</em>, but the first dividend is at <em>time 1</em>. You always discount future dividends back to today. Why? Because you buy today, but you receive the first cash flow next year.
+                    <p style="color: #555; font-size: 1.05rem; margin-top: 1rem; line-height: 1.6; background-color: #F5F5F5; padding: 1rem; border-radius: 6px;">
+                        <strong>Important:</strong> Price is at <em>time 0</em>, but the first dividend is at <em>time 1</em>. You always discount future dividends back to today.
                     </p>
                 </div>
 
-                <!-- SINGLE GROWTH (Point 2) -->
+                <!-- SINGLE GROWTH REVIEW -->
                 <section class="content-card" style="border-top: 4px solid #2E7D32;">
                     <h2 class="section-title" style="color: #2E7D32;">Single Growth Review (Gordon Model)</h2>
                     <p style="margin-bottom: 1rem; color: #444; font-size: 1.05rem;">
-                        If dividends grow forever at a constant rate <strong>g</strong>, the infinite sum compresses to:
+                        If dividends grow forever at a constant rate <strong>g</strong>, the model simplifies to:
                     </p>
                     <div class="math-block" style="font-size: 1.4rem; font-weight: bold; background-color: #E8F5E9; border-color: #81C784; color: #2E7D32;">
                         P&#8320; = D&#8321; / (r - g)
@@ -131,36 +137,34 @@
                             <li>Price is at <strong>time 0</strong></li>
                             <li>Dividend used is <strong>D&#8321;</strong> (the next dividend)</li>
                         </ul>
+                        <p style="margin-top: 0.5rem; color: #555; font-style: italic;">Why? Because you buy today, but the first cash flow is next year.</p>
                     </div>
                 </section>
 
-                <!-- THE CRITICAL TIME RULE (Points 3 & 10) -->
+                <!-- THE CRITICAL TIME RULE -->
                 <div style="background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); border-left: 6px solid #D32F2F; padding: 2rem; border-radius: 8px; margin-bottom: 3rem; box-shadow: 0 4px 15px rgba(211, 47, 47, 0.15);">
                     <h3 style="color: #B71C1C; font-size: 1.35rem; margin-bottom: 1rem; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 0.5rem;">
-                        <span>⏱️</span> The Critical Time Rule (The Golden Rule)
+                        <span>⏱️</span> The Critical Time Rule (This is the key)
                     </h3>
                     <p style="color: #333; font-size: 1.15rem; font-weight: 600; margin-bottom: 1rem;">
-                        The price at time <code style="background: rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 4px; color: #D32F2F;">t</code> depends on the dividend at time <code style="background: rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 4px; color: #D32F2F;">t+1</code>.
+                        General Gordon formula: The price at time <strong>t</strong> depends on the dividend at time <strong>t+1</strong>.
                     </p>
                     <div class="math-block" style="font-size: 1.3rem; border-color: #B71C1C; color: #B71C1C; background: rgba(255,255,255,0.6);">
                         P<sub>t</sub> = D<sub>t+1</sub> / (r - g)
                     </div>
                     <p style="color: #444; font-size: 1.15rem; margin-top: 1.5rem; line-height: 1.7; background-color: rgba(255,255,255,0.8); padding: 1rem; border-radius: 6px;">
                         The value of a stream of dividends is <strong>always placed ONE PERIOD BEFORE</strong> the first dividend.<br><br>
-                        If the first dividend is at time <strong>T</strong>, the value (Price) is at time <strong>T&minus;1</strong>. Always.
+                        If the first dividend is at time <strong>T</strong>, the value applies to time <strong>T&minus;1</strong>. Always.
                     </p>
                 </div>
 
-                <!-- TWO-STAGE MODEL STRUCTURE (Points 4, 5, 6, 7) -->
+                <!-- TWO-STAGE MODEL STRUCTURE -->
                 <h2 style="color: var(--clr-text-main); font-size: 1.8rem; margin: 4rem 0 2rem 0; text-align: center; border-bottom: 2px solid #EAEAEA; padding-bottom: 0.5rem;">
-                    THE TWO-STAGE MODEL
+                    THE TWO-STAGE MODEL STRUCTURE
                 </h2>
                 
                 <p style="color: #555; font-size: 1.1rem; text-align: center; margin-bottom: 2.5rem;">
-                    We split valuation into two distinct parts: <strong>Phase 1 (High growth)</strong> + <strong>Phase 2 (Stable growth)</strong>.<br>
-                    <span style="display: block; margin-top: 1rem; font-weight: bold; font-size: 1.2rem; background: #FAFAFA; padding: 1rem; border: 1px solid #EEE; border-radius: 6px;">
-                        Total Share Value = PV(Phase 1) + PV(Phase 2)
-                    </span>
+                    We split valuation into two periods: <strong>Phase 1 (High growth)</strong> + <strong>Phase 2 (Stable growth)</strong>.
                 </p>
 
                 <!-- PHASE 1 -->
@@ -169,7 +173,7 @@
                         <span>🚀</span> PHASE 1: Supernormal Growth (Finite)
                     </h3>
                     <p style="color: #444; font-size: 1.05rem; margin-bottom: 1rem; line-height: 1.6;">
-                        Dividends grow at <strong>g&#8321;</strong> for <strong>N</strong> years. We compute each dividend explicitly:
+                        Dividends grow at rate <strong>g&#8321;</strong> for <strong>N</strong> years. We compute each dividend explicitly:
                     </p>
                     <div style="background-color: #F8F9FA; padding: 1rem 1.5rem; border-radius: 6px; font-family: 'Consolas', monospace; color: #333; margin-bottom: 1.5rem; border-left: 4px solid #90CAF9;">
                         D&#8321;<br>
@@ -177,9 +181,13 @@
                         ...<br>
                         D<sub>N</sub>
                     </div>
-                    <p style="color: #555; margin-bottom: 0.5rem;">Discount each of them to today (Time 0):</p>
-                    <div class="math-block" style="border-color: #90CAF9; color: #1976D2; background-color: #E3F2FD;">
-                        PV<sub>phase1</sub> = &sum; [ D<sub>t</sub> / (1+r)&#7491; ]
+                    <p style="color: #555; margin-bottom: 0.5rem;">Value at time 0:</p>
+                    <div class="math-block" style="border-color: #90CAF9; color: #1976D2; background-color: #E3F2FD; margin-bottom: 1.5rem;">
+                        PV<sub>Phase1</sub> = &sum; [ D<sub>t</sub> / (1+r)&#7491; ]
+                    </div>
+                    <strong style="color: #333; display: block; margin-bottom: 0.5rem;">Excel Implementation:</strong>
+                    <div class="code-block dark-mode" style="padding: 1.5rem;">
+                        <code><span class="excel-func">=NPV</span>(<span class="param">rate</span> ; <span class="param">Range_of_Dividends_Year1_to_N</span>)</code>
                     </div>
                 </section>
 
@@ -192,7 +200,6 @@
                         Stable growth starts at year <strong>N+1</strong> forever at rate <strong>g&#8322;</strong>. We apply the model in 3 steps:
                     </p>
 
-                    <!-- Steps for Phase 2 -->
                     <div style="display: flex; flex-direction: column; gap: 1.5rem;">
                         <!-- Step 1 -->
                         <div style="border-left: 4px solid #4DB6AC; padding-left: 1.5rem;">
@@ -211,19 +218,27 @@
                             <div class="math-block" style="margin: 0.5rem 0; padding: 1rem; font-size: 1.2rem; border-color: rgba(0,0,0,0.1);">
                                 P<sub>N</sub> = D<sub>N+1</sub> / (r - g&#8322;)
                             </div>
-                            <span style="display: inline-block; background-color: #E0F2F1; color: #00695C; padding: 0.5rem 1rem; border-radius: 4px; font-weight: 500; font-size: 0.9rem;">
-                                🧠 WHY YEAR N? The value must be placed ONE YEAR BEFORE the first dividend.
+                            <span style="display: inline-block; background-color: #E0F2F1; color: #00695C; padding: 0.5rem 1rem; border-radius: 4px; font-weight: 500; font-size: 0.9rem; margin-bottom: 1rem;">
+                                🧠 WHY YEAR N? Because N is the exact "contact point" between the high-growth phase and stability.
                             </span>
+                            <strong style="color: #333; display: block; margin-bottom: 0.5rem;">Excel Implementation (Terminal Value P_N):</strong>
+                            <div class="code-block dark-mode" style="padding: 1.5rem;">
+                                <code>=(<span class="param">D_N</span> * (1 + <span class="param">g2</span>)) / (<span class="param">r</span> - <span class="param">g2</span>)</code>
+                            </div>
                         </div>
 
                         <!-- Step 3 -->
                         <div style="border-left: 4px solid #4DB6AC; padding-left: 1.5rem;">
                             <strong style="color: #00796B; display: block; margin-bottom: 0.5rem; font-size: 1.1rem;">Step 3 — Discount back to today</strong>
                             <p style="color: #555; font-size: 0.95rem; margin-bottom: 0.8rem;">
-                                The value P<sub>N</sub> is N years in the future. We must deflate it to get today's value:
+                                The value P<sub>N</sub> is N years in the future. To bring it back to today, we divide by (1+r)<sup>N</sup>:
                             </p>
                             <div class="math-block" style="margin: 0.5rem 0; padding: 1rem; font-size: 1.2rem; border-color: rgba(0,0,0,0.1);">
-                                PV<sub>phase2</sub> = P<sub>N</sub> / (1+r)&#7491;
+                                PV<sub>Phase2</sub> = P<sub>N</sub> / (1+r)<sup>N</sup>
+                            </div>
+                            <strong style="color: #333; display: block; margin-bottom: 0.5rem;">Excel Implementation (Final PV of Phase 2):</strong>
+                            <div class="code-block dark-mode" style="padding: 1.5rem;">
+                                <code>=<span class="param">P_N</span> / (1 + <span class="param">r</span>)^<span class="param">N</span></code>
                             </div>
                         </div>
                     </div>
@@ -232,39 +247,53 @@
                 <!-- FINAL SHARE VALUE -->
                 <div style="background-color: #212121; color: white; padding: 2rem; border-radius: 8px; text-align: center; margin: 3rem 0; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
                     <h3 style="color: #81C784; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem;">Final Share Value</h3>
-                    <div style="font-family: 'Consolas', monospace; font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">
-                        P&#8320; = PV<sub>phase1</sub> + PV<sub>phase2</sub>
+                    <div style="font-family: 'Consolas', monospace; font-size: 1.8rem; font-weight: bold; margin-bottom: 1.5rem;">
+                        P&#8320; = PV<sub>Phase1</sub> + PV<sub>Phase2</sub>
+                    </div>
+                    <div class="code-block dark-mode" style="text-align: left; padding: 1.5rem; background-color: #111; border-color: #555;">
+                        <span class="code-comment">// Total Price in Excel</span><br>
+                        <code style="display: block; margin-top: 0.5rem;">=<span class="param">PV_Phase1</span> + <span class="param">PV_Phase2</span></code>
                     </div>
                 </div>
 
-                <!-- ULTRA CLEAR TIMELINE (Point 9) -->
+                <!-- ULTRA CLEAR TIMELINE -->
                 <section class="content-card" style="border: 2px dashed #9E9E9E; background-color: #FAFAFA;">
                     <h2 class="section-title" style="color: #616161; font-size: 1.2rem; text-align: center;">Ultra Clear Timeline Example</h2>
-                    <p style="color: #444; font-size: 1.05rem; text-align: center; margin-bottom: 1.5rem;">
-                        If stable dividends start at <strong>D&#8332;</strong>:
-                    </p>
-                    <ul style="color: #333; list-style: none; padding: 0; line-height: 2;">
-                        <li style="border-bottom: 1px solid #EEE; padding-bottom: 0.5rem;">🎯 <strong>D&#8332;</strong> received at <strong>year 6</strong>.</li>
-                        <li style="border-bottom: 1px solid #EEE; padding: 0.5rem 0;">📍 Value of stable stream located at <strong>year 5</strong>: <br><code style="background: #E0E0E0; padding: 3px 6px; border-radius: 4px; font-size: 1.1rem;">P&#8325; = D&#8332; / (r - g)</code></li>
-                        <li style="padding-top: 0.5rem;">🔄 Then discount to time 0: <br><code style="background: #E0E0E0; padding: 3px 6px; border-radius: 4px; font-size: 1.1rem;">P&#8320; = P&#8325; / (1+r)&#8309;</code></li>
+                    <ul style="color: #333; list-style: none; padding: 0.5rem; line-height: 2; margin-top: 1rem;">
+                        <li style="border-bottom: 1px solid #EEE; padding-bottom: 1rem; margin-bottom: 1rem;">
+                            🎯 Stable dividends start at Year 6 (<strong>D&#8332;</strong>).<br>
+                            <span style="color: #666; font-size: 0.95rem;">D&#8332; is received at Year 6.</span>
+                        </li>
+                        <li style="border-bottom: 1px solid #EEE; padding-bottom: 1rem; margin-bottom: 1rem;">
+                            📍 Value of stable stream is placed at <strong>Year 5 (P&#8325;)</strong>.<br>
+                            <code style="display: block; margin-top: 0.5rem; background: #E0E0E0; padding: 8px 12px; border-radius: 4px; font-size: 1.1rem;">Formula: P&#8325; = D&#8332; / (r - g&#8322;)</code>
+                        </li>
+                        <li>
+                            🔄 Discount to Time 0:<br>
+                            <code style="display: block; margin-top: 0.5rem; background: #E0E0E0; padding: 8px 12px; border-radius: 4px; font-size: 1.1rem;">Formula: P&#8320; = P&#8325; / (1 + r)<sup>5</sup></code>
+                            <span style="display: block; margin-top: 0.8rem; color: #D32F2F; font-size: 0.95rem; font-weight: 500;">
+                                Note: On utilise la puissance 5 car le prix terminal a été figé à l'année 5.
+                            </span>
+                        </li>
                     </ul>
                 </section>
 
                 <div class="mt-4 text-center">
                     <button class="btn-note" onclick="toggleNote('note-timeline')"
                         style="margin: 0 auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                        <span class="note-icon">🔥</span> TERMINAL VALUE TRICK
+                        <span class="note-icon">🔥</span> TERMINAL EXPONENT TRICK
                     </button>
                 </div>
 
+                <!-- GOLDEN RULE POST-IT -->
                 <div id="note-timeline" class="post-it-note"
-                    style="background-color: #B2D3C2; max-width: 600px; margin: 2rem auto 2rem auto; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transform: rotate(1deg);">
+                    style="background-color: #B2D3C2; max-width: 650px; margin: 2rem auto 2rem auto; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transform: rotate(-1deg);">
                     <p
-                        style="font-weight: 800; color: #111; font-size: 1.15rem; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; margin-bottom: 0.8rem; letter-spacing: 0.5px;">
-                        RAPPEL SUR LA PHASE STABLE !
+                        style="font-weight: 800; color: #111; font-size: 1.15rem; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; margin-bottom: 0.8rem; letter-spacing: 0.5px; text-transform: uppercase;">
+                        GOLDEN RULE
                     </p>
-                    <p style="color: #111; line-height: 1.7; font-size: 1.05rem; font-weight: 500;">
-                        Si la phase stable commence à l'année 11, ta valeur terminale se calcule obligatoirement à l'année 10 ! (T-1)
+                    <p style="color: #111; line-height: 1.7; font-size: 1.1rem; font-weight: 500;">
+                        The exponent used to discount the Terminal Value (P<sub>N</sub>) is <strong style="color: #D32F2F; background: rgba(255,255,255,0.4); padding: 0 4px;">always N</strong>, which is the same year where the first phase ends!
                     </p>
                 </div>
 
