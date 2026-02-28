@@ -34,20 +34,13 @@
 
                 <div class="accordion-item">
                     <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="folder-icon">📁</span> LECTURE 2: Fixed Income
+                        <span class="folder-icon">📁</span> LECTURE 2: EXCEL
                         <span class="chevron">▼</span>
                     </button>
                     <div class="accordion-content">
-                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 1: Bond Pricing</a>
-                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: Yield to Maturity</a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 1: à suivre </a>
+                        <a href="#" class="nav-link disabled" tabindex="-1">Ex 2: à suivre</a>
                     </div>
-                </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header disabled">
-                        <span class="folder-icon">📁</span> LECTURE 3: Risk & Return
-                        <span class="chevron">▼</span>
-                    </button>
                 </div>
             </nav>
         </aside>
@@ -74,9 +67,8 @@
                             <h3 class="method-title">1️⃣ Build the Model</h3>
                             <div class="code-block dark-mode" style="margin-top: 1rem;">
                                 <p style="margin-bottom: 0.5rem; color: #D4D4D4;">You need: A <span
-                                        class="param">Discount Rate variable</span> , an <span
-                                        class="excel-func">NPV </span> referencing that rate, and your <span
-                                        class="param">Cash Flows</span>.</p>
+                                        class="param">Discount Rate variable</span> , an <span class="excel-func">NPV
+                                    </span> referencing that rate, and your <span class="param">Cash Flows</span>.</p>
                             </div>
                         </div>
 
@@ -84,19 +76,21 @@
                         <div class="method-column mt-4">
                             <h3 class="method-title">2️⃣ Setup the Data Table (Output Structure)</h3>
                             <div class="code-block dark-mode" style="margin-top: 1rem;">
-        
+
                                 <p style="color: #D4D4D4;">
                                     Create a <span class="param">Data Table</span> with two columns:
                                 </p>
                                 <p style="color: #D4D4D4; margin-top: 0.5rem;">
-                                    • First column → <span class="param">Test discount rates</span> (0%, 3%, 6%, 9%, 12%, 15%, ...)
+                                    • First column → <span class="param">Test discount rates</span> (0%, 3%, 6%, 9%,
+                                    12%, 15%, ...)
                                 </p>
                                 <p style="color: #D4D4D4;">
-                                 • Second column → <span class="param">NPV results</span> (1st case = <span
-                                        class="excel-func">NPV reference </span> and the rest will be automatically generated)
+                                    • Second column → <span class="param">NPV results</span> (1st case = <span
+                                        class="excel-func">NPV reference </span> and the rest will be automatically
+                                    generated)
                                 </p>
 
-                             </div>
+                            </div>
                         </div>
 
                         <!-- Step 3 -->
@@ -104,7 +98,8 @@
                             <h3 class="method-title">3️⃣ Select & Run</h3>
                             <div class="code-block dark-mode" style="margin-top: 1rem;">
                                 <ul style="margin-left: 1.5rem; margin-bottom: 1rem; color: #D4D4D4;">
-                                    <li>Select the <span class="param">entire data table </span> ().</li> (including the NPV reference, not the discount rate)
+                                    <li>Select the <span class="param">entire data table </span> ().</li> (including the
+                                    NPV reference, not the discount rate)
                                     <li>Go to: <strong>Data &rarr; What-If Analysis &rarr; Data Table</strong>.</li>
                                 </ul>
                                 <div class="code-comment">// Since your rates are in a column:</div>
@@ -160,14 +155,14 @@
 
                             <ul
                                 style="margin-top: 1.5rem; margin-bottom: 1.5rem; margin-left: 1.5rem; color: #D4D4D4; line-height: 2;">
-    
+
                                 <li>
-                                    <strong>1st IRR:</strong> Choose a guess close to the first sign-change interval. 
+                                    <strong>1st IRR:</strong> Choose a guess close to the first sign-change interval.
                                     Excel converges to the root in that region.
                                 </li>
 
                                 <li>
-                                    <strong>2nd IRR:</strong> Choose a guess close to the second sign-change interval. 
+                                    <strong>2nd IRR:</strong> Choose a guess close to the second sign-change interval.
                                     Excel converges to the root located in that region.
                                 </li>
 
@@ -175,7 +170,7 @@
 
                             <div class="code-comment">// Rule:</div>
                             <p style="color: #D4D4D4;">
-                                The guess does not determine the IRR value. 
+                                The guess does not determine the IRR value.
                                 It determines which <span class="param">mathematical root</span> Excel converges to,
                                 based on the region where NPV changes sign.
                             </p>
