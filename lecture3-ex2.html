@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 2: Manual Histogram Construction</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .math-block {
+            background-color: var(--clr-bg-card);
+            border: 2px dashed var(--clr-excel-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Consolas', monospace;
+            font-size: 1.1rem;
+            color: var(--clr-text-main);
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);
+        }
+
+        .vs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #EAEAEA;
+        }
+
+        .vs-table th,
+        .vs-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #EAEAEA;
+        }
+
+        .vs-table th {
+            background-color: #F8F9FA;
+            color: var(--clr-excel-green);
+            font-weight: 700;
+        }
+
+        .vs-table td {
+            background-color: white;
+            color: #444;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-wrapper">
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>EXCEL VBA CORE</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- Accordion Menu -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 1: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="index.html" class="nav-link">Ex 1: NPV & IRR</a>
+                        <a href="ex2.html" class="nav-link">Ex 2: Multiple IRRs</a>
+                        <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
+                        <a href="ex4.html" class="nav-link">Ex 4: Payment Schedule</a>
+                        <a href="ex5.html" class="nav-link">Ex 5: Future Value</a>
+                        <a href="ex6.html" class="nav-link">Ex 6 & Case Study</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 2: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture2-ex1.html" class="nav-link">Ex 1: Gordon Model</a>
+                        <a href="lecture2-ex2.html" class="nav-link">Ex 2: Two-Stage Model</a>
+                        <a href="lecture2-ex3.html" class="nav-link">Ex 3: Cost of Capital</a>
+                        <a href="lecture2-ex4.html" class="nav-link">Ex 4: CAPM & Regression</a>
+                        <a href="lecture2-ex5.html" class="nav-link">Ex 5: Portfolio Analysis</a>
+                    </div>
+                </div>
+                <div class="accordion-item active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 3: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content show">
+                        <a href="lecture3-ex1.html" class="nav-link">Ex 1: Matrix Regression</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <!-- ================= END SIDEBAR ================= -->
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+
+
+
+
+
+
+            
+            <header class="page-header">
+                <h1>LECTURE 3 &mdash; EX 2: MANUAL HISTOGRAM CONSTRUCTION</h1>
+            </header>
+
+            <div class="content-scroll">
+
+                <!-- OBJECTIVE -->
+                <section class="content-card" style="border-top: 4px solid #1976D2; margin-bottom: 2rem;">
+                    <h2 class="section-title" style="color: #1976D2; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🎯</span> OBJECTIVE: VISUALIZING RISK STRUCTURE
+                    </h2>
+                    <p style="color: #444; font-size: 1.1rem; line-height: 1.6; margin-bottom: 0;">
+                        Our goal is to construct the distribution of <strong>Log Returns</strong> using the <em>Equal-Width Bins</em> method. Instead of looking at a chaotic time series, we reorganize the data into a frequency distribution. This allows us to visually analyze the true "shape of risk" (Volatility, Skewness, Kurtosis).
+                    </p>
+                </section>
+
+                <!-- STEP 1 & 2 GRID -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                    
+                    <!-- STEP 1 -->
+                    <div style="background-color: white; border: 1px solid #BBDEFB; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(25, 118, 210, 0.05);">
+                        <h3 style="color: #1976D2; border-bottom: 1px solid #E3F2FD; padding-bottom: 0.5rem; margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🗺️</span> STEP 1: DEFINE BOUNDARIES
+                        </h3>
+                        <p style="color: #555; margin-bottom: 1rem;"><strong>Concept:</strong> Find the absolute 'Map' of your data. You need to know the worst and best historical days to properly calibrate your chart.</p>
+                        
+                        <div class="code-block dark-mode" style="padding: 1rem; margin-bottom: 0.5rem;">
+                            <code>=MIN(<span class="param">return_range</span>)</code>
+                        </div>
+                        <div class="code-block dark-mode" style="padding: 1rem; margin-bottom: 1rem;">
+                            <code>=MAX(<span class="param">return_range</span>)</code>
+                        </div>
+                        <p style="color: #78909C; font-size: 0.95rem; margin: 0;"><em>Purpose: Defines the full range of observed returns.</em></p>
+                    </div>
+
+                    <!-- STEP 2 -->
+                    <div style="background-color: white; border: 1px solid #C8E6C9; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.05);">
+                        <h3 style="color: #388E3C; border-bottom: 1px solid #E8F5E9; padding-bottom: 0.5rem; margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>📏</span> STEP 2: CALIBRATE BINS
+                        </h3>
+                        <p style="color: #555; margin-bottom: 1rem;"><strong>Concept:</strong> We must divide our total return range into equal intervals. We standardly choose <strong>n = 30</strong> bins.</p>
+                        
+                        <div class="math-block" style="border-color: #A5D6A7; color: #2E7D32; background-color: #E8F5E9; padding: 1rem; margin-top: 0; margin-bottom: 1rem; font-size: 1.1rem;">
+                            Bin Width = (Max - Min) / n
+                        </div>
+                        <div class="code-block dark-mode" style="padding: 1rem; margin-bottom: 1rem;">
+                            <code>=(<span class="param">max</span> - <span class="param">min</span>) / 30</code>
+                        </div>
+                        <p style="color: #78909C; font-size: 0.95rem; margin: 0;"><em>Logic: Ensures every bar in your histogram has exactly the same width.</em></p>
+                    </div>
+                </div>
+
+                <!-- STEP 3 & 4 -->
+                <section class="content-card" style="border-top: 4px solid #FBC02D; margin-bottom: 2rem;">
+                    
+                    <!-- STEP 3 -->
+                    <h3 style="color: #F57F17; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🪜</span> STEP 3: CONSTRUCT BIN BOUNDARIES (THE LADDER)
+                    </h3>
+                    <p style="color: #444; margin-bottom: 1rem;">Create equally spaced intervals from the minimum to the maximum. These will act as your X-axis categories.</p>
+                    
+                    <div style="background-color: #FFFDE7; border-left: 4px solid #FBC02D; padding: 1.5rem; border-radius: 4px; margin-bottom: 2rem;">
+                        <strong style="color: #F57F17; display: block; margin-bottom: 0.5rem;">First boundary:</strong>
+                        <div class="code-block dark-mode" style="padding: 0.8rem; margin-bottom: 1rem;"><code>=<span class="param">min</span></code></div>
+                        
+                        <strong style="color: #F57F17; display: block; margin-bottom: 0.5rem;">Next boundaries:</strong>
+                        <div class="code-block dark-mode" style="padding: 0.8rem; margin-bottom: 0.5rem;"><code>=<span class="param">previous_boundary</span> + <span class="param">bin_size</span></code></div>
+                        <p style="color: #555; margin-bottom: 0; font-style: italic;">Instruction: Repeat this specific formula down the column until you have n boundaries.</p>
+                    </div>
+
+                    <!-- STEP 4 -->
+                    <h3 style="color: #D32F2F; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; margin-top: 3rem;">
+                        <span>⚙️</span> STEP 4: THE FREQUENCY ENGINE
+                    </h3>
+                    <p style="color: #444; margin-bottom: 1rem;">This function counts how many daily return observations fall into each specific "bucket".</p>
+                    
+                    <div class="code-block dark-mode" style="padding: 1.5rem; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                        <code>=FREQUENCY(<span class="param">return_range</span> ; <span class="param">bin_boundaries_range</span>)</code>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="background-color: #FFEBEE; padding: 1rem; border-radius: 4px; border: 1px solid #FFCDD2;">
+                            <strong style="color: #D32F2F;">Modern Excel (Office 365)</strong><br>
+                            <span style="color: #C62828;">Simply press <strong>Enter</strong>.</span>
+                        </div>
+                        <div style="background-color: #FFEBEE; padding: 1rem; border-radius: 4px; border: 1px solid #FFCDD2;">
+                            <strong style="color: #D32F2F;">Old Excel versions</strong><br>
+                            <span style="color: #C62828;">🚨 Press <strong>CTRL + SHIFT + ENTER</strong>.</span>
+                        </div>
+                    </div>
+
+                    <p style="color: #78909C; font-size: 0.95rem; margin: 0;"><em>Optional Step: To convert to Relative Frequency (percentages), use <code>=frequency / total_number_of_observations</code>.</em></p>
+                </section>
+
+                <!-- STEP 5 & INTERPRETATION -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem;">
+                    
+                    <!-- STEP 5 -->
+                    <div style="background-color: #303030; color: white; padding: 1.5rem; border-radius: 8px; border-top: 4px solid #8E24AA;">
+                        <h3 style="color: #CE93D8; border-bottom: 1px solid #4A148C; padding-bottom: 0.5rem; margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>📊</span> STEP 5: VISUALIZATION
+                        </h3>
+                        <ol style="color: #E0E0E0; line-height: 1.8; margin-bottom: 1.5rem; padding-left: 1.5rem;">
+                            <li>Select your calculated <strong>Bins</strong> and <strong>Frequencies</strong>.</li>
+                            <li>Go to <strong>Insert &rarr; Column Chart</strong>.</li>
+                            <li><strong style="color: #E1BEE7;">The Secret Trick:</strong> Right-click any bar on the chart, go to <em>Format Data Series</em>.</li>
+                            <li>Set <strong>Gap Width = 0%</strong>.</li>
+                        </ol>
+                        <div style="background-color: rgba(142, 36, 170, 0.2); border-left: 4px solid #AB47BC; padding: 1rem; color: #F3E5F5; font-size: 0.95rem;">
+                            <strong>Note:</strong> A true histogram must have NO space between bars to represent a continuous numerical distribution perfectly.
+                        </div>
+                    </div>
+
+                    <!-- INTERPRETATION -->
+                    <div style="background-color: #303030; color: white; padding: 1.5rem; border-radius: 8px; border-top: 4px solid #00ACC1;">
+                        <h3 style="color: #80DEEA; border-bottom: 1px solid #006064; padding-bottom: 0.5rem; margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>⚖️</span> ECONOMIC INTERPRETATION
+                        </h3>
+                        <p style="color: #E0E0E0; margin-bottom: 1rem;">The final histogram acts as a visual X-ray of the asset's behavior over time.</p>
+                        <ul style="color: #B2EBF2; line-height: 1.8; margin-bottom: 0; padding-left: 1.5rem; list-style-type: square;">
+                            <li><strong style="color: white;">Dispersion:</strong> How wide is the bell curve? (Measures Volatility).</li>
+                            <li><strong style="color: white;">Extreme Values:</strong> Are there stray bars far out to the left or right? (Indicates Black Swans / Tail Risk).</li>
+                            <li><strong style="color: white;">Shape:</strong> Is it perfectly symmetrical like a Normal Distribution, or skewed? (Tells you about market biases).</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- PRO TIP POST IT -->
+                <div style="background-color: #B2D3C2; border-left: 6px solid #2E7D32; padding: 1.5rem; border-radius: 4px; color: #1B5E20; box-shadow: 2px 4px 10px rgba(0,0,0,0.1); margin-bottom: 3rem; transform: rotate(-0.5deg);">
+                    <strong style="font-size: 1.2rem; display: block; margin-bottom: 0.5rem; text-transform: uppercase;">
+                        📌 PRO TIP
+                    </strong>
+                    <p style="margin: 0; font-size: 1.1rem; line-height: 1.6;">
+                        We use <strong>Log Returns</strong> because they are <em>additive</em>, making the histogram mathematically consistent and robust when we analyze different time horizons (like scaling daily risk to monthly risk)!
+                    </p>
+                </div>
+
+            </div>
+
+        </main>
+        <!-- ================= END MAIN CONTENT ================= -->
+
+    </div>
+
+    <!-- Overlay Note System -->
+    <div id="note-overlay" class="overlay" onclick="closeNote()"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
