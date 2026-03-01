@@ -115,7 +115,7 @@
 
             
             <header class="page-header">
-                <h1>LECTURE 3 &mdash; EX 2: MANUAL HISTOGRAM CONSTRUCTION</h1>
+                <h1>LECTURE 3 &mdash; EX 2: HISTOGRAM CONSTRUCTION</h1>
             </header>
 
             <div class="content-scroll">
@@ -126,7 +126,7 @@
                         <span>🎯</span> OBJECTIVE: VISUALIZING RISK STRUCTURE
                     </h2>
                     <p style="color: #444; font-size: 1.1rem; line-height: 1.6; margin-bottom: 0;">
-                        Our goal is to construct the distribution of <strong>Log Returns</strong> using the <em>Equal-Width Bins</em> method. Instead of looking at a chaotic time series, we reorganize the data into a frequency distribution. This allows us to visually analyze the true "shape of risk" (Volatility, Skewness, Kurtosis).
+                        Our goal is to construct the distribution of <strong>Log Returns</strong> using the <em>Equal-Width Bins</em> method. Instead of looking at a chaotic time series, we reorganize the data into a frequency distribution. This allows us to visually analyze the true "shape of risk".
                     </p>
                 </section>
 
@@ -194,18 +194,7 @@
                         <code>=FREQUENCY(<span class="param">return_range</span> ; <span class="param">bin_boundaries_range</span>)</code>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
-                        <div style="background-color: #FFEBEE; padding: 1rem; border-radius: 4px; border: 1px solid #FFCDD2;">
-                            <strong style="color: #D32F2F;">Modern Excel (Office 365)</strong><br>
-                            <span style="color: #C62828;">Simply press <strong>Enter</strong>.</span>
-                        </div>
-                        <div style="background-color: #FFEBEE; padding: 1rem; border-radius: 4px; border: 1px solid #FFCDD2;">
-                            <strong style="color: #D32F2F;">Old Excel versions</strong><br>
-                            <span style="color: #C62828;">🚨 Press <strong>CTRL + SHIFT + ENTER</strong>.</span>
-                        </div>
-                    </div>
-
-                    <p style="color: #78909C; font-size: 0.95rem; margin: 0;"><em>Optional Step: To convert to Relative Frequency (percentages), use <code>=frequency / total_number_of_observations</code>.</em></p>
+                    <p style="color: #78909C; font-size: 0.95rem; margin: 0;"><em>Optional percentages = use <code>=frequency / total_number_of_observations</code>.</em></p>
                 </section>
 
                 <!-- STEP 5 & INTERPRETATION -->
