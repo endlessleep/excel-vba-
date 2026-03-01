@@ -286,7 +286,108 @@
                     </tbody>
                 </table>
 
-                <!-- EXAM TIP POST-IT -->
+                
+                <!-- EXTENSION: WEIGHTED AVERAGES -->
+                <h2 style="color: var(--clr-text-main); font-size: 1.8rem; margin: 4rem 0 2rem 0; text-align: center; border-bottom: 2px solid #EAEAEA; padding-bottom: 0.5rem; text-transform: uppercase;">
+                    EXTENSION: PORTFOLIO PROPERTIES
+                </h2>
+
+                <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 3rem;">
+                    
+                    <!-- 1) Weighted Average Beta -->
+                    <section class="content-card" style="border-top: 4px solid #1976D2; margin-bottom: 0;">
+                        <h3 class="section-title" style="color: #0D47A1; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="background-color: #E3F2FD; padding: 4px 8px; border-radius: 4px; font-size: 1.1rem; color: #1976D2;">🔹 1) Weighted Average Beta</span>
+                        </h3>
+                        
+                        <strong style="color: #333; display: block; margin-bottom: 0.5rem;">📌 Financial Formula</strong>
+                        <div class="math-block" style="border-color: #90CAF9; color: #1976D2; background-color: #E3F2FD; margin-top: 0; margin-bottom: 1.5rem; padding: 1rem; font-size: 1.2rem;">
+                            &beta;<sub>portfolio</sub> = &Sigma; (w<sub>i</sub> &times; &beta;<sub>i</sub>)
+                        </div>
+                        <ul style="color: #555; line-height: 1.8; list-style-type: none; padding-left: 0; margin-bottom: 1.5rem;">
+                            <li><strong style="color: #1976D2;">w<sub>i</sub>:</strong> Weight of asset <em>i</em> in the portfolio</li>
+                            <li><strong style="color: #1976D2;">&beta;<sub>i</sub>:</strong> Beta of asset <em>i</em></li>
+                            <li style="margin-top: 0.5rem; border-left: 3px solid #1976D2; padding-left: 0.5rem;"><em>The portfolio beta is the exact weighted average of individual betas.</em></li>
+                        </ul>
+
+                        <strong style="color: #333; display: block; margin-bottom: 0.5rem; border-top: 1px dashed #DDD; padding-top: 1.5rem;">📌 Excel Structure</strong>
+                        <div class="code-block dark-mode" style="padding: 1.5rem; margin-top: 0.5rem; margin-bottom: 1rem;">
+                            <code>=SUMPRODUCT(<span class="param">range_betas</span> ; <span class="param">range_weights</span>)</code>
+                        </div>
+                        <ul style="color: #555; line-height: 1.8; list-style-type: square; margin-bottom: 1rem;">
+                            <li><strong style="color: #006064;">range_betas:</strong> Row containing individual stock betas</li>
+                            <li><strong style="color: #006064;">range_weights:</strong> Row containing portfolio weights</li>
+                        </ul>
+                        <div style="background-color: #FFEBEE; padding: 1rem; border-left: 4px solid #D32F2F; color: #C62828; margin-bottom: 1.5rem;">
+                            <strong>Important:</strong> The weights range MUST be locked with absolute references ($) if the formula is copied.
+                        </div>
+
+                        <strong style="color: #333; display: block; margin-bottom: 0.5rem; border-top: 1px dashed #DDD; padding-top: 1.5rem;">📌 Economic Interpretation</strong>
+                        <p style="color: #444; margin-bottom: 1rem;">Portfolio beta measures the portfolio’s sensitivity to market movements.</p>
+                        <ul style="color: #444; line-height: 1.8; background: #FAFAFA; padding: 1rem 1.5rem; border-radius: 4px; border: 1px solid #EAEAEA;">
+                            <li><strong>&beta;<sub>portfolio</sub> &gt; 1:</strong> Portfolio is more volatile than the market</li>
+                            <li><strong>&beta;<sub>portfolio</sub> = 1:</strong> Same risk as the market</li>
+                            <li><strong>&beta;<sub>portfolio</sub> &lt; 1:</strong> Less volatile than the market</li>
+                        </ul>
+                        
+                        <div style="background-color: #F1F8E9; padding: 1rem; border-left: 4px solid #7CB342; margin-top: 1.5rem; color: #33691E;">
+                            <strong>Core CAPM Concept:</strong><br>
+                            E(R<sub>p</sub>) = r<sub>f</sub> + &beta;<sub>p</sub> &times; (E(R<sub>m</sub>) - r<sub>f</sub>)<br>
+                            Beta determines the expected return required by investors. <strong style="text-decoration: underline;">This measure is theoretically exact.</strong>
+                        </div>
+                    </section>
+
+                    <!-- 2) Weighted Average R-Squared -->
+                    <section class="content-card" style="border-top: 4px solid #8E24AA; margin-bottom: 0;">
+                        <h3 class="section-title" style="color: #6A1B9A; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="background-color: #F3E5F5; padding: 4px 8px; border-radius: 4px; font-size: 1.1rem; color: #8E24AA;">🔹 2) Weighted Average R-Squared</span>
+                        </h3>
+                        
+                        <strong style="color: #333; display: block; margin-bottom: 0.5rem;">📌 Financial Formula</strong>
+                        <div class="math-block" style="border-color: #CE93D8; color: #6A1B9A; background-color: #F3E5F5; margin-top: 0; margin-bottom: 1.5rem; padding: 1rem; font-size: 1.2rem;">
+                            R&sup2;<sub>portfolio</sub> &asymp; &Sigma; (w<sub>i</sub> &times; R&sup2;<sub>i</sub>)
+                        </div>
+                        <ul style="color: #555; line-height: 1.8; list-style-type: none; padding-left: 0; margin-bottom: 1.5rem;">
+                            <li><strong style="color: #8E24AA;">w<sub>i</sub>:</strong> Weight of asset <em>i</em></li>
+                            <li><strong style="color: #8E24AA;">R&sup2;<sub>i</sub>:</strong> R-squared of asset <em>i</em> from regression on the market</li>
+                        </ul>
+
+                        <strong style="color: #333; display: block; margin-bottom: 0.5rem; border-top: 1px dashed #DDD; padding-top: 1.5rem;">📌 Excel Structure</strong>
+                        <div class="code-block dark-mode" style="padding: 1.5rem; margin-top: 0.5rem; margin-bottom: 1rem;">
+                            <code>=SUMPRODUCT(<span class="param">range_r_squared</span> ; <span class="param">range_weights</span>)</code>
+                        </div>
+                        <ul style="color: #555; line-height: 1.8; list-style-type: square; margin-bottom: 1.5rem;">
+                            <li><strong style="color: #6A1B9A;">range_r_squared:</strong> Row containing individual R&sup2; values</li>
+                            <li><strong style="color: #6A1B9A;">range_weights:</strong> Row containing portfolio weights (fixed with $)</li>
+                        </ul>
+
+                        <strong style="color: #333; display: block; margin-bottom: 0.5rem; border-top: 1px dashed #DDD; padding-top: 1.5rem;">📌 Economic Interpretation</strong>
+                        <p style="color: #444; margin-bottom: 1rem; line-height: 1.6;">
+                            R-squared measures the proportion of a stock’s return variance explained by market movements.<br>
+                            For the portfolio:
+                        </p>
+                        <ul style="color: #444; line-height: 1.8; background: #FAFAFA; padding: 1rem 1.5rem; border-radius: 4px; border: 1px solid #EAEAEA; margin-bottom: 1.5rem;">
+                            <li>A <strong>higher</strong> weighted R&sup2; suggests the portfolio behaves more like the market.</li>
+                            <li>A <strong>lower</strong> R&sup2; suggests more idiosyncratic (firm-specific) risk.</li>
+                        </ul>
+
+                        <div style="background-color: #FFF3E0; padding: 1.5rem; border-left: 4px solid #FF9800; color: #E65100;">
+                            <strong style="font-size: 1.1rem; display: block; margin-bottom: 0.5rem; text-transform: uppercase;">⚠️ Important Conceptual Note</strong>
+                            <p style="margin-bottom: 0.8rem; line-height: 1.6;">
+                                Unlike beta, the weighted average R&sup2; is <strong>descriptive</strong>. It is not a fundamental CAPM parameter.<br>
+                                The true portfolio R&sup2; would require computing:
+                            </p>
+                            <div class="math-block" style="border-color: rgba(255,152,0,0.3); background: rgba(255,152,0,0.1); color: #E65100; padding: 0.8rem; margin-bottom: 0.8rem; font-size: 1rem;">
+                                R&sup2; = 1 - (Variance<sub>specific</sub> / Variance<sub>total</sub>)
+                            </div>
+                            <p style="margin: 0; font-weight: bold;">
+                                So the weighted average is a simplified indicator, not a theoretical identity.
+                            </p>
+                        </div>
+                    </section>
+
+                </div>
+<!-- EXAM TIP POST-IT -->
                 <div id="note-timeline" class="post-it-note"
                     style="background-color: #B2D3C2; max-width: 650px; margin: 0 auto 3rem auto; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transform: rotate(-1.5deg);">
                     <p
