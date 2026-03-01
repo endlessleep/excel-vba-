@@ -484,13 +484,11 @@
                         <strong style="color: #81C784; font-size: 1.25rem; display: block; margin-bottom: 1rem;">1.
                             Simple Return</strong>
                         <div class="math-block"
-                            style="border-color: rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white; font-size: 1.1rem; margin-top: 0;">
+                            style="border-color: rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white; font-size: 1.1rem; margin-top: 0; margin-bottom: 1rem;">
                             R<sub>t</sub> = (P<sub>t</sub> / P<sub>t-1</sub>) - 1
                         </div>
-                        <div class="code-block dark-mode" style="padding: 1rem; margin-top: 1rem; background: #1E1E1E;">
-                            <code>=<span class="param">F4</span> / <span class="param">F3</span> - 1</code>
-                        </div>
-                        <p style="margin-top: 1rem; color: #B0BEC5;">(Standard, common use)</p>
+                        <p style="color: #B0BEC5;">Standard method for period-by-period calculation. Simple to explain.
+                        </p>
                     </div>
 
                     <div
@@ -498,24 +496,61 @@
                         <strong style="color: #64B5F6; font-size: 1.25rem; display: block; margin-bottom: 1rem;">2. Log
                             Return</strong>
                         <div class="math-block"
-                            style="border-color: rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white; font-size: 1.1rem; margin-top: 0;">
+                            style="border-color: rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white; font-size: 1.1rem; margin-top: 0; margin-bottom: 1rem;">
                             r<sub>t</sub> = LN(P<sub>t</sub> / P<sub>t-1</sub>)
                         </div>
-                        <div class="code-block dark-mode" style="padding: 1rem; margin-top: 1rem; background: #1E1E1E;">
-                            <code>=LN(<span class="param">F4</span> / <span class="param">F3</span>)</code>
-                        </div>
-                        <p style="margin-top: 1rem; color: #B0BEC5;">(Mathematically cleaner for high-level models)</p>
+                        <p style="color: #B0BEC5;">Mathematically cleaner for high-level models and complex finance.</p>
                     </div>
 
                 </div>
 
-                <div
-                    style="background-color: #E8F5E9; padding: 1.5rem; border-left: 4px solid #4CAF50; color: #1B5E20; font-size: 1.1rem; line-height: 1.6; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 3rem;">
-                    <strong style="font-size: 1.2rem; text-transform: uppercase;">Key Insight:</strong><br>
-                    For small, daily changes, Simple and Log returns are <strong>almost identical</strong>. However, Log
-                    returns are highly preferred in advanced finance because they are <strong>additive over
-                        time</strong> (the log return of 2 days is precisely the sum of each day's log return).
-                </div>
+                <!-- NEW SECTION: WHY USE LN -->
+                <section class="content-card" style="border-top: 4px solid #8E24AA; margin-bottom: 3rem;">
+                    <h3 class="section-title"
+                        style="color: #6A1B9A; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>📌</span> Why use LN (Log Returns)?
+                    </h3>
+
+                    <strong style="color: #4CAF50; display: block; margin-bottom: 1rem; font-size: 1.15rem;">✅ Key
+                        Reasons:</strong>
+                    <ul
+                        style="color: #444; line-height: 1.8; list-style-type: square; margin-bottom: 2rem; padding-left: 1.5rem; font-size: 1.05rem;">
+                        <li style="margin-bottom: 0.8rem;">
+                            <strong style="color: #6A1B9A;">Additive over time:</strong> The log return of 2 days is
+                            precisely the sum of each day's log return (<em>r<sub>1</sub> + r<sub>2</sub> = total return
+                                over 2 periods</em>).
+                        </li>
+                        <li style="margin-bottom: 0.8rem;">
+                            <strong style="color: #6A1B9A;">Continuous-time model:</strong> Consistent with continuous
+                            compounding models (e.g. Black-Scholes).
+                        </li>
+                        <li style="margin-bottom: 0.8rem;">
+                            <strong style="color: #6A1B9A;">Volatility aggregation:</strong> Works cleanly, making the
+                            Square Root of Time rule (&sigma; scales with &radic;T) mathematically sound!
+                        </li>
+                        <li>
+                            <strong style="color: #6A1B9A;">Statistical distribution:</strong> The distribution of log
+                            returns is often closer to a normal distribution.
+                        </li>
+                    </ul>
+
+                    <div
+                        style="background-color: #FFF3E0; border-left: 4px solid #FF9800; padding: 1.5rem; color: #E65100;">
+                        <strong
+                            style="text-transform: uppercase; font-size: 1.1rem; display: block; margin-bottom: 0.8rem;">⚠️
+                            Important Note for small changes:</strong>
+                        <p style="margin-bottom: 0.5rem; line-height: 1.6;">
+                            For extremely small, daily returns, the mathematical approximation holds:
+                        </p>
+                        <div class="math-block"
+                            style="border-color: rgba(255,152,0,0.3); background: rgba(255,152,0,0.1); color: #E65100; padding: 0.8rem; margin: 0.8rem 0; font-size: 1.2rem;">
+                            LN(1 + x) &asymp; x
+                        </div>
+                        <p style="margin: 0; font-weight: bold;">
+                            Therefore, log returns &asymp; simple returns for short horizons.
+                        </p>
+                    </div>
+                </section>
 
             </div>
         </main>
