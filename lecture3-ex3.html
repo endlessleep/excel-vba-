@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 3: Lognormal Stock Price Model</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .math-block {
+            background-color: var(--clr-bg-card);
+            border: 2px dashed var(--clr-excel-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Consolas', monospace;
+            font-size: 1.1rem;
+            color: var(--clr-text-main);
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);
+        }
+
+        .vs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(33, 115, 70, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #EAEAEA;
+        }
+
+        .vs-table th,
+        .vs-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #EAEAEA;
+        }
+
+        .vs-table th {
+            background-color: #F8F9FA;
+            color: var(--clr-excel-green);
+            font-weight: 700;
+        }
+
+        .vs-table td {
+            background-color: white;
+            color: #444;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-wrapper">
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>EXCEL VBA CORE</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- Accordion Menu -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 1: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="index.html" class="nav-link">Ex 1: NPV & IRR</a>
+                        <a href="ex2.html" class="nav-link">Ex 2: Multiple IRRs</a>
+                        <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
+                        <a href="ex4.html" class="nav-link">Ex 4: Payment Schedule</a>
+                        <a href="ex5.html" class="nav-link">Ex 5: Future Value</a>
+                        <a href="ex6.html" class="nav-link">Ex 6 & Case Study</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 2: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture2-ex1.html" class="nav-link">Ex 1: Gordon Model</a>
+                        <a href="lecture2-ex2.html" class="nav-link">Ex 2: Two-Stage Model</a>
+                        <a href="lecture2-ex3.html" class="nav-link">Ex 3: Cost of Capital</a>
+                        <a href="lecture2-ex4.html" class="nav-link">Ex 4: CAPM & Regression</a>
+                        <a href="lecture2-ex5.html" class="nav-link">Ex 5: Portfolio Analysis</a>
+                    </div>
+                </div>
+                
+                
+                <div class="accordion-item active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 3: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content show">
+                        <a href="lecture3-ex1.html" class="nav-link">Ex 1: Matrix Regression</a>
+                        <a href="lecture3-ex2.html" class="nav-link">Ex 2: Manual Histogram</a>
+                        <a href="lecture3-ex3.html" class="nav-link active">Ex 3: Lognormal Simulation</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <!-- ================= END SIDEBAR ================= -->
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+
+
+
+
+
+
+            
+            
+            <header class="page-header">
+                <h1>LECTURE 3 &mdash; EX 3: LOGNORMAL STOCK PRICE MODEL</h1>
+            </header>
+
+            <div class="content-scroll">
+
+                <!-- 1. CONTEXT & CONCEPTUAL FOUNDATION -->
+                <section class="content-card" style="border-top: 4px solid #1976D2; margin-bottom: 2rem;">
+                    <h2 class="section-title" style="color: #1976D2; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🧠</span> 1. CONTEXT &mdash; WHAT ARE WE DOING?
+                    </h2>
+                    <p style="color: #444; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                        We want to <strong>simulate</strong> how a stock price evolves over time. This is the foundation of the Black-Scholes framework. We transition from analyzing historical data (Histograms, Beta) to predicting the future using stochastic simulation. Our assumptions:
+                    </p>
+                    <ul style="color: #555; list-style-type: square; margin-bottom: 2rem; padding-left: 1.5rem; font-size: 1.05rem;">
+                        <li>Stock prices are random.</li>
+                        <li>Returns are uncertain.</li>
+                        <li><strong>Logarithmic returns follow a Normal distribution.</strong></li>
+                    </ul>
+
+                    <div style="background-color: #E3F2FD; border-left: 4px solid #1976D2; padding: 1.5rem; border-radius: 4px;">
+                        <strong style="color: #0D47A1; font-size: 1.15rem; display: block; margin-bottom: 1rem; text-transform: uppercase;">
+                            The Core Assumption
+                        </strong>
+                        <p style="color: #1565C0; margin-bottom: 1rem; font-size: 1.05rem; line-height: 1.6;">
+                            We do <strong>NOT</strong> assume prices are normal. We assume <strong>log-returns</strong> are normal.<br>
+                            If log-returns are normal &rarr; <strong>Stock Prices are Lognormal</strong>.
+                        </p>
+                        <p style="color: #0D47A1; font-weight: bold; margin-bottom: 0;">
+                            Why? Because stock prices cannot be negative. The Lognormal distribution starts exactly at 0 and goes to infinity to accurately reflect limited liability!
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 2. THE EVOLUTION FORMULA -->
+                <section class="content-card" style="border-top: 4px solid #8E24AA; margin-bottom: 2rem;">
+                    <h2 class="section-title" style="color: #6A1B9A; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🧪</span> 2. THE EVOLUTION FORMULA
+                    </h2>
+                    
+                    <strong style="color: #444; display: block; margin-bottom: 0.5rem;">Mathematical Equation:</strong>
+                    <div class="math-block" style="border-color: #CE93D8; color: #6A1B9A; background-color: #F3E5F5; font-size: 1.5rem; padding: 1.5rem; margin-bottom: 2rem;">
+                        S<sub>t+1</sub> = S<sub>t</sub> &times; e<sup>(&mu;&Delta;t + &sigma;Z&radic;&Delta;t)</sup>
+                    </div>
+
+                    <strong style="color: #444; display: block; margin-bottom: 0.5rem;">Excel Formula (The Black Box):</strong>
+                    <div class="code-block dark-mode" style="padding: 1.5rem; margin-bottom: 1rem; font-size: 1.1rem; line-height: 1.6;">
+                        <code>=<span class="param">Previous_Price</span> * EXP( <span class="param">Mean</span> * <span class="param">dt</span> + <span class="param">Sigma</span> * <span class="param">Normal_Deviate</span> * SQRT(<span class="param">dt</span>) )</code>
+                    </div>
+                </section>
+
+                <!-- 3. ANATOMY & 4. PARAMETERS GRID -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem;">
+                    
+                    <!-- ANATOMY -->
+                    <div style="background-color: white; border: 1px solid #EAEAEA; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                        <h3 style="color: #2E7D32; border-bottom: 1px solid #E8F5E9; padding-bottom: 0.5rem; margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>📉</span> 3. ANATOMY OF THE FORMULA
+                        </h3>
+                        <p style="color: #555; margin-bottom: 1.5rem; line-height: 1.6;">Each period, the stock price changes because of two distinct forces inside the exponent:</p>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <strong style="color: #1976D2; display: block; margin-bottom: 0.3rem;">1. The Deterministic Trend (&mu;&Delta;t)</strong>
+                            <span style="color: #444;">The average 'drift' or consistent growth of the stock. It is the predictable component.</span>
+                        </div>
+                        
+                        <div>
+                            <strong style="color: #D32F2F; display: block; margin-bottom: 0.3rem;">2. The Random Shock (&sigma;Z&radic;&Delta;t)</strong>
+                            <span style="color: #444;">The 'noise' or pure uncertainty.</span>
+                            <div class="code-block dark-mode" style="padding: 0.8rem; margin-top: 0.8rem; font-size: 0.95rem;">
+                                <span class="code-comment" style="display:block; margin-bottom:4px;">// Z is a random draw from N(0,1):</span>
+                                <code>=NORM.S.INV(RAND())</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PARAMETERS -->
+                    <div style="background-color: #FAFAFA; border: 1px solid #EAEAEA; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                        <h3 style="color: #FF8F00; border-bottom: 1px solid #FFF8E1; padding-bottom: 0.5rem; margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>📐</span> 4. STEP-BY-STEP PARAMETERS
+                        </h3>
+                        <ul style="color: #444; line-height: 2.2; margin-bottom: 0; padding-left: 1.5rem;">
+                            <li><strong style="color: #FF8F00;">S<sub>t</sub></strong> : Previous Price (Price today).</li>
+                            <li><strong style="color: #FF8F00;">&mu; (Mean)</strong> : Annual expected return.</li>
+                            <li><strong style="color: #FF8F00;">&sigma; (Sigma)</strong> : Annual volatility.</li>
+                            <li><strong style="color: #FF8F00;">Z</strong> : Normal Deviate (Randomness).</li>
+                            <li><strong style="color: #FF8F00;">dt (&Delta;t)</strong> : The Time Step.</li>
+                        </ul>
+                        <div style="background-color: #FFF3E0; border-left: 4px solid #FF9800; padding: 1rem; margin-top: 1rem; color: #E65100; font-size: 0.95rem;">
+                            <strong>Note on dt:</strong> If using annual rates but simulating day-by-day, <strong>dt = 1/250</strong>. For monthly simulation, <strong>dt = 1/12</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. WHY THE EXPONENTIAL? -->
+                <section class="content-card" style="border-top: 4px solid #00ACC1; margin-bottom: 2rem;">
+                    <h2 class="section-title" style="color: #0097A7; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🔬</span> 5. WHY THE EXPONENTIAL?
+                    </h2>
+                    <p style="color: #444; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1rem;">
+                        What is actually happening mathematically? The term entirely <em>inside</em> the <code>EXP()</code> function is precisely our simulated <strong>Log-Return</strong>. We explicitly assume:
+                    </p>
+                    <div class="math-block" style="border-color: #B2EBF2; color: #00ACC1; background-color: #E0F7FA; padding: 1rem; margin-top: 0; margin-bottom: 1.5rem; font-size: 1.2rem;">
+                        ln(S<sub>t+1</sub> / S<sub>t</sub>) = &mu;&Delta;t + &sigma;Z&radic;&Delta;t
+                    </div>
+                    <p style="color: #444; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1rem;">
+                        To isolate the future price, we must 'cancel' the natural logarithm (<code>ln</code>). The mathematical opposite of <code>ln()</code> is <code>EXP()</code>. By exponentiating both sides:
+                    </p>
+                    <div class="math-block" style="border-color: #B2EBF2; color: #00ACC1; background-color: #E0F7FA; padding: 1rem; margin-top: 0; margin-bottom: 1.5rem; font-size: 1.2rem;">
+                        S<sub>t+1</sub> / S<sub>t</sub> = EXP( &mu;&Delta;t + &sigma;Z&radic;&Delta;t )
+                    </div>
+                    <p style="color: #00838F; font-size: 1.1rem; line-height: 1.6; margin-bottom: 0; font-weight: bold;">
+                        And finally multiplying by S<sub>t</sub> gives our formula. The EXP() function brilliantly converts the modeled log-return into a clean, multiplicative Price Factor. Because we exponentiate, the price is always geometrically positive!
+                    </p>
+                </section>
+                
+                <!-- 6. SUMMARY: WHY LOG RETURNS -->
+                <div style="background-color: #303030; color: white; padding: 2.5rem; border-radius: 8px; border-top: 4px solid #2E7D32; margin-bottom: 3rem;">
+                    <h3 style="color: #81C784; border-bottom: 1px solid #1B5E20; padding-bottom: 0.5rem; margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🎯</span> 6. FINAL RECAP: WHY LOG-RETURNS?
+                    </h3>
+                    <p style="color: #E0E0E0; margin-bottom: 1.5rem; font-size: 1.05rem;">If log-returns are normal &rarr; prices are lognormal. This is the cornerstone of quantitative finance for three structural reasons:</p>
+                    <ul style="color: #C8E6C9; line-height: 1.8; margin-bottom: 0; padding-left: 1.5rem; font-size: 1.05rem;">
+                        <li style="margin-bottom: 0.5rem;"><strong style="color: white;">Additivity:</strong> You can perfectly sum them over time (log-return of 2 days is the sum of each day).</li>
+                        <li style="margin-bottom: 0.5rem;"><strong style="color: white;">Positivity:</strong> Prices will never drop mathematically below zero (unlike a standard Normal distribution on raw prices).</li>
+                        <li><strong style="color: white;">Continuous Compounding:</strong> Reflects how real markets actually move (non-stop, exponentiated growth).</li>
+                    </ul>
+                </div>
+
+                <!-- CRITICAL POST IT -->
+                <div style="background-color: #B2D3C2; border-left: 6px solid #2E7D32; padding: 1.5rem; border-radius: 4px; color: #1B5E20; box-shadow: 2px 4px 10px rgba(0,0,0,0.1); margin-bottom: 3rem; transform: rotate(0.5deg);">
+                    <strong style="font-size: 1.2rem; display: block; margin-bottom: 0.5rem; text-transform: uppercase;">
+                        ⚠️ CRITICAL
+                    </strong>
+                    <p style="margin: 0; font-size: 1.1rem; line-height: 1.6;">
+                        Your Time Increment (<strong>dt</strong>) <em>MUST</em> be consistent with your &mu; and &sigma;. If your mean and volatility are presented in <strong>Annual</strong> terms, but you are simulating a path day-by-day, your <strong>dt is strictly 1/250</strong>!
+                    </p>
+                </div>
+
+            </div>
+
+        </main>
+        <!-- ================= END MAIN CONTENT ================= -->
+
+    </div>
+
+    <!-- Overlay Note System -->
+    <div id="note-overlay" class="overlay" onclick="closeNote()"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
