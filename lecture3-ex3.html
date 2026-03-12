@@ -54,10 +54,15 @@
 <body>
     <div class="app-wrapper">
 
+        <!-- Sidebar Toggle Button (visible when sidebar is closed) -->
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+
         <!-- ================= SIDEBAR ================= -->
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <span>EXCEL VBA CORE</span>
+                <button class="close-sidebar" onclick="toggleSidebar()">✕</button>
             </div>
 
             <nav class="sidebar-nav">

@@ -43,3 +43,12 @@ function closeNote() {
         currentOpenNote = null;
     }
 }
+
+// Sidebar Toggle Logic
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('.main-content');
+    
+    if(sidebar) sidebar.classList.toggle('closed');
+    if(mainContent) mainContent.classList.toggle('expanded');
+}

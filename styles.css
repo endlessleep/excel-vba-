@@ -88,7 +88,7 @@ strong {
     padding: 2rem 1.5rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    justify-content: space-between;
     border-bottom: 1px solid #EAEAEA;
     background-color: var(--clr-excel-green);
     color: white;
@@ -471,5 +471,67 @@ strong {
 
     .accordion-content.show {
         max-height: max-content;
+    }
+}
+/* =========================================
+   Sidebar Toggle (Open / Close)
+   ========================================= */
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 90; /* Right underneath the sidebar */
+    background-color: var(--clr-excel-green);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: background-color 0.2s;
+}
+
+.menu-toggle:hover {
+    background-color: var(--clr-excel-green-hover);
+}
+
+.close-sidebar {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-sidebar:hover {
+    transform: scale(1.1);
+}
+
+.sidebar {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar.closed {
+    transform: translateX(-100%);
+}
+
+.main-content {
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-content.expanded {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+@media (max-width: 768px) {
+    .sidebar.closed {
+        display: none;
+        transform: none;
     }
 }
