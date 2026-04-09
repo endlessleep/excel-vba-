@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 7: VBA — Sum, Product & Random</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-wrapper">
+
+        <!-- Sidebar Toggle Button (visible when sidebar is closed) -->
+        <button class="menu-toggle" onclick="toggleSidebar()" style="display: none;">☰</button>
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>EXCEL VBA CORE</span>
+                <button class="close-sidebar" onclick="toggleSidebar()">✕</button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 1: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="index.html" class="nav-link">Ex 1: NPV & IRR</a>
+                        <a href="ex2.html" class="nav-link">Ex 2: Multiple IRRs</a>
+                        <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
+                        <a href="ex4.html" class="nav-link">Ex 4: Payment Schedule</a>
+                        <a href="ex5.html" class="nav-link">Ex 5: Future Value</a>
+                        <a href="ex6.html" class="nav-link">Ex 6 & Case Study</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 2: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture2-ex1.html" class="nav-link">Ex 1: Gordon Model</a>
+                        <a href="lecture2-ex2.html" class="nav-link">Ex 2: Two-Stage Model</a>
+                        <a href="lecture2-ex3.html" class="nav-link">Ex 3: Cost of Capital</a>
+                        <a href="lecture2-ex4.html" class="nav-link">Ex 4: CAPM & Regression</a>
+                        <a href="lecture2-ex5.html" class="nav-link">Ex 5: Portfolio Analysis</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 3: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture3-ex1.html" class="nav-link">Ex 1: Matrix Regression</a>
+                        <a href="lecture3-ex2.html" class="nav-link">Ex 2: Manual Histogram</a>
+                        <a href="lecture3-ex3.html" class="nav-link">Ex 3: Lognormal Simulation</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 6: VBA
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture6-vba.html" class="nav-link">Lecture 6</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 7: VBA
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content show">
+                        <a href="lecture7-vba.html" class="nav-link active">Lecture 7</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <!-- ================= END SIDEBAR ================= -->
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1>LECTURE 7: VBA — SUM, PRODUCT & RANDOM</h1>
+                <p style="margin-top: 0.5rem; font-size: 1.1rem; color: var(--clr-text-muted);">Function vs Sub
+                    patterns — building core operations from scratch.</p>
+            </header>
+
+            <div class="cards-container">
+
+                <!-- ============================================= -->
+                <!-- SECTION 1: SUM                                -->
+                <!-- ============================================= -->
+                <section class="content-card">
+                    <h2 class="section-title">1. SUM</h2>
+
+                    <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+                        Two ways to sum a range of cells: a <span class="fluo">Function</span> that receives a range
+                        directly, and a <span class="fluo">Sub</span> that navigates through the worksheet cell by cell.
+                    </p>
+
+                    <!-- ---- METHOD 1: FUNCTION ---- -->
+                    <div style="margin-top: 1.5rem;">
+                        <h3 class="method-title">📗 SumaF — Function</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Sum — Function approach</div>
+<code><span class="excel-func">Public Function</span> <span class="param">SumaF</span>(numbers <span class="excel-func">As</span> Range) <span class="excel-func">As</span> Double
+    <span class="excel-func">Dim</span> i <span class="excel-func">As</span> Integer
+    SumaF = numbers(1, 1).Value
+    <span class="excel-func">For</span> i = 2 <span class="excel-func">To</span> numbers.Count
+        SumaF = SumaF + numbers(i, 1).Value
+    <span class="excel-func">Next</span> i
+<span class="excel-func">End Function</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-sumaf')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-sumaf" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">
+                                🧠 Step-by-step breakdown
+                            </p>
+
+                            <p>This function receives a range of cells called <code>numbers</code>.</p>
+
+                            <p class="mt-2"><strong>1. Initialize with the first value</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code>SumaF = numbers(1, 1).Value</code>
+                            </div>
+
+                            <p class="mt-2"><strong>2. Loop through the rest</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code><span class="excel-func">For</span> i = 2 <span class="excel-func">To</span> numbers.Count</code>
+                            </div>
+                            <p style="margin-left: 1rem;">→ starts at 2 because the first cell was already used to initialize the sum.</p>
+
+                            <p class="mt-2"><strong>3. Accumulate</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code>SumaF = SumaF + numbers(i, 1).Value</code>
+                            </div>
+                            <p style="margin-left: 1rem;">→ adds each cell to the running total.</p>
+
+                            <p class="mt-2"><strong>📌 Key detail</strong></p>
+                            <p style="margin-left: 1rem;"><code>numbers(1,1)</code> means the first cell of the given range.
+                                If the range is <code>B3:B6</code>, then <code>numbers(1,1) = B3</code>, <code>numbers(2,1) = B4</code>, etc.</p>
+                        </div>
+                    </div>
+
+                    <!-- ---- METHOD 2: SUB ---- -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">📕 TheSum — Sub</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Sum — Sub approach</div>
+<code><span class="excel-func">Public Sub</span> <span class="param">TheSum</span>()
+    <span class="excel-func">Dim</span> varSum <span class="excel-func">As</span> Double
+    Range("b3").<span class="param">Activate</span>
+    varSum = ActiveCell.Value
+    <span class="excel-func">Do</span>
+        ActiveCell.<span class="param">Offset</span>(1, 0).<span class="param">Activate</span>
+        <span class="excel-func">If</span> ActiveCell.Value &lt;&gt; "" <span class="excel-func">And</span> VBA.<span class="param">IsNumeric</span>(ActiveCell.Value) = True <span class="excel-func">Then</span>
+            varSum = varSum + ActiveCell.Value
+        <span class="excel-func">End If</span>
+    <span class="excel-func">Loop Until</span> ActiveCell.Text = ""
+    ActiveCell.Value = varSum
+    ActiveCell.Font.Bold = True
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-thesum')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-thesum" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">
+                                🧠 Step-by-step breakdown
+                            </p>
+
+                            <p>This macro starts in cell <code>B3</code> and stores its value in <code>varSum</code>.</p>
+
+                            <p class="mt-2"><strong>1. Move down one cell at a time</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code>ActiveCell.<span class="param">Offset</span>(1, 0).<span class="param">Activate</span></code>
+                            </div>
+                            <p style="margin-left: 1rem;">→ <code>Offset(1, 0)</code> = move 1 row down, same column.</p>
+
+                            <p class="mt-2"><strong>2. Check & accumulate</strong></p>
+                            <p style="margin-left: 1rem;">If the new cell contains a number, add it to the total.</p>
+
+                            <p class="mt-2"><strong>3. Stop condition</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code><span class="excel-func">Loop Until</span> ActiveCell.Text = ""</code>
+                            </div>
+                            <p style="margin-left: 1rem;">→ the empty cell is used as the stopping signal.</p>
+
+                            <p class="mt-2"><strong>4. Write result</strong></p>
+                            <p style="margin-left: 1rem;">The macro writes the total into the empty cell and formats it in <strong>bold</strong>.</p>
+
+                            <p class="mt-2"><strong>📌 Example</strong></p>
+                            <p style="margin-left: 1rem;">If B3 = 5, B4 = 7, B5 = 2, and B6 is empty →
+                                computes <code>5 + 7 + 2 = 14</code>, writes 14 into B6 in bold.</p>
+                        </div>
+                    </div>
+
+                    <!-- ---- KEY INSIGHT: FUNCTION VS SUB ---- -->
+                    <div style="margin-top: 2rem;">
+                        <div class="alert-box" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                            <p style="font-weight: 800; font-size: 1.1rem; color: var(--clr-excel-green);">
+                                💡 Function vs Sub
+                            </p>
+                            <p><span class="fluo">Function</span> = better when the <strong>range is already known</strong>.</p>
+                            <p><span class="fluo">Sub</span> = better when the macro must <strong>move through Excel and decide where to stop</strong>.</p>
+                        </div>
+
+                        <div class="alert-box" style="margin-top: 1rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                            <p style="font-weight: 800; font-size: 1.1rem; color: var(--clr-excel-green);">
+                                ⚠️ Button use
+                            </p>
+                            <p>A button can directly run a <strong>Sub</strong>, but <strong>not</strong> usually a Function.</p>
+                            <ul style="margin-left: 1.5rem; line-height: 2;">
+                                <li>A <strong>Sub</strong> performs an <span class="fluo">action</span> in Excel</li>
+                                <li>A <strong>Function</strong> returns a <span class="fluo">value</span></li>
+                            </ul>
+                            <p>→ <code>TheSum</code> can be assigned directly to a button.<br>
+                               → <code>SumaF</code> should usually be called inside a Sub.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================= -->
+                <!-- SECTION 2: PRODUCT                            -->
+                <!-- ============================================= -->
+                <section class="content-card">
+                    <h2 class="section-title">2. PRODUCT</h2>
+
+                    <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+                        Same pattern as SUM, but with <span class="fluo">multiplication</span> instead of addition.
+                        Again, two approaches: Function and Sub.
+                    </p>
+
+                    <!-- ---- METHOD 1: FUNCTION ---- -->
+                    <div style="margin-top: 1.5rem;">
+                        <h3 class="method-title">📗 ProductF — Function</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Product — Function approach</div>
+<code><span class="excel-func">Public Function</span> <span class="param">ProductF</span>(numbers <span class="excel-func">As</span> Range) <span class="excel-func">As</span> Double
+    <span class="excel-func">Dim</span> i <span class="excel-func">As</span> Integer
+    ProductF = numbers(1, 1).Value
+    <span class="excel-func">For</span> i = 2 <span class="excel-func">To</span> numbers.Count
+        ProductF = ProductF * numbers(i, 1).Value
+    <span class="excel-func">Next</span> i
+<span class="excel-func">End Function</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-productf')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-productf" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">
+                                🧠 Step-by-step breakdown
+                            </p>
+
+                            <p>This function receives a range of cells called <code>numbers</code>.</p>
+
+                            <p class="mt-2"><strong>1. Initialize with the first value</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code>ProductF = numbers(1, 1).Value</code>
+                            </div>
+
+                            <p class="mt-2"><strong>2. Loop through the rest</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code><span class="excel-func">For</span> i = 2 <span class="excel-func">To</span> numbers.Count</code>
+                            </div>
+                            <p style="margin-left: 1rem;">→ starts at 2 because the first cell was already used to initialize the product.</p>
+
+                            <p class="mt-2"><strong>3. Accumulate</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code>ProductF = ProductF * numbers(i, 1).Value</code>
+                            </div>
+                            <p style="margin-left: 1rem;">→ multiplies each cell into the running product.</p>
+
+                            <p class="mt-2"><strong>📌 Key detail</strong></p>
+                            <p style="margin-left: 1rem;">If the range is <code>C3:C6</code>, then <code>numbers(1,1) = C3</code>, <code>numbers(2,1) = C4</code>, etc.</p>
+                        </div>
+                    </div>
+
+                    <!-- ---- METHOD 2: SUB ---- -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">📕 TheProduct — Sub</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Product — Sub approach</div>
+<code><span class="excel-func">Public Sub</span> <span class="param">TheProduct</span>()
+    <span class="excel-func">Dim</span> varProduct <span class="excel-func">As</span> Double
+    Range("c3").<span class="param">Activate</span>
+    varProduct = ActiveCell.Value
+    <span class="excel-func">Do</span>
+        ActiveCell.<span class="param">Offset</span>(1, 0).<span class="param">Activate</span>
+        <span class="excel-func">If</span> ActiveCell.Value &lt;&gt; "" <span class="excel-func">And</span> VBA.<span class="param">IsNumeric</span>(ActiveCell.Value) = True <span class="excel-func">Then</span>
+            varProduct = varProduct * ActiveCell.Value
+        <span class="excel-func">End If</span>
+    <span class="excel-func">Loop Until</span> ActiveCell.Text = ""
+    ActiveCell.Value = varProduct
+    ActiveCell.Font.Bold = True
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-theproduct')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-theproduct" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">
+                                🧠 Step-by-step breakdown
+                            </p>
+
+                            <p>This macro starts in cell <code>C3</code> and stores its value in <code>varProduct</code>.</p>
+
+                            <p class="mt-2"><strong>1. Move down one cell at a time</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code>ActiveCell.<span class="param">Offset</span>(1, 0).<span class="param">Activate</span></code>
+                            </div>
+                            <p style="margin-left: 1rem;">→ <code>Offset(1, 0)</code> = move 1 row down, same column.</p>
+
+                            <p class="mt-2"><strong>2. Check & accumulate</strong></p>
+                            <p style="margin-left: 1rem;">If the new cell contains a number, multiply it into the running product.</p>
+
+                            <p class="mt-2"><strong>3. Stop & write</strong></p>
+                            <p style="margin-left: 1rem;">When the empty cell is reached, the macro writes the product and formats it in <strong>bold</strong>.</p>
+
+                            <p class="mt-2"><strong>📌 Example</strong></p>
+                            <p style="margin-left: 1rem;">If C3 = 2, C4 = 3, C5 = 4, and C6 is empty →
+                                computes <code>2 × 3 × 4 = 24</code>, writes 24 into C6 in bold.</p>
+                        </div>
+                    </div>
+
+                    <!-- ---- BUTTON USE ---- -->
+                    <div style="margin-top: 2rem;">
+                        <div class="alert-box" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                            <p style="font-weight: 800; font-size: 1.1rem; color: var(--clr-excel-green);">
+                                ⚠️ Button use
+                            </p>
+                            <p>→ <code>TheProduct</code> can be assigned directly to a button.<br>
+                               → <code>ProductF</code> should usually be called inside a Sub.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================= -->
+                <!-- SECTION 3: RANDOM                             -->
+                <!-- ============================================= -->
+                <section class="content-card">
+                    <h2 class="section-title">3. RANDOM</h2>
+
+                    <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+                        Two ways to fill a range with <span class="fluo">random numbers</span>: one using the current
+                        <strong>Selection</strong>, the other prompting the user via an <strong>InputBox</strong>.
+                    </p>
+
+                    <!-- ---- METHOD 1: SELECTION ---- -->
+                    <div style="margin-top: 1.5rem;">
+                        <h3 class="method-title">📗 MakroRn — Selection-Based</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Random — Selection-based</div>
+<code><span class="excel-func">Sub</span> <span class="param">MakroRn</span>()
+    <span class="code-comment">'Ctrl+n</span>
+    rw = Selection.Rows.Count
+    cl = Selection.Columns.Count
+    <span class="excel-func">For</span> i = 1 <span class="excel-func">To</span> rw
+        <span class="excel-func">For</span> j = 1 <span class="excel-func">To</span> cl
+            Selection.Cells(i, j).Value = <span class="param">Rnd</span>
+        <span class="excel-func">Next</span> j
+    <span class="excel-func">Next</span> i
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-makrorn')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-makrorn" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">
+                                🧠 Step-by-step breakdown
+                            </p>
+
+                            <p>This macro works on the cells <strong>currently selected</strong> in Excel.</p>
+
+                            <p class="mt-2"><strong>1. Count the selection dimensions</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code>rw = Selection.Rows.Count
+cl = Selection.Columns.Count</code>
+                            </div>
+
+                            <p class="mt-2"><strong>2. Double loop to fill every cell</strong></p>
+                            <p style="margin-left: 1rem;">→ the first loop goes through rows, the second through columns.</p>
+
+                            <p class="mt-2"><strong>3. Write a random number</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code>Selection.Cells(i, j).Value = <span class="param">Rnd</span></code>
+                            </div>
+                            <p style="margin-left: 1rem;">→ every cell receives a random number between 0 and 1.</p>
+
+                            <p class="mt-2"><strong>📌 Example</strong></p>
+                            <p style="margin-left: 1rem;">If the selected range is <code>A1:B2</code>, the macro fills A1, B1, A2, B2 with random numbers.</p>
+                        </div>
+                    </div>
+
+                    <!-- ---- METHOD 2: INPUTBOX ---- -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">📕 RandomSub — InputBox-Based</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Random — InputBox-based</div>
+<code><span class="excel-func">Sub</span> <span class="param">RandomSub</span>()
+    pos = <span class="param">InputBox</span>("Input array specification e.g. a1:b3")
+    rw = Range(pos).Rows.Count
+    cl = Range(pos).Columns.Count
+    <span class="excel-func">For</span> i = 1 <span class="excel-func">To</span> rw
+        <span class="excel-func">For</span> j = 1 <span class="excel-func">To</span> cl
+            Range(pos).Cells(i, j).Value = <span class="param">Rnd</span>
+        <span class="excel-func">Next</span> j
+    <span class="excel-func">Next</span> i
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-randomsub')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-randomsub" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">
+                                🧠 Step-by-step breakdown
+                            </p>
+
+                            <p>Same filling logic, but instead of using the current selection, it <strong>asks the user</strong> to type a range.</p>
+
+                            <p class="mt-2"><strong>1. Prompt the user</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code>pos = <span class="param">InputBox</span>("Input array specification e.g. a1:b3")</code>
+                            </div>
+                            <p style="margin-left: 1rem;">→ <code>pos</code> stores the range address as text (e.g. <code>"A1:B3"</code>).</p>
+
+                            <p class="mt-2"><strong>2. Convert text → range object</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code>Range(pos)</code>
+                            </div>
+                            <p style="margin-left: 1rem;">→ turns the text into a real Excel range.</p>
+
+                            <p class="mt-2"><strong>3. Fill with random numbers</strong></p>
+                            <p style="margin-left: 1rem;">The two loops work exactly like MakroRn.</p>
+
+                            <p class="mt-2"><strong>📌 Key difference</strong></p>
+                            <p style="margin-left: 1rem;">The only difference is <strong>how the target area is chosen</strong>:<br>
+                                → <code>Selection</code> in MakroRn<br>
+                                → <code>InputBox + Range(pos)</code> in RandomSub</p>
+                        </div>
+                    </div>
+
+                    <!-- ---- KEY INSIGHTS ---- -->
+                    <div style="margin-top: 2rem;">
+                        <div class="alert-box" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                            <p style="font-weight: 800; font-size: 1.1rem; color: var(--clr-excel-green);">
+                                ⚠️ Button use
+                            </p>
+                            <p>Both <code>MakroRn</code> and <code>RandomSub</code> are <strong>Sub</strong> procedures → both can be assigned directly to a button.</p>
+                            <ul style="margin-left: 1.5rem; line-height: 2;">
+                                <li><code>MakroRn</code> needs the user to <strong>select a range first</strong></li>
+                                <li><code>RandomSub</code> asks for the range through an <strong>input box</strong></li>
+                            </ul>
+                        </div>
+
+                        <div class="alert-box" style="margin-top: 1rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                            <p style="font-weight: 800; font-size: 1.1rem; color: var(--clr-excel-green);">
+                                💡 Core pattern
+                            </p>
+                            <p>Both methods share the <strong>same filling logic</strong>:</p>
+                            <ul style="margin-left: 1.5rem; line-height: 2;">
+                                <li>Count rows</li>
+                                <li>Count columns</li>
+                                <li>Loop through the whole area</li>
+                                <li>Place <code>Rnd</code> in each cell</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+        <!-- ================= END MAIN CONTENT ================= -->
+
+    </div>
+
+    <!-- Overlay Note System -->
+    <div id="note-overlay" class="overlay" onclick="closeNote()"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
