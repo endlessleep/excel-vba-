@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 8: VBA — Data, Loops & Files</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-wrapper">
+
+        <!-- Sidebar Toggle Button -->
+        <button class="menu-toggle" onclick="toggleSidebar()" style="display: none;">☰</button>
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>EXCEL VBA CORE</span>
+                <button class="close-sidebar" onclick="toggleSidebar()">✕</button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 1: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="index.html" class="nav-link">Ex 1: NPV & IRR</a>
+                        <a href="ex2.html" class="nav-link">Ex 2: Multiple IRRs</a>
+                        <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
+                        <a href="ex4.html" class="nav-link">Ex 4: Payment Schedule</a>
+                        <a href="ex5.html" class="nav-link">Ex 5: Future Value</a>
+                        <a href="ex6.html" class="nav-link">Ex 6 & Case Study</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 2: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture2-ex1.html" class="nav-link">Ex 1: Gordon Model</a>
+                        <a href="lecture2-ex2.html" class="nav-link">Ex 2: Two-Stage Model</a>
+                        <a href="lecture2-ex3.html" class="nav-link">Ex 3: Cost of Capital</a>
+                        <a href="lecture2-ex4.html" class="nav-link">Ex 4: CAPM & Regression</a>
+                        <a href="lecture2-ex5.html" class="nav-link">Ex 5: Portfolio Analysis</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 3: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture3-ex1.html" class="nav-link">Ex 1: Matrix Regression</a>
+                        <a href="lecture3-ex2.html" class="nav-link">Ex 2: Manual Histogram</a>
+                        <a href="lecture3-ex3.html" class="nav-link">Ex 3: Lognormal Simulation</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 6: VBA
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture6-vba.html" class="nav-link">Lecture 6</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 7: VBA
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture7-vba.html" class="nav-link">Lecture 7</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 8: VBA
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content show">
+                        <a href="lecture8-vba.html" class="nav-link active">Lecture 8</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <!-- ================= END SIDEBAR ================= -->
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1>LECTURE 8: VBA — DATA, LOOPS & FILES</h1>
+                <p style="margin-top: 0.5rem; font-size: 1.1rem; color: var(--clr-text-muted);">Cross-workbook data
+                    transfer, Do/For loop patterns, and file management.</p>
+            </header>
+
+            <div class="cards-container">
+
+                <!-- ============================================= -->
+                <!-- SECTION 1: LOAD DATA BETWEEN TWO WORKBOOKS    -->
+                <!-- ============================================= -->
+                <section class="content-card">
+                    <h2 class="section-title">1. Load Data Between Two Workbooks</h2>
+
+                    <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+                        This macro copies a block of data from a <span class="fluo">source workbook</span> and pastes
+                        it into a <span class="fluo">destination workbook</span>. VBA always works on the
+                        <strong>active</strong> workbook when using <code>Range</code>, <code>Selection</code>,
+                        <code>ActiveSheet</code>, and <code>Paste</code>.
+                    </p>
+
+                    <div class="code-block dark-mode">
+                        <div class="code-comment">' Load data from one workbook to another</div>
+<code><span class="excel-func">Public Sub</span> <span class="param">LoadData</span>()
+
+    Workbooks("FichierData.xls").<span class="param">Activate</span>
+
+    Range("A2:B2").<span class="param">Select</span>
+    Range(Selection, ActiveCell.SpecialCells(xlLastCell)).<span class="param">Select</span>
+    Selection.<span class="param">Copy</span>
+
+    Workbooks("Lecture8.xls").<span class="param">Activate</span>
+
+    Range("A16").<span class="param">Select</span>
+    ActiveSheet.<span class="param">Paste</span>
+
+<span class="excel-func">End Sub</span></code>
+                    </div>
+
+                    <button class="btn-note mt-4" onclick="toggleNote('note-loaddata')">
+                        <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                    </button>
+
+                    <div id="note-loaddata" class="post-it-note">
+                        <p style="font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">
+                            🧠 Step-by-step breakdown
+                        </p>
+
+                        <p><strong>1. Activate the source workbook</strong></p>
+                        <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                            <code>Workbooks("FichierData.xls").<span class="param">Activate</span></code>
+                        </div>
+                        <p style="margin-left: 1rem;">→ all subsequent instructions apply to this workbook.</p>
+
+                        <p class="mt-2"><strong>2. Select and extend the data block</strong></p>
+                        <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                            <code>Range("A2:B2").<span class="param">Select</span>
+Range(Selection, ActiveCell.SpecialCells(xlLastCell)).<span class="param">Select</span></code>
+                        </div>
+                        <p style="margin-left: 1rem;">→ starts at A2:B2, then extends to the <span class="fluo">last used cell</span> on the sheet.</p>
+
+                        <p class="mt-2"><strong>3. Copy the selected block</strong></p>
+                        <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                            <code>Selection.<span class="param">Copy</span></code>
+                        </div>
+
+                        <p class="mt-2"><strong>4. Switch to the destination workbook and paste</strong></p>
+                        <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                            <code>Workbooks("Lecture8.xls").<span class="param">Activate</span>
+Range("A16").<span class="param">Select</span>
+ActiveSheet.<span class="param">Paste</span></code>
+                        </div>
+                        <p style="margin-left: 1rem;">→ pastes the copied block starting from cell A16.</p>
+
+                        <div class="alert-box" style="margin-top: 1rem;">
+                            <span class="alert-icon">⚠️</span>
+                            <span>This is <strong>recorder-style VBA</strong> — it depends on the correct workbook being open, the correct sheet being active, and the last used cell being detected correctly.</span>
+                        </div>
+
+                        <p class="mt-2"><strong>📌 Visual logic</strong></p>
+                        <p style="margin-left: 1rem;">source workbook → select data → copy<br>
+                            destination workbook → select target cell → paste</p>
+                    </div>
+                </section>
+
+                <!-- ============================================= -->
+                <!-- SECTION 2: DO LOOPS — THREE VARIANTS          -->
+                <!-- ============================================= -->
+                <section class="content-card">
+                    <h2 class="section-title">2. Do Loops — Three Variants</h2>
+
+                    <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+                        Three macros that all use a <span class="fluo">Do loop</span> to work row by row. They detect
+                        how many rows are filled in column A, then write results in columns B, C, and D using three
+                        different stopping conditions.
+                    </p>
+
+                    <!-- DO UNTIL ... LOOP -->
+                    <div>
+                        <h3 class="method-title">📗 Do Until … Loop</h3>
+                        <p style="font-size: 0.95rem; color: var(--clr-text-muted); margin-bottom: 0.75rem;">
+                            Writes an <strong>increasing sequence</strong> (100, 101, 102…) in column B.
+                        </p>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Do Until ... Loop</div>
+<code><span class="excel-func">Sub</span> <span class="param">dountill</span>()
+    <span class="excel-func">Dim</span> RCount <span class="excel-func">As</span> Long
+    <span class="excel-func">Dim</span> FRow <span class="excel-func">As</span> Long
+    <span class="excel-func">Dim</span> CCount <span class="excel-func">As</span> Long
+
+    FRow = 0
+    RCount = Range("A65000").<span class="param">End</span>(xlUp).Row
+    CCount = Range("A65000").<span class="param">End</span>(xlUp).Column
+
+    <span class="excel-func">Do Until</span> FRow = RCount
+        Cells(FRow + 1, CCount + 1).Value = 100 + FRow
+        FRow = FRow + 1
+    <span class="excel-func">Loop</span>
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-dountil')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-dountil" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+                            <p><code>RCount</code> = last used row in column A.<br>
+                                <code>CCount</code> = column number of A (= 1).</p>
+                            <p class="mt-2"><code>Cells(FRow + 1, CCount + 1)</code> → writes in <strong>column B</strong>.</p>
+                            <p class="mt-2">Result: B1 = 100, B2 = 101, B3 = 102…</p>
+                            <p class="mt-2"><strong>Stopping condition:</strong> <code>Do Until FRow = RCount</code><br>
+                                → repeat <strong>until</strong> the counter reaches the last row.</p>
+                        </div>
+                    </div>
+
+                    <!-- DO WHILE ... LOOP -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">📕 Do While … Loop</h3>
+                        <p style="font-size: 0.95rem; color: var(--clr-text-muted); margin-bottom: 0.75rem;">
+                            Writes a <strong>constant value</strong> (100) in column C.
+                        </p>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Do While ... Loop</div>
+<code><span class="excel-func">Sub</span> <span class="param">dowhile</span>()
+    <span class="excel-func">Dim</span> RCount <span class="excel-func">As</span> Long
+    <span class="excel-func">Dim</span> FRow <span class="excel-func">As</span> Long
+    <span class="excel-func">Dim</span> CCount <span class="excel-func">As</span> Long
+
+    FRow = 0
+    RCount = Range("A65000").<span class="param">End</span>(xlUp).Row
+    CCount = Range("A65000").<span class="param">End</span>(xlUp).Column
+
+    <span class="excel-func">Do While</span> FRow &lt;&gt; RCount
+        Cells(FRow + 1, CCount + 2).Value = 100
+        FRow = FRow + 1
+    <span class="excel-func">Loop</span>
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-dowhile')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-dowhile" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+                            <p><code>CCount + 2 = 3</code> → writes in <strong>column C</strong>.</p>
+                            <p class="mt-2">Result: C1 = 100, C2 = 100, C3 = 100…</p>
+                            <p class="mt-2"><strong>Stopping condition:</strong> <code>Do While FRow &lt;&gt; RCount</code><br>
+                                → repeat <strong>while</strong> the counter is different from the last row.</p>
+                            <p class="mt-2">Logically equivalent to <code>Do Until FRow = RCount</code> — both stop at the same moment.</p>
+                        </div>
+                    </div>
+
+                    <!-- DO ... LOOP UNTIL -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">📙 Do … Loop Until</h3>
+                        <p style="font-size: 0.95rem; color: var(--clr-text-muted); margin-bottom: 0.75rem;">
+                            <strong>Sums columns B + C</strong> and writes the result in column D.
+                        </p>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Do ... Loop Until</div>
+<code><span class="excel-func">Sub</span> <span class="param">dountill2</span>()
+    <span class="excel-func">Dim</span> RCount <span class="excel-func">As</span> Long
+    <span class="excel-func">Dim</span> FRow <span class="excel-func">As</span> Long
+    <span class="excel-func">Dim</span> CCount <span class="excel-func">As</span> Long
+
+    FRow = 0
+    RCount = Range("A65000").<span class="param">End</span>(xlUp).Row
+    CCount = Range("A65000").<span class="param">End</span>(xlUp).Column
+
+    <span class="excel-func">Do</span>
+        Cells(FRow + 1, CCount + 3).Value = Cells(FRow + 1, CCount + 2).Value + Cells(FRow + 1, CCount + 1).Value
+        FRow = FRow + 1
+    <span class="excel-func">Loop Until</span> FRow = RCount
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-doloopuntil')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-doloopuntil" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+                            <p><code>CCount + 3 = 4</code> → writes in <strong>column D</strong>.</p>
+                            <p class="mt-2">D = C + B. Example: if B1 = 100 and C1 = 100, then D1 = 200.</p>
+                            <p class="mt-2"><strong>Stopping condition at the end:</strong> <code>Loop Until FRow = RCount</code><br>
+                                → runs the block <strong>first</strong>, then checks. Different structure from the first two.</p>
+                        </div>
+                    </div>
+
+                    <!-- KEY INSIGHTS FOR DO LOOPS -->
+                    <div style="margin-top: 2rem;">
+                        <div class="alert-box" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                            <p style="font-weight: 800; font-size: 1.1rem; color: var(--clr-excel-green);">
+                                💡 Shared logic
+                            </p>
+                            <p>All three macros use <code>Range("A65000").End(xlUp).Row</code> to find the last used row in column A. Column A is only used as a <strong>reference</strong> — results are written in B, C, D.</p>
+                        </div>
+
+                        <div class="alert-box" style="margin-top: 1rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                            <p style="font-weight: 800; font-size: 1.1rem; color: var(--clr-excel-green);">
+                                📋 Three loop styles
+                            </p>
+                            <ul style="margin-left: 1.5rem; line-height: 2;">
+                                <li><code>Do Until … Loop</code> — condition <strong>at the top</strong></li>
+                                <li><code>Do While … Loop</code> — condition <strong>at the top</strong> (opposite logic)</li>
+                                <li><code>Do … Loop Until</code> — condition <strong>at the bottom</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================= -->
+                <!-- SECTION 3: OPENING A WORKBOOK                 -->
+                <!-- ============================================= -->
+                <section class="content-card">
+                    <h2 class="section-title">3. Opening a Workbook</h2>
+
+                    <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+                        Three procedures that manage <span class="fluo">file-based data import</span>:
+                        one opens from a typed filename, one clears imported data, and one uses a file picker.
+                        The actual copy/paste logic is <strong>delegated to <code>LoadData</code></strong>.
+                    </p>
+
+                    <!-- BUTTON 1: OPEN FROM TYPED PATH -->
+                    <div>
+                        <h3 class="method-title">📗 Button 1 — Open from typed filename</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Open file from typed filename</div>
+<code><span class="excel-func">Private Sub</span> <span class="param">CommandButton1_Click</span>()
+
+    <span class="excel-func">Dim</span> DataFile <span class="excel-func">As</span> Object
+    <span class="excel-func">Dim</span> DataWB <span class="excel-func">As</span> Excel.Workbook
+
+    <span class="excel-func">Set</span> DataFile = <span class="param">CreateObject</span>("Scripting.FileSystemObject")
+    Filename = <span class="param">InputBox</span>("File Name", "Input", CurDir &amp; "\Lecture8_Data.xls")
+
+    <span class="excel-func">If</span> DataFile.<span class="param">FileExists</span>(Filename) = True <span class="excel-func">Then</span>
+        Workbooks.<span class="param">Open</span>(Filename)
+        <span class="excel-func">Set</span> DataWB = ActiveWorkbook
+        <span class="param">LoadData</span>
+        DataWB.<span class="param">Close</span>
+    <span class="excel-func">Else</span>
+        Application.DisplayAlerts = False
+        Application.ScreenUpdating = False
+        <span class="param">MsgBox</span>("Specified file does not exist!")
+    <span class="excel-func">End If</span>
+
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-btn1')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-btn1" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+                            <p><code>CreateObject("Scripting.FileSystemObject")</code> → creates an object that can check files on disk.</p>
+                            <p class="mt-2"><code>DataFile.FileExists(Filename)</code> → verifies whether the file path is valid.</p>
+                            <p class="mt-2">If the file exists: <strong>open → run LoadData → close</strong>.</p>
+                            <p class="mt-2">The file is only opened <strong>temporarily</strong> as a source, then closed after import.</p>
+                        </div>
+                    </div>
+
+                    <!-- BUTTON 2: CLEAR DATA -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">📕 Button 2 — Clear imported data</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Clear imported data starting from A16</div>
+<code><span class="excel-func">Private Sub</span> <span class="param">CommandButton2_Click</span>()
+
+    Range("A16").<span class="param">Activate</span>
+
+    <span class="excel-func">If</span> ActiveCell &lt;&gt; "" <span class="excel-func">Then</span>
+        Range("A16:B16").<span class="param">Select</span>
+        Range(Selection, ActiveCell.SpecialCells(xlLastCell)).<span class="param">Select</span>
+        Selection.<span class="param">ClearContents</span>
+        Range("A16").<span class="param">Select</span>
+    <span class="excel-func">End If</span>
+
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-btn2')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-btn2" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+                            <p>Checks if A16 is not empty → extends the selection to the last used cell → <strong>clears values only</strong> (not formatting).</p>
+                            <p class="mt-2">Then moves back to A16.</p>
+                        </div>
+                    </div>
+
+                    <!-- OPEN FILE WITH FILE CHOOSER -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">📙 OpenFile — File Chooser</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Open file with file picker dialog</div>
+<code><span class="excel-func">Sub</span> <span class="param">OpenFile</span>()
+
+    nsName1 = ActiveWorkbook.Name
+
+    <span class="param">MsgBox</span>("Select file to open")
+
+    NewFN = Application.<span class="param">GetOpenFilename</span>(fileFilter:="Excel Files (.xls), .xls", Title:="SELECT FILE HERE")
+
+    <span class="excel-func">If</span> NewFN = False <span class="excel-func">Then</span>
+        <span class="param">MsgBox</span> "Stopping because you did not select a file"
+        <span class="excel-func">Exit Sub</span>
+    <span class="excel-func">Else</span>
+        <span class="excel-func">Set</span> SampleFile = Application.Workbooks.<span class="param">Open</span>(Filename:=NewFN)
+    <span class="excel-func">End If</span>
+
+    nsName0 = SampleFile.Name
+    Workbooks(nsName0).Sheets("Data").<span class="param">Select</span>
+    <span class="param">LoadData</span>
+
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-openfile')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-openfile" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+                            <p><code>Application.GetOpenFilename(…)</code> → opens the standard file picker window.</p>
+                            <p class="mt-2">If the user cancels → the macro stops with <code>Exit Sub</code>.</p>
+                            <p class="mt-2">If a file is selected: <strong>open → go to "Data" sheet → run LoadData</strong>.</p>
+                            <p class="mt-2">More <span class="fluo">user-friendly</span> than the InputBox version — no path typing needed.</p>
+                            <p class="mt-2"><strong>📌 Note:</strong> Unlike Button 1, this macro does <strong>not</strong> close the source workbook afterwards.</p>
+                        </div>
+                    </div>
+
+                    <!-- KEY INSIGHT -->
+                    <div style="margin-top: 2rem;">
+                        <div class="alert-box" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                            <p style="font-weight: 800; font-size: 1.1rem; color: var(--clr-excel-green);">
+                                💡 Architecture
+                            </p>
+                            <p>These procedures separate the workflow into two parts:</p>
+                            <ul style="margin-left: 1.5rem; line-height: 2;">
+                                <li><strong>File handling</strong> — how the file is chosen, opened, closed</li>
+                                <li><strong>Data loading</strong> — delegated to <code>LoadData</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================= -->
+                <!-- SECTION 4: FOR LOOP EXAMPLES                  -->
+                <!-- ============================================= -->
+                <section class="content-card">
+                    <h2 class="section-title">4. For Loop — Five Patterns</h2>
+
+                    <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+                        Five examples showing how a <span class="fluo">For…Next</span> loop can be adapted:
+                        basic looping, looping through all rows, <strong>skipping rows</strong> with Step,
+                        looping <strong>backwards</strong>, and stopping early with <strong>Exit For</strong>.
+                    </p>
+
+                    <!-- EX 1: BASIC -->
+                    <div>
+                        <h3 class="method-title">1️⃣ Basic loop</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Basic For loop — writes 101…110 in column A</div>
+<code><span class="excel-func">Sub</span> <span class="param">forexample</span>()
+    <span class="excel-func">Dim</span> i <span class="excel-func">As</span> Integer
+    <span class="excel-func">Dim</span> c <span class="excel-func">As</span> Integer
+    c = 1
+    <span class="excel-func">For</span> i = 1 <span class="excel-func">To</span> 10
+        Cells(i, c).Value = 100 + Cells(i, c).Row
+    <span class="excel-func">Next</span> i
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-for1')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-for1" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+                            <p>Writes in <strong>column A</strong> (c = 1), rows 1 to 10.</p>
+                            <p class="mt-2">Each cell = <code>100 + row number</code> → A1 = 101, A2 = 102 … A10 = 110.</p>
+                            <p class="mt-2">This is the most basic form of <code>For…Next</code>.</p>
+                        </div>
+                    </div>
+
+                    <!-- EX 2: STEP 1 -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">2️⃣ Step 1 (explicit default)</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Step 1 — writes A + i in column B</div>
+<code><span class="excel-func">Sub</span> <span class="param">forexample2</span>()
+    LastRow = Range("A65000").<span class="param">End</span>(xlUp).Row
+    FirstCol = Range("A65000").<span class="param">End</span>(xlUp).Column
+    <span class="excel-func">For</span> i = 1 <span class="excel-func">To</span> LastRow <span class="excel-func">Step</span> 1
+        Cells(i, FirstCol + 1).Value = Cells(i, FirstCol) + i
+    <span class="excel-func">Next</span> i
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-for2')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-for2" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+                            <p>Writes in <strong>column B</strong> (FirstCol + 1 = 2).</p>
+                            <p class="mt-2">Each cell = <code>value in column A + row number</code>.</p>
+                            <p class="mt-2">If A1 = 10, A2 = 20, A3 = 30 → B1 = 11, B2 = 22, B3 = 33.</p>
+                            <p class="mt-2"><code>Step 1</code> is the default — shown here for complete syntax.</p>
+                        </div>
+                    </div>
+
+                    <!-- EX 3: STEP 2 -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">3️⃣ Step 2 (skip rows)</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Step 2 — processes every other row in column C</div>
+<code><span class="excel-func">Sub</span> <span class="param">forexample3</span>()
+    LastRow = Range("A65000").<span class="param">End</span>(xlUp).Row
+    FirstCol = Range("A65000").<span class="param">End</span>(xlUp).Column
+    <span class="excel-func">For</span> i = 1 <span class="excel-func">To</span> LastRow <span class="excel-func">Step</span> 2
+        Cells(i, FirstCol + 2).Value = Cells(i, FirstCol + 1) + i
+    <span class="excel-func">Next</span> i
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-for3')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-for3" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+                            <p>Writes in <strong>column C</strong> (FirstCol + 2 = 3).</p>
+                            <p class="mt-2">Processes row 1, 3, 5, 7… — <strong>skips every second row</strong>.</p>
+                            <p class="mt-2">Each cell = <code>value in column B + row number</code>.</p>
+                        </div>
+                    </div>
+
+                    <!-- EX 4: STEP 3 -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">4️⃣ Step 3 (wider skip)</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Step 3 — processes every third row in column D</div>
+<code><span class="excel-func">Sub</span> <span class="param">forexample4</span>()
+    LastRow = Range("A65000").<span class="param">End</span>(xlUp).Row
+    FirstCol = Range("A65000").<span class="param">End</span>(xlUp).Column
+    <span class="excel-func">For</span> i = 1 <span class="excel-func">To</span> LastRow <span class="excel-func">Step</span> 3
+        Cells(i, FirstCol + 3).Value = Cells(i, FirstCol) + i
+    <span class="excel-func">Next</span> i
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-for4')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-for4" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+                            <p>Writes in <strong>column D</strong> (FirstCol + 3 = 4).</p>
+                            <p class="mt-2">Processes row 1, 4, 7, 10… — every <strong>third</strong> row only.</p>
+                            <p class="mt-2">Each cell = <code>value in column A + row number</code>.</p>
+                        </div>
+                    </div>
+
+                    <!-- EX 5: STEP -1 & EXIT FOR -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">5️⃣ Step -1 & Exit For (backward + early stop)</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Step -1 — backwards loop with immediate exit</div>
+<code><span class="excel-func">Sub</span> <span class="param">forexample5</span>()
+    LastRow = Range("A65000").<span class="param">End</span>(xlUp).Row
+    FirstCol = Range("A65000").<span class="param">End</span>(xlUp).Column
+    <span class="excel-func">For</span> i = LastRow <span class="excel-func">To</span> 1 <span class="excel-func">Step</span> -1
+        Cells(i, FirstCol + 4).Value = Cells(i, FirstCol) + i
+        <span class="excel-func">Exit For</span>
+    <span class="excel-func">Next</span> i
+    <span class="param">MsgBox</span> "First Value Found"
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-for5')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-for5" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+                            <p>Writes in <strong>column E</strong> (FirstCol + 4 = 5).</p>
+                            <p class="mt-2">The loop starts at <code>LastRow</code> and goes <strong>backwards</strong> to row 1 with <code>Step -1</code>.</p>
+                            <p class="mt-2">But <code>Exit For</code> stops the loop <strong>immediately after the first iteration</strong>.</p>
+                            <p class="mt-2">So in practice, only <strong>one value</strong> is written — on the last used row, in column E.</p>
+                            <p class="mt-2">This demonstrates two ideas: <span class="fluo">backwards looping</span> and <span class="fluo">early exit</span>.</p>
+                        </div>
+                    </div>
+
+                    <!-- KEY INSIGHT -->
+                    <div style="margin-top: 2rem;">
+                        <div class="alert-box" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                            <p style="font-weight: 800; font-size: 1.1rem; color: var(--clr-excel-green);">
+                                💡 Key insight
+                            </p>
+                            <p>A <code>For…Next</code> loop can <strong>move forward</strong>, <strong>skip rows</strong>,
+                                <strong>move backward</strong>, or <strong>stop after the first match</strong>. Same structure, many behaviors.</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+        <!-- ================= END MAIN CONTENT ================= -->
+
+    </div>
+
+    <!-- Overlay Note System -->
+    <div id="note-overlay" class="overlay" onclick="closeNote()"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
