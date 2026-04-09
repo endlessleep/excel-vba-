@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 6: VBA — Financial Modelling</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-wrapper">
+
+        <!-- Sidebar Toggle Button (visible when sidebar is closed) -->
+        <button class="menu-toggle" onclick="toggleSidebar()" style="display: none;">☰</button>
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>EXCEL VBA CORE</span>
+                <button class="close-sidebar" onclick="toggleSidebar()">✕</button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 1: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="index.html" class="nav-link">Ex 1: NPV & IRR</a>
+                        <a href="ex2.html" class="nav-link">Ex 2: Multiple IRRs</a>
+                        <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
+                        <a href="ex4.html" class="nav-link">Ex 4: Payment Schedule</a>
+                        <a href="ex5.html" class="nav-link">Ex 5: Future Value</a>
+                        <a href="ex6.html" class="nav-link">Ex 6 & Case Study</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 2: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture2-ex1.html" class="nav-link">Ex 1: Gordon Model</a>
+                        <a href="lecture2-ex2.html" class="nav-link">Ex 2: Two-Stage Model</a>
+                        <a href="lecture2-ex3.html" class="nav-link">Ex 3: Cost of Capital</a>
+                        <a href="lecture2-ex4.html" class="nav-link">Ex 4: CAPM & Regression</a>
+                        <a href="lecture2-ex5.html" class="nav-link">Ex 5: Portfolio Analysis</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 3: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture3-ex1.html" class="nav-link">Ex 1: Matrix Regression</a>
+                        <a href="lecture3-ex2.html" class="nav-link">Ex 2: Manual Histogram</a>
+                        <a href="lecture3-ex3.html" class="nav-link">Ex 3: Lognormal Simulation</a>
+                    </div>
+                </div>
+
+                <div class="accordion-item active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 6: VBA
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content show">
+                        <a href="lecture6-vba.html" class="nav-link active">VBA Functions</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <!-- ================= END SIDEBAR ================= -->
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1>LECTURE 6: INTRODUCTION TO VBA</h1>
+                <p style="margin-top: 0.5rem; font-size: 1.1rem; color: var(--clr-text-muted);">Writing custom
+                    functions in Visual Basic for Applications.</p>
+            </header>
+
+            <div class="cards-container">
+
+                <!-- ============================================= -->
+                <!-- SECTION 1: VARIANCE-COVARIANCE FUNCTION       -->
+                <!-- ============================================= -->
+                <section class="content-card">
+                    <h2 class="section-title">1. Variance-Covariance Matrix</h2>
+
+                    <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+                        This function takes a table of asset returns (each column = one asset) and computes the full
+                        <span class="fluo">variance-covariance matrix</span>. It compares every column with every other
+                        column using Excel's built-in <code style="font-weight:700;">COVAR</code> function.
+                    </p>
+
+                    <div class="code-block dark-mode">
+                        <div class="code-comment">' Variance-Covariance Function</div>
+<code><span class="excel-func">Option Explicit</span>
+
+<span class="excel-func">Function</span> <span class="param">VarCovar</span>(rng <span class="excel-func">As</span> Range) <span class="excel-func">As</span> Variant
+
+    <span class="excel-func">Dim</span> i <span class="excel-func">As</span> Integer
+    <span class="excel-func">Dim</span> j <span class="excel-func">As</span> Integer
+    <span class="excel-func">Dim</span> numCols <span class="excel-func">As</span> Integer
+
+    numCols = rng.Columns.Count
+
+    <span class="excel-func">Dim</span> matrix() <span class="excel-func">As</span> Double
+    <span class="excel-func">ReDim</span> matrix(numCols - 1, numCols - 1)
+
+    <span class="excel-func">For</span> i = 1 <span class="excel-func">To</span> numCols
+        <span class="excel-func">For</span> j = 1 <span class="excel-func">To</span> numCols
+            matrix(i - 1, j - 1) = Application.WorksheetFunction.<span class="param">Covar</span>(rng.Columns(i), rng.Columns(j))
+        <span class="excel-func">Next</span> j
+    <span class="excel-func">Next</span> i
+
+    VarCovar = matrix
+
+<span class="excel-func">End Function</span></code>
+                    </div>
+
+                    <button class="btn-note mt-4" onclick="toggleNote('note-varcovar')">
+                        <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                    </button>
+
+                    <div id="note-varcovar" class="post-it-note">
+                        <p style="font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">
+                            🧠 Step-by-step breakdown
+                        </p>
+
+                        <p><strong>1. Identify the problem</strong></p>
+                        <p style="margin-left: 1rem;">We want a matrix where each cell = <span
+                                class="fluo">Cov(asset&nbsp;i, asset&nbsp;j)</span>.
+                            So we must compare every column with every other column.</p>
+
+                        <p class="mt-2"><strong>2. Count the number of assets</strong></p>
+                        <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                            <code>numCols = rng.Columns.Count</code>
+                        </div>
+                        <p style="margin-left: 1rem;">→ determines how big the output matrix should be (numCols × numCols).</p>
+
+                        <p class="mt-2"><strong>3. Create the matrix (dynamic storage)</strong></p>
+                        <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                            <code><span class="excel-func">Dim</span> matrix() <span class="excel-func">As</span> Double
+<span class="excel-func">ReDim</span> matrix(numCols - 1, numCols - 1)</code>
+                        </div>
+                        <p style="margin-left: 1rem;">→ <span class="fluo">ReDim</span> creates a dynamic array whose size depends on the input data.</p>
+
+                        <p class="mt-2"><strong>4. Core logic — the double loop</strong></p>
+                        <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                            <code><span class="excel-func">For</span> i = 1 <span class="excel-func">To</span> numCols
+    <span class="excel-func">For</span> j = 1 <span class="excel-func">To</span> numCols</code>
+                        </div>
+                        <p style="margin-left: 1rem;">→ generates <strong>all combinations</strong> of (asset i, asset j). Without this double loop you cannot build the full matrix.</p>
+
+                        <p class="mt-2"><strong>5. Key computation</strong></p>
+                        <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                            <code>Application.WorksheetFunction.<span class="param">Covar</span>(rng.Columns(i), rng.Columns(j))</code>
+                        </div>
+                        <p style="margin-left: 1rem;">→ <code>Application.WorksheetFunction</code> allows VBA to use any Excel formula — same as writing <code>=COVAR(…)</code> in a cell.</p>
+
+                        <p class="mt-2"><strong>6. Store & return</strong></p>
+                        <p style="margin-left: 1rem;"><code>matrix(i-1, j-1) = …</code> fills the matrix cell by cell.</p>
+                        <p style="margin-left: 1rem;"><code>VarCovar = matrix</code> returns the full matrix as an array output.</p>
+                    </div>
+                </section>
+
+                <!-- ============================================= -->
+                <!-- SECTION 2: REAL NPV FUNCTION                  -->
+                <!-- ============================================= -->
+                <section class="content-card">
+                    <h2 class="section-title">2. Real NPV (Date-Based Discounting)</h2>
+
+                    <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+                        This function computes a <span class="fluo">Net Present Value using real dates</span> instead of
+                        fixed periods. Each cash flow is discounted based on the <strong>actual time elapsed</strong>
+                        between dates.
+                    </p>
+
+                    <div class="code-block dark-mode">
+                        <div class="code-comment">' Real NPV Function (date-based)</div>
+<code><span class="excel-func">Option Explicit</span>
+
+<span class="excel-func">Function</span> <span class="param">RealNPV</span>(varDiscountRate <span class="excel-func">As</span> Double, varDate <span class="excel-func">As</span> Range, varCF <span class="excel-func">As</span> Range) <span class="excel-func">As</span> Double
+
+    <span class="excel-func">Dim</span> i <span class="excel-func">As</span> Integer
+    <span class="excel-func">Dim</span> numrows <span class="excel-func">As</span> Integer
+    <span class="excel-func">Dim</span> dt <span class="excel-func">As</span> Date
+    <span class="excel-func">Dim</span> t <span class="excel-func">As</span> Double
+    <span class="excel-func">Dim</span> dr <span class="excel-func">As</span> Double
+
+    numrows = varCF.Rows.Count
+    dt = varDate.Cells(1, 1)
+    dr = 1
+
+    <span class="excel-func">For</span> i = 1 <span class="excel-func">To</span> numrows
+        t = <span class="param">DateDiff</span>("d", dt, varDate.Cells(i, 1)) / 365
+
+        RealNPV = RealNPV + (varCF.Cells(i, 1) / (dr * (1 + varDiscountRate * t) ^ t))
+        dr = dr * (1 + varDiscountRate * t) ^ t
+        dt = varDate.Cells(i, 1)
+    <span class="excel-func">Next</span> i
+
+<span class="excel-func">End Function</span></code>
+                    </div>
+
+                    <button class="btn-note mt-4" onclick="toggleNote('note-realnpv')">
+                        <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                    </button>
+
+                    <div id="note-realnpv" class="post-it-note">
+                        <p style="font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">
+                            🧠 Step-by-step breakdown
+                        </p>
+
+                        <p><strong>Key idea</strong></p>
+                        <p style="margin-left: 1rem;">We do <span class="fluo">not</span> assume fixed periods (1 year, 2
+                            years…). Instead, we compute the <strong>exact time</strong> between each cash flow using
+                            real dates.</p>
+
+                        <p class="mt-2"><strong>1. Time calculation</strong></p>
+                        <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                            <code>t = <span class="param">DateDiff</span>("d", dt, varDate.Cells(i, 1)) / 365</code>
+                        </div>
+                        <p style="margin-left: 1rem;">→ gives time <strong>in years</strong> between two consecutive cash
+                            flows (number of days ÷ 365).</p>
+
+                        <p class="mt-2"><strong>2. Discounting logic</strong></p>
+                        <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                            <code>RealNPV = RealNPV + CFᵢ / (dr × (1 + r × tᵢ)^tᵢ)</code>
+                        </div>
+                        <p style="margin-left: 1rem;">→ each cash flow is discounted using a <span class="fluo">cumulative
+                                discount factor</span>&nbsp;<code>dr</code>.</p>
+
+                        <p class="mt-2"><strong>3. Cumulative discount factor</strong></p>
+                        <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                            <code>dr = dr * (1 + varDiscountRate * t) ^ t</code>
+                        </div>
+                        <p style="margin-left: 1rem;">→ <code>dr</code> keeps track of all past discounting. It grows
+                            over time, reducing the present value of future cash flows.</p>
+
+                        <p class="mt-2"><strong>4. Why <code>dt</code> is updated</strong></p>
+                        <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                            <code>dt = varDate.Cells(i, 1)</code>
+                        </div>
+                        <p style="margin-left: 1rem;">→ <code>dt</code> stores the <strong>previous date</strong>. This ensures we compute
+                            tᵢ = Dateᵢ − Dateᵢ₋₁ (the gap between consecutive dates, not from the first date).</p>
+
+                        <div class="alert-box" style="margin-top: 1rem;">
+                            <span class="alert-icon">💡</span>
+                            <span><strong>Key insight:</strong> Cash flows are discounted <span class="fluo">step by step</span> with
+                                <strong>irregular time intervals</strong>. The function builds the total discount
+                                progressively.</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================= -->
+                <!-- SECTION 3: BLACK-SCHOLES                      -->
+                <!-- ============================================= -->
+                <section class="content-card">
+                    <h2 class="section-title">3. Black-Scholes Option Pricing</h2>
+
+                    <!-- ---- MINI THEORY INTRO ---- -->
+                    <div class="alert-box" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.5rem;">
+                        <p style="font-weight: 800; font-size: 1.15rem; color: var(--clr-excel-green);">
+                            📘 What is Black-Scholes?
+                        </p>
+                        <p>
+                            An <span class="fluo">option</span> is a <strong>right</strong> (not an obligation) to buy or sell an
+                            asset at a fixed price in the future.
+                        </p>
+                        <ul style="margin-left: 1.5rem; line-height: 2;">
+                            <li><strong>Call option</strong> = the right to <span class="fluo accept">buy later</span>
+                                at a pre-agreed price.</li>
+                            <li><strong>Put option</strong> = the right to <span class="fluo err">sell later</span>
+                                at a pre-agreed price.</li>
+                        </ul>
+                        <p class="mt-2">
+                            The question Black-Scholes answers: <strong>"How much is this right worth
+                                today?"</strong>
+                        </p>
+                        <p class="mt-2">
+                            The model estimates the <span class="fluo">expected future gain</span> and discounts it back
+                            to today. The general formula structure is:
+                        </p>
+                        <p style="text-align: center; font-weight: 700; font-size: 1.1rem; margin-top: 0.5rem;">
+                            Option Value = Adjusted Stock Component − Adjusted Strike Component
+                        </p>
+                        <p class="mt-2">The price depends on <strong>6 inputs</strong>:</p>
+                        <ul style="margin-left: 1.5rem; line-height: 2;">
+                            <li><code>S</code> = current stock price</li>
+                            <li><code>X</code> = exercise (strike) price</li>
+                            <li><code>r</code> = risk-free interest rate</li>
+                            <li><code>q</code> = continuous dividend yield</li>
+                            <li><code>tyr</code> = time to maturity (in years)</li>
+                            <li><code>sigma (σ)</code> = volatility</li>
+                        </ul>
+                    </div>
+
+                    <!-- ---- MODULE-LEVEL DECLARATIONS ---- -->
+                    <h3 class="method-title mt-4">⚙️ Module-Level Declarations</h3>
+                    <div class="code-block dark-mode">
+<code><span class="excel-func">Option Explicit</span>
+<span class="excel-func">Option Base</span> 1</code>
+                    </div>
+                    <p style="margin-top: 0.5rem; font-size: 0.95rem; color: var(--clr-text-muted);">
+                        <code>Option Explicit</code> forces you to declare all variables (avoids hidden mistakes).
+                        <code>Option Base 1</code> sets default array lower bound to 1.
+                    </p>
+
+                    <!-- ============================================= -->
+                    <!-- BLACK-SCHOLES FUNCTIONS                      -->
+                    <!-- ============================================= -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+
+                        <!-- BS CALL FORMULA -->
+                        <div style="background: rgba(33,115,70,0.05); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                            <h3 class="method-title">📗 BSCallValue — Call Option Price</h3>
+
+                            <div class="alert-box" style="margin-bottom: 1rem; padding: 0.75rem 1rem; font-size: 0.95rem;">
+                                <span class="alert-icon">📐</span>
+                                <span><strong>Formula:</strong>&ensp;c = S·e<sup>−qT</sup>·N(d₁) − X·e<sup>−rT</sup>·N(d₂)</span>
+                            </div>
+
+                            <div class="code-block dark-mode">
+                                <div class="code-comment">' Black-Scholes CALL value</div>
+<code><span class="excel-func">Function</span> <span class="param">BSCallValue</span>(S, X, r, q, tyr, sigma) <span class="excel-func">As</span> Double
+
+    <span class="excel-func">Dim</span> ert, eqt
+    <span class="excel-func">Dim</span> DOne, DTwo, NDOne, NDTwo
+
+    ert = <span class="param">Exp</span>(-r * tyr)
+    eqt = <span class="param">Exp</span>(-q * tyr)
+
+    DOne = (<span class="param">Log</span>(S / X) + (r - q + 0.5 * sigma ^ 2) * tyr) / (sigma * <span class="param">Sqr</span>(tyr))
+    DTwo = (<span class="param">Log</span>(S / X) + (r - q - 0.5 * sigma ^ 2) * tyr) / (sigma * <span class="param">Sqr</span>(tyr))
+
+    NDOne = Application.<span class="param">NormSDist</span>(DOne)
+    NDTwo = Application.<span class="param">NormSDist</span>(DTwo)
+
+    BSCallValue = S * eqt * NDOne - X * ert * NDTwo
+
+<span class="excel-func">End Function</span></code>
+                            </div>
+
+                            <button class="btn-note mt-4" onclick="toggleNote('note-bscall')">
+                                <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                            </button>
+
+                            <div id="note-bscall" class="post-it-note">
+                                <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Line-by-line breakdown</p>
+
+                                <p><strong><code>ert = Exp(-r * tyr)</code></strong></p>
+                                <p style="margin-left: 1rem;">Discount factor for the strike price: e<sup>−rT</sup>. Paying X in the future is worth less today.</p>
+
+                                <p class="mt-2"><strong><code>eqt = Exp(-q * tyr)</code></strong></p>
+                                <p style="margin-left: 1rem;">Adjusts the stock price for dividends: e<sup>−qT</sup>. If the stock pays dividends, its expected future value is slightly reduced.</p>
+
+                                <p class="mt-2"><strong><code>DOne = …</code> (d₁)</strong></p>
+                                <p style="margin-left: 1rem;">A score that summarizes how favorable the situation is: ratio S/X, interest rate, dividend yield, volatility, and time. A <span class="fluo">larger d₁</span> means the option is more "in the money".</p>
+
+                                <p class="mt-2"><strong><code>DTwo = …</code> (d₂)</strong></p>
+                                <p style="margin-left: 1rem;">Very close to d₁ but slightly smaller: <span class="fluo">d₂ = d₁ − σ√T</span>.</p>
+
+                                <p class="mt-2"><strong><code>NDOne / NDTwo</code></strong></p>
+                                <p style="margin-left: 1rem;"><code>Application.NormSDist()</code> converts d₁ and d₂ into <span class="fluo">cumulative normal probabilities</span> N(d₁) and N(d₂) — think of them as probability-like weights.</p>
+
+                                <p class="mt-2"><strong>Final line</strong></p>
+                                <p style="margin-left: 1rem;"><code>BSCallValue = S × eqt × N(d₁) − X × ert × N(d₂)</code></p>
+                                <p style="margin-left: 1rem;">= <span class="fluo accept">expected benefit</span> (adjusted stock) − <span class="fluo err">expected cost</span> (adjusted strike).</p>
+                            </div>
+                        </div>
+
+                        <!-- BS PUT FORMULA -->
+                        <div style="background: rgba(33,115,70,0.05); border-radius: 8px; padding: 1.5rem;">
+                            <h3 class="method-title">📕 BSPutValue — Put Option Price</h3>
+
+                            <div class="alert-box" style="margin-bottom: 1rem; padding: 0.75rem 1rem; font-size: 0.95rem;">
+                                <span class="alert-icon">📐</span>
+                                <span><strong>Formula:</strong>&ensp;p = X·e<sup>−rT</sup>·N(−d₂) − S·e<sup>−qT</sup>·N(−d₁)</span>
+                            </div>
+
+                            <div class="code-block dark-mode">
+                                <div class="code-comment">' Black-Scholes PUT value</div>
+<code><span class="excel-func">Function</span> <span class="param">BSPutValue</span>(S, X, r, q, tyr, sigma) <span class="excel-func">As</span> Double
+
+    <span class="excel-func">Dim</span> ert, eqt
+    <span class="excel-func">Dim</span> DOne, DTwo, NDOne, NDTwo
+
+    ert = <span class="param">Exp</span>(-r * tyr)
+    eqt = <span class="param">Exp</span>(-q * tyr)
+
+    DOne = (<span class="param">Log</span>(S / X) + (r - q + 0.5 * sigma ^ 2) * tyr) / (sigma * <span class="param">Sqr</span>(tyr))
+    DTwo = (<span class="param">Log</span>(S / X) + (r - q - 0.5 * sigma ^ 2) * tyr) / (sigma * <span class="param">Sqr</span>(tyr))
+
+    NDOne = Application.<span class="param">NormSDist</span>(-DOne)
+    NDTwo = Application.<span class="param">NormSDist</span>(-DTwo)
+
+    BSPutValue = X * ert * NDTwo - S * eqt * NDOne
+
+<span class="excel-func">End Function</span></code>
+                            </div>
+
+                            <button class="btn-note mt-4" onclick="toggleNote('note-bsput')">
+                                <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                            </button>
+
+                            <div id="note-bsput" class="post-it-note">
+                                <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 What changes vs. the Call?</p>
+                                <p>The structure is <strong>almost identical</strong> to BSCallValue. Same inputs, same discount factors, same d₁ and d₂.</p>
+
+                                <p class="mt-2"><strong>Key difference #1 — Negative d values:</strong></p>
+                                <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                    <code>NDOne = Application.NormSDist(<span class="param">-DOne</span>)
+NDTwo = Application.NormSDist(<span class="param">-DTwo</span>)</code>
+                                </div>
+                                <p style="margin-left: 1rem;">For the put we use N(−d₁) and N(−d₂). This reflects the opposite logic: a <span class="fluo accept">call benefits when the stock goes up</span>, a <span class="fluo err">put benefits when the stock goes down</span>.</p>
+
+                                <p class="mt-2"><strong>Key difference #2 — Reversed formula:</strong></p>
+                                <p style="margin-left: 1rem;"><code>BSPutValue = X × ert × N(−d₂) − S × eqt × N(−d₁)</code></p>
+                                <p style="margin-left: 1rem;">Compared with the call, the <strong>stock and strike components are swapped</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+
+                        <!-- BSOptValue -->
+                        <div style="background: rgba(33,115,70,0.05); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                            <h3 class="method-title">🔀 BSOptValue — General Option Pricing</h3>
+
+                            <div class="alert-box" style="margin-bottom: 1rem; padding: 0.75rem 1rem; font-size: 0.95rem;">
+                                <span class="alert-icon">🔑</span>
+                                <span><strong>Key variable:</strong> <code>iopt = 1</code> → Call &ensp;|&ensp; <code>iopt = -1</code> → Put</span>
+                            </div>
+
+                            <div class="code-block dark-mode">
+                                <div class="code-comment">' General Black-Scholes (Call OR Put)</div>
+<code><span class="excel-func">Function</span> <span class="param">BSOptValue</span>(iopt, S, X, r, q, tyr, sigma)
+
+    <span class="excel-func">Dim</span> ert, eqt, NDOne, NDTwo
+
+    ert = <span class="param">Exp</span>(-r * tyr)
+    eqt = <span class="param">Exp</span>(-q * tyr)
+
+    NDOne = Application.<span class="param">NormSDist</span>(iopt * <span class="param">BSDOne</span>(S, X, r, q, tyr, sigma))
+    NDTwo = Application.<span class="param">NormSDist</span>(iopt * <span class="param">BSDTwo</span>(S, X, r, q, tyr, sigma))
+
+    BSOptValue = iopt * (S * eqt * NDOne - X * ert * NDTwo)
+
+<span class="excel-func">End Function</span></code>
+                            </div>
+
+                            <button class="btn-note mt-4" onclick="toggleNote('note-bsopt')">
+                                <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                            </button>
+
+                            <div id="note-bsopt" class="post-it-note">
+                                <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 The <code>iopt</code> trick</p>
+
+                                <p>Instead of writing two separate formulas, this function uses <strong>one general expression</strong> and changes the sign via <code>iopt</code>:</p>
+
+                                <p class="mt-2" style="margin-left: 1rem;"><strong>If <code>iopt = 1</code> (Call):</strong></p>
+                                <p style="margin-left: 2rem;">N(iopt × d₁) = N(d₁) and N(iopt × d₂) = N(d₂) → call formula.</p>
+
+                                <p class="mt-2" style="margin-left: 1rem;"><strong>If <code>iopt = -1</code> (Put):</strong></p>
+                                <p style="margin-left: 2rem;">N(iopt × d₁) = N(−d₁) and N(iopt × d₂) = N(−d₂) → put formula.</p>
+
+                                <p class="mt-2">Final line: <code>iopt × (S·eqt·N − X·ert·N)</code> flips the sign for puts automatically.</p>
+
+                                <div class="alert-box" style="margin-top: 1rem;">
+                                    <span class="alert-icon">✅</span>
+                                    <span>This is more <strong>compact, professional, and easier to maintain</strong> — one function handles both option types.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HELPER: BSDOne -->
+                        <div class="methods-grid" style="margin-top: 1.5rem;">
+                            <div class="method-column">
+                                <h3 class="method-title">🔧 Helper — BSDOne (d₁)</h3>
+                                <div class="code-block dark-mode">
+<code><span class="excel-func">Function</span> <span class="param">BSDOne</span>(S, X, r, q, tyr, sigma)
+
+    BSDOne = (<span class="param">Log</span>(S / X) + (r - q + 0.5 * sigma ^ 2) * tyr) / (sigma * <span class="param">Sqr</span>(tyr))
+
+<span class="excel-func">End Function</span></code>
+                                </div>
+                                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--clr-text-muted);">
+                                    d₁ is an intermediate score combining S/X ratio, rates, volatility, and time.
+                                    A <span class="fluo">larger d₁</span> = option more "in the money".
+                                </p>
+                            </div>
+
+                            <div class="method-column">
+                                <h3 class="method-title">🔧 Helper — BSDTwo (d₂)</h3>
+                                <div class="code-block dark-mode">
+<code><span class="excel-func">Function</span> <span class="param">BSDTwo</span>(S, X, r, q, tyr, sigma)
+
+    BSDTwo = (<span class="param">Log</span>(S / X) + (r - q - 0.5 * sigma ^ 2) * tyr) / (sigma * <span class="param">Sqr</span>(tyr))
+
+<span class="excel-func">End Function</span></code>
+                                </div>
+                                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--clr-text-muted);">
+                                    d₂ = d₁ − σ√T. BS uses N(d₁) for the stock part and N(d₂) for the strike part — these are the two key building blocks.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ---- SUMMARY TABLE ---- -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">📋 Summary — All 5 Functions</h3>
+
+                        <div class="table-wrapper" style="margin-top: 1rem;">
+                            <table class="premium-table">
+                                <thead>
+                                    <tr>
+                                        <th>Function</th>
+                                        <th>Role</th>
+                                        <th>Method</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="formula-cell"><code>BSCallValue</code></td>
+                                        <td>Computes <strong>call</strong> price only</td>
+                                        <td class="year-col">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="formula-cell"><code>BSPutValue</code></td>
+                                        <td>Computes <strong>put</strong> price only</td>
+                                        <td class="year-col">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="formula-cell"><code>BSOptValue</code></td>
+                                        <td>Computes <strong>call or put</strong> via <code>iopt</code></td>
+                                        <td class="year-col">2</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="formula-cell"><code>BSDOne</code></td>
+                                        <td>Helper — computes d₁</td>
+                                        <td class="year-col">2</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="formula-cell"><code>BSDTwo</code></td>
+                                        <td>Helper — computes d₂</td>
+                                        <td class="year-col">2</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </main>
+        <!-- ================= END MAIN CONTENT ================= -->
+
+    </div>
+
+    <!-- Overlay Note System -->
+    <div id="note-overlay" class="overlay" onclick="closeNote()"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
