@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 9: VBA — Forms, Controls & CAPM</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-wrapper">
+
+        <button class="menu-toggle" onclick="toggleSidebar()" style="display: none;">☰</button>
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>EXCEL VBA CORE</span>
+                <button class="close-sidebar" onclick="toggleSidebar()">✕</button>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 1: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="index.html" class="nav-link">Ex 1: NPV & IRR</a>
+                        <a href="ex2.html" class="nav-link">Ex 2: Multiple IRRs</a>
+                        <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
+                        <a href="ex4.html" class="nav-link">Ex 4: Payment Schedule</a>
+                        <a href="ex5.html" class="nav-link">Ex 5: Future Value</a>
+                        <a href="ex6.html" class="nav-link">Ex 6 & Case Study</a>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 2: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture2-ex1.html" class="nav-link">Ex 1: Gordon Model</a>
+                        <a href="lecture2-ex2.html" class="nav-link">Ex 2: Two-Stage Model</a>
+                        <a href="lecture2-ex3.html" class="nav-link">Ex 3: Cost of Capital</a>
+                        <a href="lecture2-ex4.html" class="nav-link">Ex 4: CAPM & Regression</a>
+                        <a href="lecture2-ex5.html" class="nav-link">Ex 5: Portfolio Analysis</a>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 3: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture3-ex1.html" class="nav-link">Ex 1: Matrix Regression</a>
+                        <a href="lecture3-ex2.html" class="nav-link">Ex 2: Manual Histogram</a>
+                        <a href="lecture3-ex3.html" class="nav-link">Ex 3: Lognormal Simulation</a>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 6: VBA
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture6-vba.html" class="nav-link">Lecture 6</a>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 7: VBA
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture7-vba.html" class="nav-link">Lecture 7</a>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 8: VBA
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture8-vba.html" class="nav-link">Lecture 8</a>
+                    </div>
+                </div>
+                <div class="accordion-item active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 9: VBA
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content show">
+                        <a href="lecture9-vba.html" class="nav-link active">Lecture 9</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <!-- ================= END SIDEBAR ================= -->
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1>LECTURE 9: VBA — FORMS, CONTROLS & CAPM</h1>
+                <p style="margin-top: 0.5rem; font-size: 1.1rem; color: var(--clr-text-muted);">Interface programming
+                    with CheckBoxes, OptionButtons, ToggleButton, UserForms, and the CAPM calculator.</p>
+            </header>
+
+            <div class="cards-container">
+
+                <!-- ============================================= -->
+                <!-- SECTION 1: FORM CONTROLS                     -->
+                <!-- ============================================= -->
+                <section class="content-card">
+                    <h2 class="section-title">1. Form Controls — CheckBox / OptionButton / ToggleButton</h2>
+
+                    <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+                        These procedures are linked to <span class="fluo">interface controls</span> placed on the
+                        worksheet. They run when the user clicks a specific control — not like normal macros.
+                    </p>
+
+                    <!-- ---- CHECKBOXES ---- -->
+                    <div>
+                        <h3 class="method-title">🎨 CheckBox Group — Color Toggle</h3>
+                        <p style="font-size: 0.95rem; color: var(--clr-text-muted); margin-bottom: 0.75rem;">
+                            Each checkbox changes its <strong>background color</strong> when checked.
+                        </p>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' CheckBox color toggle</div>
+<code><span class="excel-func">Private Sub</span> <span class="param">CheckBox1_Click</span>()
+    <span class="excel-func">If</span> CheckBox1.Value = True <span class="excel-func">Then</span>
+        CheckBox1.BackColor = vbBlue
+    <span class="excel-func">Else</span>
+        CheckBox1.BackColor = vbWhite
+    <span class="excel-func">End If</span>
+<span class="excel-func">End Sub</span>
+
+<span class="excel-func">Private Sub</span> <span class="param">CheckBox2_Click</span>()
+    <span class="excel-func">If</span> CheckBox2.Value = True <span class="excel-func">Then</span>
+        CheckBox2.BackColor = vbRed
+    <span class="excel-func">Else</span>
+        CheckBox2.BackColor = vbWhite
+    <span class="excel-func">End If</span>
+<span class="excel-func">End Sub</span>
+
+<span class="excel-func">Private Sub</span> <span class="param">CheckBox3_Click</span>()
+    <span class="excel-func">If</span> CheckBox3.Value = True <span class="excel-func">Then</span>
+        CheckBox3.BackColor = vbYellow
+    <span class="excel-func">Else</span>
+        CheckBox3.BackColor = vbWhite
+    <span class="excel-func">End If</span>
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-checkbox')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-checkbox" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Core idea</p>
+                            <p>A checkbox is a <strong>yes/no</strong> control. Its key property is <code>Value</code>:</p>
+                            <ul style="margin-left: 1.5rem; line-height: 2;">
+                                <li><code>True</code> = checked → color changes</li>
+                                <li><code>False</code> = unchecked → back to white</li>
+                            </ul>
+                            <p class="mt-2"><code>BackColor</code> controls the background color of the control.</p>
+                            <p class="mt-2">These procedures are purely <strong>visual</strong> — they don't calculate anything. They show how VBA reacts to user clicks.</p>
+                        </div>
+                    </div>
+
+                    <!-- ---- OPTIONBUTTONS ---- -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">🔘 OptionButton Group — Choose an Operation</h3>
+                        <p style="font-size: 0.95rem; color: var(--clr-text-muted); margin-bottom: 0.75rem;">
+                            Each button performs a <strong>different calculation</strong> on cells E15 and E16, then
+                            displays the result in a TextBox.
+                        </p>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' OptionButtons — sum / multiply / divide</div>
+<code><span class="excel-func">Private Sub</span> <span class="param">OptionButton1_Click</span>()
+    <span class="excel-func">If</span> OptionButton1.Value = True <span class="excel-func">Then</span>
+        TextBox1.Text = "Result:  " &amp; <span class="param">Str</span>(Range("E15").Value + Range("E16").Value)
+    <span class="excel-func">End If</span>
+<span class="excel-func">End Sub</span>
+
+<span class="excel-func">Private Sub</span> <span class="param">OptionButton2_Click</span>()
+    <span class="excel-func">If</span> OptionButton2.Value = True <span class="excel-func">Then</span>
+        TextBox1.Text = "Result:  " &amp; <span class="param">Str</span>(Range("E15").Value * Range("E16").Value)
+    <span class="excel-func">End If</span>
+<span class="excel-func">End Sub</span>
+
+<span class="excel-func">Private Sub</span> <span class="param">OptionButton3_Click</span>()
+    <span class="excel-func">If</span> OptionButton3.Value = True <span class="excel-func">Then</span>
+        TextBox1.Text = "Result:  " &amp; <span class="param">Str</span>(Range("E15").Value / Range("E16").Value)
+    <span class="excel-func">End If</span>
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-optionbtn')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-optionbtn" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Core idea</p>
+                            <p>OptionButtons are <strong>mutually exclusive</strong> — only one can be selected at a time.</p>
+                            <ul style="margin-left: 1.5rem; line-height: 2;">
+                                <li>Button 1 → <strong>E15 + E16</strong></li>
+                                <li>Button 2 → <strong>E15 × E16</strong></li>
+                                <li>Button 3 → <strong>E15 ÷ E16</strong></li>
+                            </ul>
+                            <p class="mt-2"><code>Str(…)</code> converts the result to text because <code>TextBox1.Text</code> expects a string, not a number.</p>
+                            <p class="mt-2">The result is displayed <strong>inside the interface</strong>, not written to the worksheet.</p>
+                        </div>
+                    </div>
+
+                    <!-- ---- TOGGLEBUTTON ---- -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">🔀 ToggleButton — Load / Clear Lists</h3>
+                        <p style="font-size: 0.95rem; color: var(--clr-text-muted); margin-bottom: 0.75rem;">
+                            Acts like an ON/OFF switch: <strong>ON</strong> loads data into a ComboBox and ListBox,
+                            <strong>OFF</strong> clears them.
+                        </p>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' ToggleButton — load or clear lists</div>
+<code><span class="excel-func">Private Sub</span> <span class="param">ToggleButton1_Click</span>()
+    <span class="excel-func">Dim</span> i <span class="excel-func">As</span> Integer
+    <span class="excel-func">If</span> ToggleButton1.Value = True <span class="excel-func">Then</span>
+        Range("G24").<span class="param">Activate</span>
+        <span class="excel-func">Do While</span> ActiveCell.Value &lt;&gt; ""
+            ComboBox1.<span class="param">AddItem</span>(ActiveCell.Value)
+            ListBox1.<span class="param">AddItem</span>(ActiveCell.Value)
+            ActiveCell.<span class="param">Offset</span>(1, 0).<span class="param">Activate</span>
+        <span class="excel-func">Loop</span>
+        ComboBox1.ListIndex = 0
+    <span class="excel-func">Else</span>
+        ComboBox1.<span class="param">Clear</span>
+        ListBox1.<span class="param">Clear</span>
+    <span class="excel-func">End If</span>
+    Range("G1").<span class="param">Activate</span>
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-toggle')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-toggle" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Core idea</p>
+                            <p>When <strong>ON</strong>: reads a vertical list from G24 downward until an empty cell, adding each value to both <code>ComboBox1</code> (dropdown) and <code>ListBox1</code> (visible list).</p>
+                            <p class="mt-2"><code>ComboBox1.ListIndex = 0</code> → selects the first item by default.</p>
+                            <p class="mt-2">When <strong>OFF</strong>: both controls are cleared.</p>
+                            <p class="mt-2">One toggle button manages <strong>both states</strong> — no need for two separate buttons.</p>
+                        </div>
+                    </div>
+
+                    <!-- KEY INSIGHT -->
+                    <div style="margin-top: 2rem;">
+                        <div class="alert-box" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                            <p style="font-weight: 800; font-size: 1.1rem; color: var(--clr-excel-green);">
+                                📋 Summary
+                            </p>
+                            <ul style="margin-left: 1.5rem; line-height: 2;">
+                                <li><strong>CheckBoxes</strong> → change appearance (True / False)</li>
+                                <li><strong>OptionButtons</strong> → select one operation, display result in TextBox</li>
+                                <li><strong>ToggleButton</strong> → ON loads lists, OFF clears them</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================= -->
+                <!-- SECTION 2: CAPM — USERFORM BUTTONS            -->
+                <!-- ============================================= -->
+                <section class="content-card">
+                    <h2 class="section-title">2. CAPM — UserForm Calculator</h2>
+
+                    <!-- MINI THEORY -->
+                    <div class="alert-box" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.5rem; margin-bottom: 1.5rem;">
+                        <p style="font-weight: 800; font-size: 1.15rem; color: var(--clr-excel-green);">
+                            📘 What is CAPM?
+                        </p>
+                        <p><strong>Capital Asset Pricing Model</strong> — estimates the expected return of an asset.</p>
+                        <p style="text-align: center; font-weight: 700; font-size: 1.1rem; margin: 0.75rem 0;">
+                            E(Rᵢ) = Rf + β × (E(Rm) − Rf)
+                        </p>
+                        <ul style="margin-left: 1.5rem; line-height: 2;">
+                            <li><code>Rf</code> = risk-free rate (safe investment)</li>
+                            <li><code>E(Rm)</code> = expected market return</li>
+                            <li><code>β</code> = sensitivity to market movements (systematic risk)</li>
+                            <li><code>E(Rᵢ)</code> = expected return of the asset</li>
+                        </ul>
+                        <p class="mt-2"><strong>Intuition:</strong> start with the safe return Rf, then add a <span class="fluo">risk premium</span> = how much extra the market pays × how risky the asset is.</p>
+                        <ul style="margin-left: 1.5rem; line-height: 2;">
+                            <li>β = 1 → same risk as the market</li>
+                            <li>β > 1 → <span class="fluo err">more risky</span></li>
+                            <li>β < 1 → <span class="fluo accept">less risky</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- BUTTON 1: CALCULATE -->
+                    <div>
+                        <h3 class="method-title">📗 CommandButton1 — Calculate CAPM</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' CAPM calculation from UserForm inputs</div>
+<code><span class="excel-func">Private Sub</span> <span class="param">CommandButton1_Click</span>()
+    rf = UserForm1.ComboBoxRF.Text
+    beta = UserForm1.TextBoxBeta.Text
+    erm = UserForm1.TextBoxRM.Text
+    <span class="excel-func">If</span> VBA.<span class="param">IsNumeric</span>(rf) <span class="excel-func">And</span> VBA.<span class="param">IsNumeric</span>(beta) <span class="excel-func">And</span> VBA.<span class="param">IsNumeric</span>(erm) <span class="excel-func">Then</span>
+        er = rf + (erm - rf) * beta
+    <span class="excel-func">End If</span>
+    UserForm1.TextBoxR.Text = er
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-capm-calc')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-capm-calc" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+
+                            <p><strong>1. Read inputs from the form</strong></p>
+                            <ul style="margin-left: 1.5rem; line-height: 2;">
+                                <li><code>ComboBoxRF</code> → risk-free rate (Rf)</li>
+                                <li><code>TextBoxBeta</code> → beta (β)</li>
+                                <li><code>TextBoxRM</code> → expected market return (E(Rm))</li>
+                            </ul>
+
+                            <p class="mt-2"><strong>2. Validate inputs</strong></p>
+                            <p style="margin-left: 1rem;"><code>VBA.IsNumeric(…)</code> checks that all three values are numbers.</p>
+
+                            <p class="mt-2"><strong>3. Apply the CAPM formula</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code>er = rf + (erm - rf) * beta</code>
+                            </div>
+                            <p style="margin-left: 1rem;">→ <code>(erm - rf)</code> = market risk premium<br>
+                                → <code>× beta</code> = adjusted to the asset's risk<br>
+                                → <code>+ rf</code> = total expected return</p>
+
+                            <p class="mt-2"><strong>4. Display result</strong></p>
+                            <p style="margin-left: 1rem;">The result appears in <code>TextBoxR</code> — directly inside the form.</p>
+                        </div>
+                    </div>
+
+                    <!-- BUTTON 2: HIDE & CLEAR -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">📕 CommandButton2 — Hide & Clear</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Hide form and clear all fields</div>
+<code><span class="excel-func">Private Sub</span> <span class="param">CommandButton2_Click</span>()
+    UserForm1.<span class="param">Hide</span>
+    UserForm1.ComboBoxRF.Text = ""
+    UserForm1.TextBoxBeta.Text = ""
+    UserForm1.TextBoxRM.Text = ""
+    UserForm1.TextBoxR.Text = ""
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-capm-clear')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-capm-clear" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+                            <p><code>UserForm1.Hide</code> → closes the form from the screen.</p>
+                            <p class="mt-2">Then all input and output fields are cleared to empty strings.</p>
+                            <p class="mt-2">So the next time the form opens, it starts <strong>clean</strong>.</p>
+                        </div>
+                    </div>
+
+                    <!-- KEY INSIGHT -->
+                    <div style="margin-top: 2rem;">
+                        <div class="alert-box" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                            <p style="font-weight: 800; font-size: 1.1rem; color: var(--clr-excel-green);">
+                                💡 Why is this inside a UserForm?
+                            </p>
+                            <p>This code is <strong>form-event code</strong> — not standard module code, not worksheet code.</p>
+                            <p class="mt-2">The buttons belong to the form itself. When the user clicks, the form reacts immediately. That's why the procedures are written as <code>Private Sub CommandButton_Click()</code>.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================= -->
+                <!-- SECTION 3: USERFORM PREP + ACTIVECELL SHOW    -->
+                <!-- ============================================= -->
+                <section class="content-card">
+                    <h2 class="section-title">3. UserForm Preparation & ActiveCell Inspector</h2>
+
+                    <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+                        Two utility macros: one <span class="fluo">prepares and launches</span> the UserForm, the other
+                        <span class="fluo">inspects</span> the currently selected cell.
+                    </p>
+
+                    <!-- PREPARE USERFORM -->
+                    <div>
+                        <h3 class="method-title">📗 Button2_Click — Prepare & Open UserForm</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Prepare ComboBox and show UserForm</div>
+<code><span class="excel-func">Option Explicit</span>
+
+<span class="excel-func">Sub</span> <span class="param">Button2_Click</span>()
+    UserForm1.ComboBoxRF.<span class="param">Clear</span>
+    <span class="excel-func">For</span> i = 1 <span class="excel-func">To</span> 8
+        UserForm1.ComboBoxRF.<span class="param">AddItem</span>(<span class="param">Str</span>(i * 0.5))
+    <span class="excel-func">Next</span>
+    UserForm1.<span class="param">Show</span>
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-prep')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-prep" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+
+                            <p><strong>1. Clear old items</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code>UserForm1.ComboBoxRF.<span class="param">Clear</span></code>
+                            </div>
+                            <p style="margin-left: 1rem;">→ prevents duplicates if the macro runs multiple times.</p>
+
+                            <p class="mt-2"><strong>2. Fill with risk-free rate values</strong></p>
+                            <div class="code-block dark-mode" style="margin: 0.5rem 0 0.5rem 1rem; padding: 0.75rem;">
+                                <code><span class="excel-func">For</span> i = 1 <span class="excel-func">To</span> 8
+    UserForm1.ComboBoxRF.<span class="param">AddItem</span>(<span class="param">Str</span>(i * 0.5))
+<span class="excel-func">Next</span></code>
+                            </div>
+                            <p style="margin-left: 1rem;">→ adds 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0</p>
+                            <p style="margin-left: 1rem;"><code>Str(…)</code> converts numbers to text for the ComboBox.</p>
+
+                            <p class="mt-2"><strong>3. Show the form</strong></p>
+                            <p style="margin-left: 1rem;"><code>UserForm1.Show</code> → opens the form on screen.</p>
+
+                            <p class="mt-2"><strong>📌 Logic:</strong> clear → fill → show. This macro is a <strong>form launcher</strong>.</p>
+                        </div>
+                    </div>
+
+                    <!-- ACTIVECELL SHOW -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">📕 ActivecellShow — Cell Inspector</h3>
+
+                        <div class="code-block dark-mode">
+                            <div class="code-comment">' Display info about the active cell</div>
+<code><span class="excel-func">Option Explicit</span>
+
+<span class="excel-func">Sub</span> <span class="param">ActivecellShow</span>()
+    <span class="param">MsgBox</span> "You are at: " &amp; ActiveCell.Address &amp; _
+        Chr(13) &amp; "The Formula in the cell is: " &amp; ActiveCell.Formula &amp; Chr(13) &amp; _
+        "The value of the cell is: " &amp; _
+        ActiveCell.Value
+<span class="excel-func">End Sub</span></code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-activecell')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-activecell" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+
+                            <p>Displays a MsgBox with <strong>three pieces of information</strong> about the selected cell:</p>
+
+                            <ul style="margin-left: 1.5rem; line-height: 2;">
+                                <li><code>ActiveCell.Address</code> → where? e.g. <code>$B$4</code></li>
+                                <li><code>ActiveCell.Formula</code> → what's written? e.g. <code>=A1+A2</code></li>
+                                <li><code>ActiveCell.Value</code> → what's the result? e.g. <code>25</code></li>
+                            </ul>
+
+                            <p class="mt-2"><code>Chr(13)</code> inserts a line break in the message box.</p>
+
+                            <p class="mt-2"><strong>📌 Key distinction:</strong></p>
+                            <ul style="margin-left: 1.5rem; line-height: 2;">
+                                <li><strong>Address</strong> = where the cell is</li>
+                                <li><strong>Formula</strong> = what is written in the cell</li>
+                                <li><strong>Value</strong> = the result displayed</li>
+                            </ul>
+
+                            <p class="mt-2">This macro is a small <strong>inspection tool</strong> for understanding any cell.</p>
+                        </div>
+                    </div>
+
+                    <!-- OPTION EXPLICIT NOTE -->
+                    <div style="margin-top: 2rem;">
+                        <div class="alert-box" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                            <p style="font-weight: 800; font-size: 1.1rem; color: var(--clr-excel-green);">
+                                💡 What is Option Explicit?
+                            </p>
+                            <p><code>Option Explicit</code> forces all variables to be <strong>declared before use</strong>.</p>
+                            <p class="mt-2">If you misspell a variable name, VBA stops and shows an error instead of silently creating a new empty variable. This makes code <span class="fluo">safer and cleaner</span>.</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+        <!-- ================= END MAIN CONTENT ================= -->
+
+    </div>
+
+    <!-- Overlay Note System -->
+    <div id="note-overlay" class="overlay" onclick="closeNote()"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
