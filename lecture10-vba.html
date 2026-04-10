@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 10: VBA — Word Automation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-wrapper">
+
+        <button class="menu-toggle" onclick="toggleSidebar()" style="display: none;">☰</button>
+
+        <!-- ================= SIDEBAR ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>EXCEL VBA CORE</span>
+                <button class="close-sidebar" onclick="toggleSidebar()">✕</button>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 1: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="index.html" class="nav-link">Ex 1: NPV & IRR</a>
+                        <a href="ex2.html" class="nav-link">Ex 2: Multiple IRRs</a>
+                        <a href="ex3.html" class="nav-link">Ex 3: Advanced Data Tables</a>
+                        <a href="ex4.html" class="nav-link">Ex 4: Payment Schedule</a>
+                        <a href="ex5.html" class="nav-link">Ex 5: Future Value</a>
+                        <a href="ex6.html" class="nav-link">Ex 6 & Case Study</a>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 2: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture2-ex1.html" class="nav-link">Ex 1: Gordon Model</a>
+                        <a href="lecture2-ex2.html" class="nav-link">Ex 2: Two-Stage Model</a>
+                        <a href="lecture2-ex3.html" class="nav-link">Ex 3: Cost of Capital</a>
+                        <a href="lecture2-ex4.html" class="nav-link">Ex 4: CAPM & Regression</a>
+                        <a href="lecture2-ex5.html" class="nav-link">Ex 5: Portfolio Analysis</a>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 3: EXCEL
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture3-ex1.html" class="nav-link">Ex 1: Matrix Regression</a>
+                        <a href="lecture3-ex2.html" class="nav-link">Ex 2: Manual Histogram</a>
+                        <a href="lecture3-ex3.html" class="nav-link">Ex 3: Lognormal Simulation</a>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 6: VBA
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture6-vba.html" class="nav-link">Lecture 6</a>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 7: VBA
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture7-vba.html" class="nav-link">Lecture 7</a>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 8: VBA
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture8-vba.html" class="nav-link">Lecture 8</a>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📁</span> LECTURE 9: VBA
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="lecture9-vba.html" class="nav-link">Lecture 9</a>
+                    </div>
+                </div>
+                <div class="accordion-item active">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span class="folder-icon">📂</span> LECTURE 10: VBA
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="accordion-content show">
+                        <a href="lecture10-vba.html" class="nav-link active">Lecture 10</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+        <!-- ================= END SIDEBAR ================= -->
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1>LECTURE 10: WORD AUTOMATION FROM EXCEL</h1>
+                <p style="margin-top: 0.5rem; font-size: 1.1rem; color: var(--clr-text-muted);">Using Excel VBA to
+                    open, edit, and save a Word document automatically.</p>
+            </header>
+
+            <div class="cards-container">
+
+                <!-- ============================================= -->
+                <!-- SECTION: WORD AUTOMATION                      -->
+                <!-- ============================================= -->
+                <section class="content-card">
+                    <h2 class="section-title">1. Word Automation — OpenWordDoc</h2>
+
+                    <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+                        This macro uses Excel VBA to <span class="fluo">control Word</span>: it opens a document,
+                        modifies paragraphs depending on their font color, copies an Excel range into the document,
+                        saves it under a new name, and closes Word. <strong>Excel drives Word automatically.</strong>
+                    </p>
+
+                    <!-- FULL CODE -->
+                    <div class="code-block dark-mode">
+                        <div class="code-comment">' Word Automation from Excel</div>
+<code><span class="excel-func">Sub</span> <span class="param">OpenWordDoc</span>()
+
+    <span class="excel-func">Dim</span> objWord
+    <span class="excel-func">Dim</span> objDoc
+    <span class="excel-func">Dim</span> tbl <span class="excel-func">As</span> Excel.Range
+    <span class="excel-func">Dim</span> WordTable <span class="excel-func">As</span> Word.Table
+
+    <span class="excel-func">Set</span> objWord = <span class="param">CreateObject</span>("Word.Application")
+    <span class="excel-func">Set</span> tbl = Worksheets("data").Range("G18:H19")
+
+    <span class="excel-func">Set</span> objDoc = objWord.Documents.<span class="param">Open</span>("PATH\original_document.docx")
+    objWord.Visible = True
+
+    objDoc.Label1.Caption = objDoc.Label1.Caption &amp; " Test"
+
+    <span class="excel-func">For Each</span> oPara <span class="excel-func">In</span> objDoc.Content.Paragraphs
+        <span class="excel-func">If</span> oPara.Range.Font.Color = wdColorRed <span class="excel-func">And</span> Worksheets("data").CheckBox1.Value = True <span class="excel-func">Then</span>
+            <span class="excel-func">If</span> oPara.Range.Font.Color = wdColorRed <span class="excel-func">Then</span> oPara.Range.Font.Color = wdColorBlack
+        <span class="excel-func">Else</span>
+            <span class="excel-func">If</span> oPara.Range.Font.Color = wdColorRed <span class="excel-func">Then</span> oPara.Range.<span class="param">Delete</span>
+        <span class="excel-func">End If</span>
+        <span class="excel-func">If</span> oPara.Range.Font.Color = wdColorGreen <span class="excel-func">Then</span> oPara.Range.Font.Color = wdColorBlue
+    <span class="excel-func">Next</span> oPara
+
+    tbl.<span class="param">Copy</span>
+    objDoc.Content.<span class="param">Select</span>
+    objWord.Selection.<span class="param">Collapse</span> wdCollapseEnd
+    objWord.Selection.<span class="param">PasteExcelTable</span> LinkedToExcel:=False, WordFormatting:=Yes, RTF:=False
+
+    objDoc.<span class="param">SaveAs</span> Filename:="PATH\new_document.docx"
+    objWord.<span class="param">Quit</span>
+
+EndRoutine:
+    Application.ScreenUpdating = True
+    Application.EnableEvents = True
+    Application.CutCopyMode = False
+
+<span class="excel-func">End Sub</span></code>
+                    </div>
+
+                    <!-- ============================================= -->
+                    <!-- STEP 1: SETUP & OPEN                         -->
+                    <!-- ============================================= -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">📗 Step 1 — Setup & Open Word</h3>
+
+                        <div class="code-block dark-mode">
+<code><span class="excel-func">Set</span> objWord = <span class="param">CreateObject</span>("Word.Application")
+<span class="excel-func">Set</span> tbl = Worksheets("data").Range("G18:H19")
+<span class="excel-func">Set</span> objDoc = objWord.Documents.<span class="param">Open</span>("PATH\original_document.docx")
+objWord.Visible = True</code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-setup')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-setup" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+
+                            <p><code>CreateObject("Word.Application")</code></p>
+                            <p style="margin-left: 1rem;">→ the <strong>key instruction</strong> — creates a Word application from inside Excel. This is what enables cross-application automation.</p>
+
+                            <p class="mt-2"><code>tbl = Worksheets("data").Range("G18:H19")</code></p>
+                            <p style="margin-left: 1rem;">→ selects the Excel range that will later be pasted into Word.</p>
+
+                            <p class="mt-2"><code>objWord.Documents.Open(…)</code></p>
+                            <p style="margin-left: 1rem;">→ opens an existing Word document for modification.</p>
+
+                            <p class="mt-2"><code>objWord.Visible = True</code></p>
+                            <p style="margin-left: 1rem;">→ makes Word visible on screen (otherwise it runs in the background).</p>
+                        </div>
+                    </div>
+
+                    <!-- ============================================= -->
+                    <!-- STEP 2: PARAGRAPH FORMATTING LOGIC            -->
+                    <!-- ============================================= -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">📕 Step 2 — Paragraph Formatting Logic</h3>
+
+                        <div class="code-block dark-mode">
+<code><span class="excel-func">For Each</span> oPara <span class="excel-func">In</span> objDoc.Content.Paragraphs
+    <span class="excel-func">If</span> oPara.Range.Font.Color = wdColorRed <span class="excel-func">And</span> Worksheets("data").CheckBox1.Value = True <span class="excel-func">Then</span>
+        <span class="excel-func">If</span> oPara.Range.Font.Color = wdColorRed <span class="excel-func">Then</span> oPara.Range.Font.Color = wdColorBlack
+    <span class="excel-func">Else</span>
+        <span class="excel-func">If</span> oPara.Range.Font.Color = wdColorRed <span class="excel-func">Then</span> oPara.Range.<span class="param">Delete</span>
+    <span class="excel-func">End If</span>
+    <span class="excel-func">If</span> oPara.Range.Font.Color = wdColorGreen <span class="excel-func">Then</span> oPara.Range.Font.Color = wdColorBlue
+<span class="excel-func">Next</span> oPara</code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-paragraphs')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-paragraphs" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+
+                            <p>The loop processes the Word document <strong>paragraph by paragraph</strong>.</p>
+
+                            <p class="mt-2" style="font-weight: 700;">🔴 Red paragraphs — two outcomes:</p>
+                            <ul style="margin-left: 1.5rem; line-height: 2;">
+                                <li>CheckBox1 <strong>checked</strong> → red becomes <span class="fluo">black</span> (kept but recolored)</li>
+                                <li>CheckBox1 <strong>unchecked</strong> → red paragraph is <span class="fluo err">deleted</span></li>
+                            </ul>
+
+                            <p class="mt-2" style="font-weight: 700;">🟢 Green paragraphs:</p>
+                            <p style="margin-left: 1rem;">→ always become <span class="fluo">blue</span>.</p>
+
+                            <div class="alert-box" style="margin-top: 1rem;">
+                                <span class="alert-icon">💡</span>
+                                <span>The Excel worksheet acts as a <strong>control panel</strong> for the Word document. The checkbox value influences how paragraphs are treated — this is <strong>cross-application automation</strong>.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============================================= -->
+                    <!-- STEP 3: PASTE EXCEL TABLE INTO WORD           -->
+                    <!-- ============================================= -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">📙 Step 3 — Paste Excel Table into Word</h3>
+
+                        <div class="code-block dark-mode">
+<code>tbl.<span class="param">Copy</span>
+objDoc.Content.<span class="param">Select</span>
+objWord.Selection.<span class="param">Collapse</span> wdCollapseEnd
+objWord.Selection.<span class="param">PasteExcelTable</span> LinkedToExcel:=False, WordFormatting:=Yes, RTF:=False</code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-paste')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-paste" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+
+                            <p><strong>1.</strong> <code>tbl.Copy</code> → copies the Excel range (G18:H19).</p>
+
+                            <p class="mt-2"><strong>2.</strong> <code>objDoc.Content.Select</code> → selects the entire Word document content.</p>
+
+                            <p class="mt-2"><strong>3.</strong> <code>Selection.Collapse wdCollapseEnd</code> → moves the insertion point to the <strong>end</strong> of the document.</p>
+
+                            <p class="mt-2"><strong>4.</strong> <code>PasteExcelTable</code> → inserts the Excel range as a table in Word.</p>
+
+                            <ul style="margin-left: 1.5rem; line-height: 2; margin-top: 0.5rem;">
+                                <li><code>LinkedToExcel:=False</code> → the Word table becomes <strong>independent</strong> (no link back to Excel)</li>
+                                <li><code>WordFormatting:=Yes</code> → uses Word's formatting style</li>
+                                <li><code>RTF:=False</code> → no rich text formatting</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- ============================================= -->
+                    <!-- STEP 4: SAVE & CLOSE                         -->
+                    <!-- ============================================= -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">📘 Step 4 — Save & Close</h3>
+
+                        <div class="code-block dark-mode">
+<code>objDoc.<span class="param">SaveAs</span> Filename:="PATH\new_document.docx"
+objWord.<span class="param">Quit</span>
+
+EndRoutine:
+    Application.ScreenUpdating = True
+    Application.EnableEvents = True
+    Application.CutCopyMode = False</code>
+                        </div>
+
+                        <button class="btn-note mt-4" onclick="toggleNote('note-save')">
+                            <span class="note-icon">🔍</span> SHOW / HIDE EXPLANATION
+                        </button>
+
+                        <div id="note-save" class="post-it-note">
+                            <p style="font-weight: 700; margin-bottom: 0.75rem;">🧠 Breakdown</p>
+
+                            <p><code>SaveAs</code> → saves the modified document under a <strong>new name</strong>. The original file is not overwritten.</p>
+
+                            <p class="mt-2"><code>objWord.Quit</code> → closes Word entirely.</p>
+
+                            <p class="mt-2"><strong>Cleanup:</strong></p>
+                            <ul style="margin-left: 1.5rem; line-height: 2;">
+                                <li><code>ScreenUpdating = True</code> → turns screen refresh back on</li>
+                                <li><code>EnableEvents = True</code> → re-enables Excel events</li>
+                                <li><code>CutCopyMode = False</code> → clears the clipboard</li>
+                            </ul>
+                            <p class="mt-2">This is standard cleanup after automation tasks.</p>
+                        </div>
+                    </div>
+
+                    <!-- ============================================= -->
+                    <!-- IMPORTANT NOTE                                -->
+                    <!-- ============================================= -->
+                    <div style="margin-top: 2rem;">
+                        <div class="alert-box" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                            <p style="font-weight: 800; font-size: 1.1rem; color: var(--clr-excel-green);">
+                                ⚠️ Important note
+                            </p>
+                            <p>The line <code>objDoc.Label1.Caption = …</code> is <strong>not standard</strong> for a normal Word document. A classic .docx does not contain <code>Label1.Caption</code>. This may only work if the document contains a custom ActiveX control — in a normal document, this line will fail.</p>
+                        </div>
+                    </div>
+
+                    <!-- ============================================= -->
+                    <!-- SUMMARY TABLE                                 -->
+                    <!-- ============================================= -->
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px dashed var(--clr-excel-green);">
+                        <h3 class="method-title">📋 Summary — Automation Flow</h3>
+
+                        <div class="table-wrapper" style="margin-top: 1rem;">
+                            <table class="premium-table">
+                                <thead>
+                                    <tr>
+                                        <th>Step</th>
+                                        <th>Action</th>
+                                        <th>Key instruction</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="year-col">1</td>
+                                        <td>Create Word application</td>
+                                        <td class="formula-cell"><code>CreateObject("Word.Application")</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="year-col">2</td>
+                                        <td>Open document</td>
+                                        <td class="formula-cell"><code>Documents.Open(…)</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="year-col">3</td>
+                                        <td>Edit paragraphs by color</td>
+                                        <td class="formula-cell"><code>For Each oPara …</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="year-col">4</td>
+                                        <td>Copy Excel range</td>
+                                        <td class="formula-cell"><code>tbl.Copy</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="year-col">5</td>
+                                        <td>Paste into Word</td>
+                                        <td class="formula-cell"><code>PasteExcelTable</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="year-col">6</td>
+                                        <td>Save as new file</td>
+                                        <td class="formula-cell"><code>SaveAs</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="year-col">7</td>
+                                        <td>Close Word</td>
+                                        <td class="formula-cell"><code>objWord.Quit</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- KEY INSIGHT -->
+                    <div style="margin-top: 2rem;">
+                        <div class="alert-box" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.25rem;">
+                            <p style="font-weight: 800; font-size: 1.1rem; color: var(--clr-excel-green);">
+                                💡 Key insight
+                            </p>
+                            <p><strong>Excel is the controller, Word is being controlled.</strong></p>
+                            <p class="mt-2">Excel provides <span class="fluo">data</span> (the table) and <span class="fluo">controls</span> (the checkbox) — Word receives the edits and the pasted content.</p>
+                            <p class="mt-2">This is cross-application automation: one macro in Excel drives the entire editing process in Word.</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+        <!-- ================= END MAIN CONTENT ================= -->
+
+    </div>
+
+    <!-- Overlay Note System -->
+    <div id="note-overlay" class="overlay" onclick="closeNote()"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
